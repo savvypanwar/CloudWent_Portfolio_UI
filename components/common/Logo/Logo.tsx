@@ -15,7 +15,7 @@ export const Logo = ({ className = "", showText = true }) => {
             alt="CloudWent Logo" 
             width={120} 
             height={30} 
-            className="object-contain dark:invert"
+            className="object-contain "
           />
         </>
       )}

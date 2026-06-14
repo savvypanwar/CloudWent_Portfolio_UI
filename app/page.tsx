@@ -2,28 +2,30 @@
 import { 
   Hero,
   TechnologyBar,
-  // Services, 
-  // Stats, 
-  // Process, 
-  // Portfolio, 
-  // Team, 
-  // Testimonials, 
-  // CTA 
+  Services, 
+  Stats, 
+  WhyChooseUs,
+  Process, 
+  Portfolio, 
+  Team, 
+  Testimonials, 
+  CTA 
 } from "@/features/home/components";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-slate-950 flex flex-col transition-colors">
       <main className="flex-grow">
         <Hero />
         <TechnologyBar />
-        {/* <Services />
+        <Services />
         <Stats />
+        <WhyChooseUs /> 
         <Process />
         <Portfolio />
         <Team />
         <Testimonials />
-        <CTA /> */}
+        <CTA />
       </main>
     </div>
   );

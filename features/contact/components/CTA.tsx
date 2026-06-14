@@ -19,7 +19,7 @@ export const CTA = () => {
           {/* Text */}
           <div className="text-white max-w-xl">
             <h3 className="text-3xl md:text-4xl font-extrabold">
-              Ready to Build Something Amazing?
+              Ready to Start Your Project?
             </h3>
             <p className="mt-2 text-white/85">
               Let's turn your ideas into scalable digital solutions that drive real results.

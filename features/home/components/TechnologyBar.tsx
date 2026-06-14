@@ -1,40 +1,53 @@
-// src/features/home/components/TechnologyBar.tsx
+"use client";
 
 import { 
-  NextJsIconSrc, 
-  ReactIconSrc, 
-  NestJsIconSrc, 
-  PostgresqlIconSrc, 
-  DockerIconSrc, 
-  TailwindCSSSrc 
+  NextJs1Icon,
+  TailwindCSSIcon,
+  TypescriptIcon,
+  AWSIcon,
+  DockerIconSrc,
+  VercelIcon,
+  PostgresqlIconSrc,
 } from "@/assets/icons";
 import { IconWrapper } from "@/assets/icons/IconWrapper";
 
-export default function TechnologyBar() {
+export const TechnologyBar = () => {
   const techs = [
-    { name: "Next.js", icon: <IconWrapper src={NextJsIconSrc} alt="Next.js" className="h-5 w-5" /> },
-    { name: "React", icon: <IconWrapper src={ReactIconSrc} alt="React" className="h-5 w-5" /> },
-    { name: "NestJS", icon: <IconWrapper src={NestJsIconSrc} alt="NestJS" className="h-5 w-5" /> },
-    { name: "PostgreSQL", icon: <IconWrapper src={PostgresqlIconSrc} alt="PostgreSQL" className="h-5 w-5" /> },
-    { name: "Docker", icon: <IconWrapper src={DockerIconSrc} alt="Docker" className="h-5 w-5" /> },
-    { name: "Tailwind CSS", icon: <IconWrapper src={TailwindCSSSrc} alt="Tailwind CSS" className="h-5 w-5" /> },
+    { name: "NEXT.", icon: <IconWrapper src={NextJs1Icon} alt="Next.js" className="h-16 w-auto object-contain" /> },
+    { name: "Tailwindcss", icon: <IconWrapper src={TailwindCSSIcon} alt="Tailwind CSS" className="h-10 w-auto object-contain" /> },
+    { name: "TypeScript", icon: <IconWrapper src={TypescriptIcon} alt="TypeScript" className="h-8 w-auto object-contain" /> },
+    { name: "", icon: <IconWrapper src={AWSIcon} alt="AWS" className="h-10 w-auto object-contain" /> },
+    { name: "Docker", icon: <IconWrapper src={DockerIconSrc} alt="Docker" className="h-10 w-auto object-contain" /> },
+    { name: "", icon: <IconWrapper src={VercelIcon} alt="Vercel" className="h-6 w-auto object-contain" /> },
+    { name: "PostgreSQL", icon: <IconWrapper src={PostgresqlIconSrc} alt="PostgreSQL" className="h-10 w-auto object-contain" /> },
   ];
 
   return (
-    <section className="border-y border-slate-800 bg-slate-900 py-8">
-      <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center gap-8 text-slate-400">
-          {techs.map((tech) => (
-            <span
-              key={tech.name}
-              className="flex items-center gap-2 text-lg font-semibold tracking-wide hover:text-slate-200 transition-colors"
-            >
-              {tech.icon}
-              {tech.name}
-            </span>
-          ))}
+    <section className="border-y border-slate-200 bg-white py-6 dark:border-slate-800 dark:bg-slate-900 transition-colors">
+      <div className="container mx-auto px-4">
+        <div className="mb-6 text-center">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
+            Trusted by innovative companies
+          </span>
+        </div>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-slate-600 dark:text-slate-400">
+          {techs.map((tech, index) => {
+            // Agar icon missing hai to skip karo
+            if (!tech.icon) return null;
+            return (
+              <div
+                key={index}
+                className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-200"
+              >
+                {tech.icon}
+                {tech.name !== "" && tech.name !== "NEXT." && (
+                  <span className="text-lg font-semibold">{tech.name}</span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-}
+};

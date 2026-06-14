@@ -1,16 +1,9 @@
 "use client";
 
-import { Rocket, Users, Activity, Calendar, Award, Zap } from "lucide-react";
+import { Zap, Award, Users } from "lucide-react";
 import { FadeIn, SlideUp, StaggerContainer } from "@/components/animations";
 
 export const WhyChooseUs = () => {
-  const stats = [
-    { icon: Rocket, value: "50+", label: "Projects Delivered", color: "text-green-400" },
-    { icon: Users, value: "20+", label: "Happy Clients", color: "text-blue-400" },
-    { icon: Activity, value: "99.9%", label: "Uptime & Reliability", color: "text-purple-400" },
-    { icon: Calendar, value: "5+", label: "Years of Experience", color: "text-yellow-400" },
-  ];
-
   const benefits = [
     {
       icon: Zap,
@@ -30,37 +23,22 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#0B101B]">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section className="bg-[#0B101B] text-white py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative ">
         <SlideUp>
-          <div className="text-center mb-16">
-            <span className="text-blue-400 font-semibold text-sm uppercase tracking-wide">
-              Why Choose Us
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mt-2">
-              Built for Performance<br />and Scale
-            </h2>
-          </div>
-        </SlideUp>
+  <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+    <div>
+      <span className="text-xs font-bold tracking-[0.2em] text-primary mb-3 text-blue-400">
+        Why Choose Us
+      </span>
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white">
+        Built for Performance<br />and Scale
+      </h2>
+    </div>
+  </div>
+</SlideUp>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16 rounded-2xl overflow-hidden border border-gray-700/50 bg-gray-800/50">
-          {stats.map((stat, i) => (
-            <FadeIn key={i} direction="up" delay={i * 0.1}>
-              <div className="p-6 lg:p-8 text-center flex flex-col items-center justify-center border-r border-gray-700/50 last:border-r-0">
-                <div className="flex items-center gap-3 text-white mb-1">
-                  <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                  <span className="text-3xl lg:text-4xl font-bold text-white">
-                    {stat.value}
-                  </span>
-                </div>
-                <span className="text-gray-400 text-sm">{stat.label}</span>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        {/* Benefits */}
+        {/* Benefits Grid */}
         <StaggerContainer>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((benefit, i) => (

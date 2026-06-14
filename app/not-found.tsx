@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/Button/Button";
 
 export default function NotFound() {
@@ -9,11 +8,9 @@ export default function NotFound() {
       <p className="text-gray-500 mb-8 text-center max-w-md">
         The page you're looking for doesn't exist or has been moved.
       </p>
-      <Link href="/">
-        <Button variant="gradient" size="lg">
-          Return Home
-        </Button>
-      </Link>
+      <Button href="/" variant="gradient" size="lg">
+        Return Home
+      </Button>
     </div>
   );
 }

@@ -1,4 +1,10 @@
-// src/features/home/components/index.ts
-
-export { default as Hero } from "./Hero";
-export { default as TechnologyBar } from "./TechnologyBar";
+export * from "./Hero";
+export * from "./TechnologyBar";
+export * from "./Services";
+export * from "./Stats";
+export * from "./WhyChooseUs";
+export * from "./Process";
+export * from "./Portfolio";
+export * from "./Team";
+export * from "./Testimonials";
+export * from "./CTA";

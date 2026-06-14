@@ -1,31 +1,16 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 export interface ThemeToggleProps {
   className?: string;
 }
 
 export const ThemeToggle = ({ className }: ThemeToggleProps) => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    // Check localStorage or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDarkMode = savedTheme === "dark" || (!savedTheme && prefersDark);
-    setIsDark(isDarkMode);
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, []);
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    document.documentElement.classList.toggle("dark", newIsDark);
-    localStorage.setItem("theme", newIsDark ? "dark" : "light");
-  };
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   return (
     <button
@@ -36,6 +21,7 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
         className
       )}
       aria-label="Toggle theme"
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
         <Sun className="h-5 w-5 text-yellow-500" />

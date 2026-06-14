@@ -32,12 +32,9 @@ export const useThemeStore = create<ThemeStore>()(
       },
 
       toggleTheme: () => {
-        set((state) => {
-          const themes: Theme[] = ["light", "dark", "system"];
-          const currentIndex = themes.indexOf(state.theme);
-          const nextIndex = (currentIndex + 1) % themes.length;
-          return { theme: themes[nextIndex] };
-        });
+        set((state) => ({
+          theme: state.resolvedTheme === "dark" ? "light" : "dark",
+        }));
       },
 
       setLight: () => {

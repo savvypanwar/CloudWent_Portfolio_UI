@@ -1,113 +1,96 @@
 "use client";
 
-import { Code, Layers, Shield, Smartphone, Brain, Server } from "lucide-react";
+import { 
+  Code2, 
+  GraduationCap, 
+  Cloud, 
+  Smartphone, 
+  Sparkles, 
+  CloudCog,
+  ArrowRight 
+} from "lucide-react";
 import Link from "next/link";
-import { FadeIn, StaggerContainer, SlideUp } from "@/components/animations";
 
 export const Services = () => {
   const services = [
     {
-      icon: Code,
+      icon: Code2,
       title: "Web Development",
-      desc: "Modern web apps, responsive design, and seamless user experiences.",
-      color: "text-blue-600",
-      bg: "bg-blue-50",
+      desc: "Modern, responsive and high-performance websites and web applications.",
+      color: "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
     },
     {
-      icon: Layers,
+      icon: GraduationCap,
       title: "LMS Development",
-      desc: "Fully-featured e-Learning platforms with interactive courses and assessments.",
-      color: "text-purple-600",
-      bg: "bg-purple-50",
+      desc: "Feature-rich LMS platforms for education, training and corporate learning.",
+      color: "bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
     },
     {
-      icon: Shield,
+      icon: Cloud,
       title: "SaaS Development",
-      desc: "Scalable SaaS products to streamline business operations and drive growth.",
-      color: "text-green-600",
-      bg: "bg-green-50",
+      desc: "Scalable SaaS products that help you grow your business globally.",
+      color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
     },
     {
       icon: Smartphone,
       title: "Mobile Applications",
-      desc: "Cross-platform mobile apps with intuitive interfaces and native performance.",
-      color: "text-orange-600",
-      bg: "bg-orange-50",
+      desc: "Cross-platform mobile apps that deliver exceptional user experiences.",
+      color: "bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
     },
     {
-      icon: Brain,
+      icon: Sparkles,
       title: "AI Solutions",
-      desc: "AI-powered solutions to automate processes, gain insights, and drive innovation.",
-      color: "text-indigo-600",
-      bg: "bg-indigo-50",
+      desc: "AI-powered solutions to automate processes and unlock new opportunities.",
+      color: "bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-900/30 dark:text-fuchsia-400",
     },
     {
-      icon: Server,
+      icon: CloudCog,
       title: "Cloud & DevOps",
-      desc: "Secure cloud architectures with CI/CD pipelines and comprehensive monitoring.",
-      color: "text-cyan-600",
-      bg: "bg-cyan-50",
+      desc: "Secure, reliable and cost-effective cloud solutions on AWS and beyond.",
+      color: "bg-sky-50 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400",
     },
   ];
 
   return (
-    <section className="py-24 bg-gray-50/50">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-12">
+    <section className="py-24 bg-white dark:bg-slate-950 transition-colors">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <SlideUp>
-              <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-                Our Services
-              </span>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-2">
-                End-to-end Solutions<br />For Every Need
-              </h2>
-            </SlideUp>
+            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3 text-blue-400">
+              OUR SERVICES
+            </p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+              End-to-end Solutions<br />For Every Need
+            </h2>
           </div>
-          <SlideUp>
-            <Link
-              href="/services"
-              className="text-blue-600 font-medium hover:underline hidden sm:block"
-            >
-              View all services →
-            </Link>
-          </SlideUp>
+          <Link 
+            href="/services" 
+            className="text-primary font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all"
+          >
+            View all services <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
-        <StaggerContainer>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
-              <FadeIn
-                key={i}
-                direction="up"
-                delay={i * 0.05}
-                className="group p-8 rounded-2xl border border-gray-200 bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer relative overflow-hidden"
-              >
-                <div
-                  className={`h-12 w-12 rounded-xl ${s.bg} ${s.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {s.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {s.desc}
-                </p>
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="h-8 w-8 rounded-full bg-blue-50 flex items-center justify-center">
-                    <span className="text-blue-600">→</span>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </StaggerContainer>
-
-        <div className="mt-8 text-center sm:hidden">
-          <Link href="/services" className="text-blue-600 font-medium hover:underline">
-            View all services →
-          </Link>
+        {/* Cards Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {services.map((s) => (
+            <div 
+              key={s.title} 
+              className="group bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+            >
+              <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.color} mb-4`}>
+                <s.icon className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-lg mb-1.5 text-slate-900 dark:text-white">
+                {s.title}
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {s.desc}
+              </p>
+              <ArrowRight className="w-5 h-5 text-primary mt-5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

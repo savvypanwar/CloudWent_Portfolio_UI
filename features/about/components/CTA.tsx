@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/Button/Button";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { FadeIn, SlideUp } from "@/components/animations";
-import Link from "next/link";
 
 export const CTA = () => {
   return (
@@ -32,16 +31,12 @@ export const CTA = () => {
           </SlideUp>
           <SlideUp delay={0.4}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button variant="gradient" size="lg" className="bg-white text-blue-600 hover:bg-gray-100 shadow-xl shadow-blue-900/30">
-                  Start a Project <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/portfolio">
-                <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
-                  View Our Work
-                </Button>
-              </Link>
+              <Button href="/contact" variant="gradient" size="lg" className="bg-white text-blue-600 hover:bg-gray-100 shadow-xl shadow-blue-900/30">
+                Start a Project <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button href="/portfolio" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+                View Our Work
+              </Button>
             </div>
           </SlideUp>
         </div>

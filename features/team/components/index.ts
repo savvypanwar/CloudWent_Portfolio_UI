@@ -1,5 +1,5 @@
 export * from "./TeamHero";
-export * from "./TeamGrid";
-export * from "./Leadership";
-export * from "./Skills";
-export * from "./Projects";
+
+export * from "./TeamSection";
+export * from "./TeamStats";
+export * from "./CTA"

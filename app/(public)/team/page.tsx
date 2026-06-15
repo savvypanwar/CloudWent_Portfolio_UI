@@ -1,52 +1,55 @@
 import { Section } from "@/components/layout/Section/Section";
-// import  PageHeading  from "@/components/common/PageHeading/PageHeading";
 import { PageHeading } from "@/components/common/PageHeading/PageHeading";
-import { TeamHero, TeamGrid, Leadership, Skills, Projects } from "@/features/team/components";
+import {
+  TeamHero,
+  TeamSection,
+  TeamStats,
+  CTA,
+} from "@/features/team/components/";
+import { teamMembers, teamSections, stats } from "@/lib/team-data";
+
+export const metadata = {
+  title: "Our Team | CloudWent",
+  description: "Meet the experts behind CloudWent. Passionate professionals building scalable digital solutions for ambitious businesses.",
+};
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B] flex flex-col transition-colors">
       <main className="flex-grow">
+        {/* Hero Section */}
         <TeamHero />
-        <Section variant="default">
-          <PageHeading
-            title="Meet Our Leadership Team"
-            description="Passionate experts with modern technologies and a drive for excellence."
-            size="lg"
-          />
-          <div className="mt-8">
-            <Leadership />
+        
+        {/* Stats Section */}
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+          <TeamStats stats={stats} />
+        </Section>
+
+        {/* Team Sections */}
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+          <div className="max-w-7xl mx-auto">
+            <PageHeading
+              title="Our Team"
+              description="Passionate professionals with expertise in modern technologies."
+            />
+            <div className="mt-8 space-y-16">
+              {teamSections.map(({ key, label, subtitle }) => {
+                const members = teamMembers.filter((m) => m.team === key);
+                return (
+                  <TeamSection
+                    key={key}
+                    label={label}
+                    subtitle={subtitle}
+                    members={members}
+                  />
+                );
+              })}
+            </div>
           </div>
         </Section>
-        <Section variant="gray">
-          <PageHeading
-            title="Our Core Team"
-            description="The talented individuals who make CloudWent possible."
-            size="lg"
-          />
-          <div className="mt-8">
-            <TeamGrid />
-          </div>
-        </Section>
-        <Section variant="default">
-          <PageHeading
-            title="Our Skills & Expertise"
-            description="Technologies and tools that drive our success."
-            size="lg"
-          />
-          <div className="mt-8">
-            <Skills />
-          </div>
-        </Section>
-        <Section variant="gray">
-          <PageHeading
-            title="Recent Projects"
-            description="Some of the amazing work delivered by our team."
-            size="lg"
-          />
-          <div className="mt-8">
-            <Projects />
-          </div>
+
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+          <CTA  />
         </Section>
       </main>
     </div>

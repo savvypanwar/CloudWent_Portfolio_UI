@@ -1,6 +1,8 @@
-export * from "./Hero";
+// features/about/components/index.ts
+export * from "./AboutHero";
+export * from "./MissionVision";
 export * from "./Story";
-export * from "./Values";
-export * from "./Statistics";
-export * from "./TeamPreview";
-export * from "./CTA";
+export * from "./Team";
+export * from "./Culture";
+export * from "./Testimonials";
+export * from "./AboutCta";

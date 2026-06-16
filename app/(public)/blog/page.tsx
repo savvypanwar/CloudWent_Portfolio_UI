@@ -1,57 +1,91 @@
-import { Navbar } from "@/components/layout/Navbar/Navbar";
-import { Footer } from "@/components/layout/Footer/Footer";
-import { Section } from "@/components/layout/Section/Section";
-import { PageHeading } from "@/components/common/PageHeading/PageHeading";
-import { BlogGrid, Categories, FeaturedArticle } from "@/features/blog/components";
+import {
+  BlogHero,
+  FeaturedArticle,
+  BlogGrid,
+  BlogSidebar,
+  BlogCta,
+} from "@/features/blog/components";
 
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
 };
 
+const featuredPost = {
+  slug: "future-of-web-development-2025",
+  title: "The Future of Web Development: Trends to Watch in 2025",
+  excerpt: "Discover the emerging technologies and frameworks shaping the future of web development, from AI-driven tools to edge computing.",
+  author: "Aamila Khan",
+  date: "January 15, 2025",
+  category: "Technology",
+  image: "/images/blog/web-dev.jpg",
+};
+
+const posts = [
+  {
+    id: 1,
+    title: "Building Scalable AI Solutions for Enterprise Applications",
+    excerpt: "Learn how to design and implement AI-powered features that scale seamlessly across large enterprise environments.",
+    author: "Usman Tariq",
+    date: "January 8, 2025",
+    category: "AI/ML",
+    image: "/images/blog/ai-solutions.jpg",
+    slug: "building-scalable-ai-solutions",
+  },
+  {
+    id: 2,
+    title: "Cloud-Native DevOps Strategies for Modern Teams",
+    excerpt: "Explore best practices for implementing cloud-native DevOps workflows that accelerate delivery and improve reliability.",
+    author: "Bilal Ahmed",
+    date: "December 20, 2024",
+    category: "Cloud",
+    image: "/images/blog/devops.jpg",
+    slug: "cloud-native-devops-strategies",
+  },
+  {
+    id: 3,
+    title: "Designing for AI Interfaces: UX Best Practices",
+    excerpt: "A comprehensive guide to designing intuitive, user-centered interfaces for AI-powered applications.",
+    author: "Sarah Ahmed",
+    date: "December 10, 2024",
+    category: "Design",
+    image: "/images/blog/ai-ux.jpg",
+    slug: "designing-for-ai-interfaces",
+  },
+  {
+    id: 4,
+    title: "Top 10 Productivity Hacks for Developers in 2025",
+    excerpt: "Practical tips and tools to help developers code smarter, not harder, and boost daily productivity.",
+    author: "Waseem Ahmad",
+    date: "November 28, 2024",
+    category: "Productivity",
+    image: "/images/blog/productivity.jpg",
+    slug: "productivity-hacks-2025",
+  },
+  {
+    id: 5,
+    title: "PostgreSQL Performance Optimization: Advanced Techniques",
+    excerpt: "Deep dive into query optimization, indexing strategies, and performance tuning for PostgreSQL databases.",
+    author: "Ahmed Hassan",
+    date: "November 15, 2024",
+    category: "Development",
+    image: "/images/blog/postgres.jpg",
+    slug: "postgresql-performance-optimization",
+  },
+];
+
 export default function BlogPage() {
-  // Sample featured article data
-  const featuredPost = {
-    slug: "future-of-web-development-2025",
-    title: "The Future of Web Development: Trends to Watch in 2025",
-    excerpt: "Discover the emerging technologies and frameworks shaping the future of web development, from AI-driven tools to edge computing.",
-    author: "Aamila Khan",
-    date: "January 15, 2025",
-    category: "Technology",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop",
-  };
-
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <Navbar />
+    <div className="min-h-screen bg-white dark:bg-[#0B101B] flex flex-col transition-colors">
       <main className="flex-grow">
-        {/* Blog Hero */}
-        <Section className="pt-12 pb-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-              Our Blog
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-4">
-              Insights & Stories
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Stay updated with the latest trends, tutorials, and insights from our team of experts.
-            </p>
-          </div>
-        </Section>
-
-        {/* Categories */}
-        <Section variant="gray" className="py-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-sm font-semibold text-gray-700">Browse Categories:</span>
-            <Categories />
-          </div>
-        </Section>
-
+        <BlogHero />
+        
         {/* Featured Article */}
-        <Section variant="default">
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Article</h2>
+        <section className="py-12 bg-white dark:bg-[#0B101B] transition-colors">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Article</h2>
+            </div>
             <FeaturedArticle
               slug={featuredPost.slug}
               title={featuredPost.title}
@@ -62,15 +96,23 @@ export default function BlogPage() {
               image={featuredPost.image}
             />
           </div>
-        </Section>
-
-        {/* All Articles */}
-        <Section variant="gray">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">All Articles</h2>
-          <BlogGrid />
-        </Section>
+        </section>
+        
+        {/* Blog Grid with Sidebar */}
+        <section className="py-24 bg-white dark:bg-[#0B101B] transition-colors">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
+              <BlogSidebar />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">All Articles</h2>
+                <BlogGrid posts={posts} />
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <BlogCta />
       </main>
-      <Footer />
     </div>
   );
 }

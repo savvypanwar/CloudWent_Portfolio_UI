@@ -15,7 +15,6 @@ export const Navbar = () => {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services", hasDropdown: true },
-    { label: "Portfolio", href: "/portfolio" },
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
     { label: "Team", href: "/team"},

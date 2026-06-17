@@ -1,5 +1,3 @@
-"use client";
-
 import { 
   Code2, 
   GraduationCap, 
@@ -52,15 +50,15 @@ export const Services = () => {
   ];
 
   return (
-    <section className="py-24 bg-white dark:bg-slate-950 transition-colors">
+    <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3 text-blue-400">
+            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
               OUR SERVICES
             </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
               End-to-end Solutions<br />For Every Need
             </h2>
           </div>
@@ -77,15 +75,15 @@ export const Services = () => {
           {services.map((s) => (
             <div 
               key={s.title} 
-              className="group bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+              className="group glass-effect rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
             >
               <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.color} mb-4`}>
                 <s.icon className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg mb-1.5 text-slate-900 dark:text-white">
+              <h3 className="font-bold text-lg mb-1.5 text-foreground">
                 {s.title}
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {s.desc}
               </p>
               <ArrowRight className="w-5 h-5 text-primary mt-5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />

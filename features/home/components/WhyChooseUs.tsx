@@ -23,34 +23,43 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="bg-[#0B101B] text-white py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative ">
+    <section className="relative overflow-hidden py-24 transition-colors">
+      {/* Light Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
+      {/* Dark Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
+      
+      <div className="max-w-7xl mx-auto px-6 relative">
         <SlideUp>
-  <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-    <div>
-      <span className="text-xs font-bold tracking-[0.2em] text-primary mb-3 text-blue-400">
-        Why Choose Us
-      </span>
-      <h2 className="text-4xl md:text-5xl font-extrabold text-white">
-        Built for Performance<br />and Scale
-      </h2>
-    </div>
-  </div>
-</SlideUp>
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div>
+              <span className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
+                Why Choose Us
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground dark:text-white">
+                Built for Performance<br />and Scale
+              </h2>
+            </div>
+          </div>
+        </SlideUp>
 
         {/* Benefits Grid */}
         <StaggerContainer>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((benefit, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.1}>
-                <div className="p-6 rounded-2xl border border-gray-700/50 bg-gray-800/30 hover:bg-gray-800/50 transition-colors">
-                  <div className="h-12 w-12 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center mb-4">
+                <div className="p-6 rounded-2xl glass-effect dark:bg-slate-800/60 dark:border-white/10 border-border hover:shadow-lg hover:-translate-y-1 transition-all">
+                  {/* Icon Box */}
+                  <div className="h-12 w-12 rounded-xl bg-primary/20 text-primary dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center mb-4">
                     <benefit.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-white font-semibold text-lg mb-2">
+                  {/* Title & Desc */}
+                  <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-400 text-sm">{benefit.desc}</p>
+                  <p className="text-muted-foreground dark:text-slate-300 text-sm leading-relaxed">
+                    {benefit.desc}
+                  </p>
                 </div>
               </FadeIn>
             ))}

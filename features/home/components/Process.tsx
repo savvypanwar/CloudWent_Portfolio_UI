@@ -1,5 +1,3 @@
-"use client";
-
 import { 
   Search, 
   FileText, 
@@ -56,14 +54,14 @@ export const Process = () => {
   ];
 
   return (
-    <section className="py-24 bg-white dark:bg-slate-950 transition-colors">
+    <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-16">
-          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3 text-blue-400">
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
             OUR PROCESS
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
             A Proven Process<br />For Successful Delivery
           </h2>
         </div>
@@ -72,27 +70,27 @@ export const Process = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8 relative">
           
           {/* Dashed Line (Desktop Only) */}
-          <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-px border-t-2 border-dashed border-slate-300 dark:border-slate-700" />
+          <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-px border-t-2 border-dashed border-border" />
 
           {steps.map((step, i) => (
             <div key={step.number} className="relative text-center group">
-              {/* Icon Circle */}
-              <div className="mx-auto w-20 h-20 rounded-full grid place-items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm group-hover:shadow-md transition">
+              {/* ✅ Icon Circle (Fixed with grid place-items-center) */}
+              <div className="mx-auto w-20 h-20 rounded-full grid place-items-center glass-effect border-border shadow-sm group-hover:shadow-md transition">
                 <step.icon className={`w-8 h-8 ${step.color}`} />
               </div>
 
               {/* Step Number */}
-              <div className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-3">
+              <div className="text-xs font-bold text-muted-foreground mt-3">
                 {step.number}
               </div>
 
               {/* Title */}
-              <h3 className="font-bold text-lg text-slate-900 dark:text-white mt-1">
+              <h3 className="font-bold text-lg text-foreground mt-1">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed max-w-[180px] mx-auto">
+              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed max-w-[180px] mx-auto">
                 {step.desc}
               </p>
             </div>

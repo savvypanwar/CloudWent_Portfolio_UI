@@ -1,7 +1,3 @@
-// src/features/home/components/Stats.tsx
-
-"use client";
-
 import { Rocket, Users, ShieldCheck, Calendar } from "lucide-react";
 
 export const Stats = () => {
@@ -41,11 +37,10 @@ export const Stats = () => {
   ];
 
   return (
-    <section className="py-10">
-      <div className="max-w-7xl mx-auto px-6 ">
+    <section className="py-10 bg-background transition-colors">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Main Container */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#0B101B] p-6 md:p-8">
-          
+        <div className="relative overflow-hidden rounded-3xl bg-dark p-6 md:p-8 shadow-glow">
           {/* Blue Glow on Left Side */}
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,oklch(0.6_0.2_260)_0%,transparent_50%)]" />
 
@@ -57,7 +52,9 @@ export const Stats = () => {
                 className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
               >
                 {/* Icon Box */}
-                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor}`}>
+                <div
+                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor}`}
+                >
                   <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
                 </div>
 
@@ -66,7 +63,7 @@ export const Stats = () => {
                   <span className="text-2xl font-bold text-white md:text-3xl">
                     {stat.value}
                   </span>
-                  <span className="text-xs text-gray-400 md:text-sm">
+                  <span className="text-xs text-muted-foreground md:text-sm">
                     {stat.label}
                   </span>
                 </div>

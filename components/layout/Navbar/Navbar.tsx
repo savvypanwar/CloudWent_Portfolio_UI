@@ -17,24 +17,24 @@ export const Navbar = () => {
     { label: "Services", href: "/services", hasDropdown: true },
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
-    { label: "Team", href: "/team"},
+    { label: "Team", href: "/team" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md transition-colors">
       <div className="max-w-7xl mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="flex items-center gap-1 hover:text-primary transition-colors"
             >
               {link.label}
               {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
@@ -47,13 +47,13 @@ export const Navbar = () => {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="rounded-lg p-2 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+            className="rounded-lg p-2 bg-surface hover:bg-muted transition-colors"
             aria-label="Toggle theme"
           >
             {resolvedTheme === "dark" ? (
               <Sun className="h-5 w-5 text-yellow-500" />
             ) : (
-              <Moon className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+              <Moon className="h-5 w-5 text-muted-foreground" />
             )}
           </button>
 
@@ -66,7 +66,7 @@ export const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          className="lg:hidden text-muted-foreground hover:text-primary transition-colors"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

@@ -1,5 +1,3 @@
-"use client";
-
 import { Star } from "lucide-react";
 
 export const Testimonials = () => {
@@ -22,7 +20,13 @@ export const Testimonials = () => {
   ];
 
   return (
-    <section className="pb-24 bg-white dark:bg-slate-950 transition-colors">
+    <section className="relative overflow-hidden py-24 transition-colors">
+      {/* Light Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
+      
+      {/* Dark Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
+
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -35,7 +39,7 @@ export const Testimonials = () => {
           {items.map((item, i) => (
             <div
               key={i}
-              className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+              className="glass-effect border-border rounded-2xl p-6 transition"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-4">
@@ -45,20 +49,20 @@ export const Testimonials = () => {
               </div>
 
               {/* Quote */}
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 "{item.quote}"
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-3 mt-6 pt-5 border-t border-slate-200 dark:border-slate-700/50">
+              <div className="flex items-center gap-3 mt-6 pt-5 border-t border-border">
                 {/* Avatar Placeholder */}
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-300 to-purple-500" />
                 
                 <div>
-                  <div className="font-bold text-sm text-slate-900 dark:text-white">
+                  <div className="font-bold text-sm text-foreground">
                     {item.name}
                   </div>
-                  <div className="text-xs text-slate-600 dark:text-slate-400">
+                  <div className="text-xs text-muted-foreground">
                     {item.role}
                   </div>
                 </div>

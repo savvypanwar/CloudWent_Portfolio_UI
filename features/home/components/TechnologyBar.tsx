@@ -1,5 +1,3 @@
-"use client";
-
 import { 
   NextJs1Icon,
   TailwindCSSIcon,
@@ -13,24 +11,25 @@ import { IconWrapper } from "@/assets/icons/IconWrapper";
 
 export const TechnologyBar = () => {
   const techs = [
-    { name: "NEXT.", icon: <IconWrapper src={NextJs1Icon} alt="Next.js" className="h-16 w-auto object-contain" /> },
+    { name: "NEXT.", icon: <IconWrapper src={NextJs1Icon} alt="Next.js" className="h-12 w-auto object-contain" /> },
     { name: "Tailwindcss", icon: <IconWrapper src={TailwindCSSIcon} alt="Tailwind CSS" className="h-10 w-auto object-contain" /> },
-    { name: "TypeScript", icon: <IconWrapper src={TypescriptIcon} alt="TypeScript" className="h-8 w-auto object-contain" /> },
+    { name: "TypeScript", icon: <IconWrapper src={TypescriptIcon} alt="TypeScript" className="h-6 w-auto object-contain" /> },
     { name: "", icon: <IconWrapper src={AWSIcon} alt="AWS" className="h-10 w-auto object-contain" /> },
     { name: "Docker", icon: <IconWrapper src={DockerIconSrc} alt="Docker" className="h-10 w-auto object-contain" /> },
-    { name: "", icon: <IconWrapper src={VercelIcon} alt="Vercel" className="h-6 w-auto object-contain" /> },
-    { name: "PostgreSQL", icon: <IconWrapper src={PostgresqlIconSrc} alt="PostgreSQL" className="h-10 w-auto object-contain" /> },
+    { name: "", icon: <IconWrapper src={VercelIcon} alt="Vercel" className="h-4 w-auto object-contain" /> },
+    { name: "PostgreSQL", icon: <IconWrapper src={PostgresqlIconSrc} alt="PostgreSQL" className="h-8 w-auto object-contain" /> },
   ];
 
   return (
-    <section className="border-y border-slate-200 bg-white py-6 dark:border-slate-800 dark:bg-slate-900 transition-colors">
+    <section className="border-y border-border bg-background dark:bg-[#36394d] py-6 transition-colors">
       <div className="container mx-auto px-4">
+        {/* Header Text */}
         <div className="mb-6 text-center">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground dark:text-white/80">
             Trusted by innovative companies
           </span>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-slate-600 dark:text-slate-400">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-muted-foreground dark:text-white/90">
           {techs.map((tech, index) => {
             // Agar icon missing hai to skip karo
             if (!tech.icon) return null;
@@ -41,7 +40,9 @@ export const TechnologyBar = () => {
               >
                 {tech.icon}
                 {tech.name !== "" && tech.name !== "NEXT." && (
-                  <span className="text-lg font-semibold">{tech.name}</span>
+                  <span className="text-lg font-semibold">
+                    {tech.name}
+                  </span>
                 )}
               </div>
             );

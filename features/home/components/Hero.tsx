@@ -1,4 +1,4 @@
-"use client";
+
 
 import Image from "next/image";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";

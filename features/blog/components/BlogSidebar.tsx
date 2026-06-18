@@ -21,7 +21,7 @@ const recentPosts = [
 
 export const BlogSidebar = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 ">
       {/* Search */}
       <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm">
         <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-4">Search</h3>

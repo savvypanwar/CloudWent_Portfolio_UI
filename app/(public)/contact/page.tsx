@@ -4,6 +4,7 @@ import {
   ContactHero,
   ContactForm,
   ConsultBanner,
+  OfficeLocation,
 } from "@/features/contact/components/";
 
 export const metadata = {
@@ -26,6 +27,9 @@ export default function ContactPage() {
 
           <div className="mt-8 max-w-7xl mx-auto">
              <ConsultBanner />
+          </div>
+          <div className="mt-8 max-w-7xl mx-auto">
+             <OfficeLocation />
           </div>
 
          

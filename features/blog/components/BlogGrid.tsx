@@ -1,8 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, User } from "lucide-react";
+import { StaticImageData } from "next/image";
 
 interface BlogPost {
   id: number;
@@ -11,7 +10,7 @@ interface BlogPost {
   author: string;
   date: string;
   category: string;
-  image: string;
+  image: string | StaticImageData;
   slug: string;
 }
 
@@ -26,9 +25,10 @@ export const BlogGrid = ({ posts }: BlogGridProps) => {
         <Link
           key={post.id}
           href={`/blog/${post.slug}`}
-          className="group bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-400 transition-all"
+          className="group glass-effect border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300"
         >
-          <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-slate-900">
+          <div className="aspect-video overflow-hidden bg-muted/20">
+            {/* ✅ Directly pass post.image, Next.js handles both string and object */}
             <Image
               src={post.image}
               alt={post.title}
@@ -39,17 +39,17 @@ export const BlogGrid = ({ posts }: BlogGridProps) => {
           </div>
           <div className="p-6">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-[10px] font-bold tracking-wider px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
+              <span className="text-[10px] font-bold tracking-wider px-2.5 py-1 rounded bg-primary/10 text-primary">
                 {post.category.toUpperCase()}
               </span>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
               {post.title}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
               {post.excerpt}
             </p>
-            <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 <User className="w-3.5 h-3.5" />
                 <span>{post.author}</span>

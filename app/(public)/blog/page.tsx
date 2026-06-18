@@ -6,6 +6,14 @@ import {
   BlogCta,
 } from "@/features/blog/components";
 
+// ✅ Imported images
+import featuredImage from "@/assets/images/blog/19362653.jpg";
+import featuredImage1 from "@/assets/images/blog/971.jpg";
+import devopsImg from "@/assets/images/blog/7046558.jpg";
+import aiUxImg from "@/assets/images/blog/5785419.jpg";
+import productivityImg from "@/assets/images/blog/20944170.jpg";
+import postgresImg from "@/assets/images/blog/6505016.jpg";
+
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
@@ -18,7 +26,7 @@ const featuredPost = {
   author: "Aamila Khan",
   date: "January 15, 2025",
   category: "Technology",
-  image: "/images/blog/web-dev.jpg",
+  image: featuredImage, 
 };
 
 const posts = [
@@ -29,7 +37,7 @@ const posts = [
     author: "Usman Tariq",
     date: "January 8, 2025",
     category: "AI/ML",
-    image: "/images/blog/ai-solutions.jpg",
+    image: featuredImage1,
     slug: "building-scalable-ai-solutions",
   },
   {
@@ -39,7 +47,7 @@ const posts = [
     author: "Bilal Ahmed",
     date: "December 20, 2024",
     category: "Cloud",
-    image: "/images/blog/devops.jpg",
+    image: devopsImg,
     slug: "cloud-native-devops-strategies",
   },
   {
@@ -49,7 +57,7 @@ const posts = [
     author: "Sarah Ahmed",
     date: "December 10, 2024",
     category: "Design",
-    image: "/images/blog/ai-ux.jpg",
+    image: aiUxImg,
     slug: "designing-for-ai-interfaces",
   },
   {
@@ -59,7 +67,7 @@ const posts = [
     author: "Waseem Ahmad",
     date: "November 28, 2024",
     category: "Productivity",
-    image: "/images/blog/productivity.jpg",
+    image: productivityImg,
     slug: "productivity-hacks-2025",
   },
   {
@@ -69,7 +77,7 @@ const posts = [
     author: "Ahmed Hassan",
     date: "November 15, 2024",
     category: "Development",
-    image: "/images/blog/postgres.jpg",
+    image: postgresImg,
     slug: "postgresql-performance-optimization",
   },
 ];
@@ -98,13 +106,16 @@ export default function BlogPage() {
           </div>
         </section>
         
-        {/* Blog Grid with Sidebar */}
+        {/* Blog Grid with Sidebar - ✅ FIXED LAYOUT */}
         <section className="py-24 bg-white dark:bg-[#0B101B] transition-colors">
           <div className="max-w-7xl mx-auto px-6">
+            
+            {/* ✅ Title ko grid ke bahar le aaya */}
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">All Articles</h2>
+            
             <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
               <BlogSidebar />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">All Articles</h2>
                 <BlogGrid posts={posts} />
               </div>
             </div>

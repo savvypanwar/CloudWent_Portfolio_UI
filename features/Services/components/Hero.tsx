@@ -14,7 +14,7 @@ export const Hero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden py-10">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
       

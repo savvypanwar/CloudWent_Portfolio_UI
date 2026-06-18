@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
 import { ChevronDown, Menu, X, Sun, Moon } from "lucide-react";
 import { MobileMenu } from "@/components/layout/MobileMenu/MobileMenu";
@@ -11,21 +12,30 @@ import { useTheme } from "@/hooks/useTheme";
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { resolvedTheme, toggleTheme } = useTheme();
+  const pathname = usePathname();
 
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services", hasDropdown: true },
-    { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" },
-    { label: "Team", href: "/team" },
-    { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/contact" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services"},
+      { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Team", href: "/team" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
+    ],
+    []
+  );
+
+  // Active link check karne ka function
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md transition-colors">
       <div className="max-w-7xl mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
         <Logo />
 
         {/* Desktop Navigation */}
@@ -34,17 +44,17 @@ export const Navbar = () => {
             <Link
               key={link.label}
               href={link.href}
-              className="flex items-center gap-1 hover:text-primary transition-colors"
+              className={`flex items-center gap-1 hover:text-primary transition-colors ${
+                isActive(link.href) ? "text-primary" : "text-muted-foreground"
+              }`}
             >
               {link.label}
-              {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
             </Link>
           ))}
         </nav>
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-4">
-          {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
             className="rounded-lg p-2 bg-surface hover:bg-muted transition-colors"
@@ -58,7 +68,8 @@ export const Navbar = () => {
           </button>
 
           <Link href="/contact">
-            <Button variant="gradient" size="sm">
+            {/* ✅ Updated to match exactly the 'primary' variant used across all pages */}
+            <Button variant="primary" size="sm">
               Book a Consultation
             </Button>
           </Link>

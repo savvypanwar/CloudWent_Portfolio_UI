@@ -6,10 +6,10 @@ export const AboutCta = () => {
   return (
     <section className="pb-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-12 py-10 shadow-lg">
+        <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-12 py-10 shadow-glow">
           {/* Decorative Cloud Shape */}
           <div className="absolute -left-4 -top-4 opacity-20">
-            <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" className="text-white/20">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" className="text-primary/30">
               <path d="M17.5 19a3.5 3.5 0 1 0 0-7h-1.5A5.5 5.5 0 0 0 5 12.5a5.5 5.5 0 0 0 5.5 5.5h7z" />
             </svg>
           </div>

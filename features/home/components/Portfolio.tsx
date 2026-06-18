@@ -1,7 +1,7 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import { ExternalLink, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/Button/Button";
 
 import portfolioLms from "@/assets/images/portfolio-lms.jpg";
 import portfolioFinance from "@/assets/images/portfolio-finance.jpg";
@@ -39,22 +39,25 @@ export const Portfolio = () => {
   ];
 
   return (
-    <section id="work" className="bg-[#0B101B] text-white py-24 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_30%,oklch(0.5_0.18_270)_0%,transparent_50%)]" />
+    <section id="work" className="relative overflow-hidden py-24 transition-colors">
+      {/* ✅ Light Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
+      
+      {/* ✅ Dark Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-blue-400 mb-3">
+            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
               OUR PORTFOLIO
             </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
               Featured Projects
             </h2>
           </div>
-          <Link href="#" className="text-blue-400 font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+          <Link href="#" className="text-primary font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
             View all projects <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -64,7 +67,7 @@ export const Portfolio = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl overflow-hidden hover:border-blue-400/40 transition group"
+              className="group glass-effect border-border rounded-2xl overflow-hidden hover:border-primary/40 transition"
             >
               {/* Image */}
               <div className="aspect-[4/3] overflow-hidden bg-black/30">
@@ -82,13 +85,13 @@ export const Portfolio = () => {
                 <span className={`inline-block text-[10px] font-bold tracking-wider px-2.5 py-1 rounded ${project.tagColor} text-white mb-3`}>
                   {project.tag.toUpperCase()}
                 </span>
-                <h3 className="text-xl font-bold">{project.title}</h3>
-                <p className="text-sm text-white/60 mt-1.5 leading-relaxed">
+                <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
                   {project.desc}
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {project.stack.map((s) => (
-                    <span key={s} className="text-[11px] font-medium px-2 py-1 rounded bg-white/10 text-white/80">
+                    <span key={s} className="text-[11px] font-medium px-2 py-1 rounded bg-background/10 text-muted-foreground">
                       {s}
                     </span>
                   ))}
@@ -98,14 +101,14 @@ export const Portfolio = () => {
           ))}
         </div>
 
-        {/* ✅ Navigation Buttons */}
+        {/* Navigation Buttons */}
         <div className="flex justify-center gap-3 mt-10">
-          <button className="w-11 h-11 rounded-full border border-white/30 grid place-items-center hover:bg-white/10 transition">
+          <Button variant="outline" size="icon" className="glass-effect border-border hover:bg-muted/50">
             <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button className="w-11 h-11 rounded-full border border-white/30 grid place-items-center hover:bg-white/10 transition">
+          </Button>
+          <Button variant="outline" size="icon" className="glass-effect border-border hover:bg-muted/50">
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </section>

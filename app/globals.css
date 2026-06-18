@@ -1,60 +1,28 @@
+/* ==========================================
+   TAILWIND DIRECTIVES & THEME SETUP
+   ========================================== */
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-   --gradient-hero-text: linear-gradient(90deg, oklch(0.78 0.16 230), oklch(0.58 0.21 258));
-   --radius: 0.875rem;
-  --background: oklch(0.99 0.005 250);
-  --foreground: oklch(0.16 0.03 260);
-  --surface: oklch(0.97 0.01 250);
-  --surface-foreground: oklch(0.16 0.03 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.03 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.03 260);
-  --primary: oklch(0.58 0.21 258);
-  --primary-foreground: oklch(0.99 0 0);
-  --primary-glow: oklch(0.78 0.16 230);
-  --secondary: oklch(0.96 0.015 255);
-  --secondary-foreground: oklch(0.2 0.04 260);
-  --muted: oklch(0.96 0.01 255);
-  --muted-foreground: oklch(0.5 0.03 255);
-  --accent: oklch(0.95 0.03 255);
-  --accent-foreground: oklch(0.2 0.04 260);
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.92 0.01 255);
-  --input: oklch(0.92 0.01 255);
-  --ring: oklch(0.58 0.21 258);
-  --dark: oklch(0.16 0.04 260);
-  --dark-foreground: oklch(0.98 0 0);
-
-  --gradient-primary: linear-gradient(135deg, oklch(0.58 0.21 258), oklch(0.72 0.18 240));
-  --gradient-hero-text: linear-gradient(90deg, oklch(0.78 0.16 230), oklch(0.58 0.21 258));
-  --gradient-dark: radial-gradient(ellipse at top, oklch(0.22 0.06 265), oklch(0.12 0.04 260));
-  --gradient-cta: linear-gradient(90deg, oklch(0.5 0.22 270), oklch(0.62 0.2 255));
-  --shadow-card: 0 1px 2px oklch(0.2 0.05 260 / 0.04), 0 4px 24px oklch(0.2 0.05 260 / 0.06);
-  --shadow-glow: 0 20px 60px -20px oklch(0.58 0.21 258 / 0.45);
-}
-
-.dark { 
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
+/* ==========================================
+   THEME TOKENS (CSS Variables & Inline Theme)
+   ========================================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-display: var(--font-display);
+  /* Fonts */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radius */
+  --radius: 0.875rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
+
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -81,23 +49,221 @@
   --color-dark-foreground: var(--dark-foreground);
 }
 
-@layer base {
-  html {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  }
+/* ==========================================
+   CSS VARIABLES (Light Mode)
+   ========================================== */
+:root {
+  /* Spacing Radius */
+  --radius: 0.875rem;
 
+  /* Light Palette */
+  --background: oklch(0.99 0.005 250);
+  --foreground: oklch(0.16 0.03 260);
+  --surface: oklch(0.97 0.01 250);
+  --surface-foreground: oklch(0.16 0.03 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.03 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.03 260);
+  --primary: oklch(0.58 0.21 258);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-glow: oklch(0.78 0.16 230);
+  --secondary: oklch(0.96 0.015 255);
+  --secondary-foreground: oklch(0.2 0.04 260);
+  --muted: oklch(0.96 0.01 255);
+  --muted-foreground: oklch(0.5 0.03 255);
+  --accent: oklch(0.95 0.03 255);
+  --accent-foreground: oklch(0.2 0.04 260);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.01 255);
+  --input: oklch(0.92 0.01 255);
+  --ring: oklch(0.58 0.21 258);
+  --dark: oklch(0.16 0.04 260);
+  --dark-foreground: oklch(0.98 0 0);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, oklch(0.58 0.21 258), oklch(0.72 0.18 240));
+  --gradient-hero-text: linear-gradient(90deg, oklch(0.78 0.16 230), oklch(0.58 0.21 258));
+  --gradient-dark: radial-gradient(ellipse at top, oklch(0.22 0.06 265), oklch(0.12 0.04 260));
+  --gradient-cta: linear-gradient(90deg, oklch(0.5 0.22 270), oklch(0.62 0.2 255));
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px oklch(0.2 0.05 260 / 0.04), 0 4px 24px oklch(0.2 0.05 260 / 0.06);
+  --shadow-glow: 0 20px 60px -20px oklch(0.58 0.21 258 / 0.45);
+  --shadow-elegant: 0 10px 40px -10px oklch(0.2 0.05 260 / 0.08);
+}
+
+/* ==========================================
+   CSS VARIABLES (Dark Mode)
+   ========================================== */
+.dark {
+  --background: oklch(0.12 0.04 260);
+  --foreground: oklch(0.98 0 0);
+  --surface: oklch(0.16 0.04 260);
+  --surface-foreground: oklch(0.98 0 0);
+  --card: oklch(0.16 0.04 260);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.16 0.04 260);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.78 0.16 230);
+  --primary-foreground: oklch(0.16 0.04 260);
+  --primary-glow: oklch(0.58 0.21 258);
+  --secondary: oklch(0.2 0.04 260);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.2 0.04 260);
+  --muted-foreground: oklch(0.5 0.03 255);
+  --accent: oklch(0.2 0.04 260);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.2 0.04 260);
+  --input: oklch(0.2 0.04 260);
+  --ring: oklch(0.78 0.16 230);
+  --dark: oklch(0.16 0.04 260);
+  --dark-foreground: oklch(0.98 0 0);
+}
+
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
   h1, h2, h3, h4 {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.02em;
-  transition: background-color 0.2s ease, color 0.2s ease;
+/* ==========================================
+   TAILWIND CUSTOM UTILITIES (FIXED)
+   ========================================== */
+@utility text-gradient-hero {
+  background-image: var(--gradient-hero-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+@utility bg-gradient-dark {
+  background-image: var(--gradient-dark);
+}
+@utility bg-gradient-cta {
+  background-image: var(--gradient-cta);
+}
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+@utility shadow-elegant {
+  box-shadow: var(--shadow-elegant);
 }
 
+/* ✅ FIXED GLASS UTILITY - Tailwind `@utility` cannot have colons */
+@utility glass {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+}
+/* Use dark:glass as a modifier via standard Tailwind `dark` variant */
+.dark .glass {
+  background: rgba(15, 23, 42, 0.70);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.40);
+}
 
+/* Alternative: Combine into a single class using `@apply` (more reliable) */
+@utility glass-effect {
+  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+}
+
+/* ==========================================
+   ANIMATIONS (Float & Reveal)
+   ========================================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+
+/* ==========================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================== */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes reveal-scale {
+  from { opacity: 0; transform: scale(.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+[data-reveal].in-view {
+  animation: reveal-up .7s cubic-bezier(.2,.7,.2,1) both;
+}
+[data-reveal="fade"].in-view  { animation-name: reveal-fade; }
+[data-reveal="scale"].in-view { animation-name: reveal-scale; }
+
+/* Delay classes for staggered animations */
+[data-reveal].in-view[data-delay="1"] { animation-delay: .08s; }
+[data-reveal].in-view[data-delay="2"] { animation-delay: .16s; }
+[data-reveal].in-view[data-delay="3"] { animation-delay: .24s; }
+[data-reveal].in-view[data-delay="4"] { animation-delay: .32s; }
+[data-reveal].in-view[data-delay="5"] { animation-delay: .40s; }
+[data-reveal].in-view[data-delay="6"] { animation-delay: .48s; }
+
+/* ==========================================
+   ACCESSIBILITY (Reduced Motion)
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .animate-float, .animate-float-slow {
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   HOVER EFFECTS
+   ========================================== */
+.hover-lift {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elegant);
+}

@@ -1,8 +1,6 @@
-// features/about/components/Story.tsx
-"use client";
-
 import Link from "next/link";
 import { ArrowRight, Cloud, Users, Rocket, Medal, Flag } from "lucide-react";
+import { Button } from "@/components/ui/Button/Button";
 
 export const Story = () => {
   const steps = [
@@ -16,28 +14,37 @@ export const Story = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 pb-20">
       <div className="grid lg:grid-cols-[1fr_2fr] gap-12">
+        {/* Left side */}
         <div>
-          <span className="text-primary dark:text-blue-400 font-semibold tracking-wider text-sm">OUR STORY</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-dark dark:text-white">From An Idea To A Digital Transformation Partner</h2>
-          <p className="mt-4 text-muted-foreground dark:text-slate-400">
+          <span className="text-primary font-semibold tracking-wider text-sm">OUR STORY</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-foreground">
+            From An Idea To A Digital Transformation Partner
+          </h2>
+          <p className="mt-4 text-muted-foreground">
             CloudWent was founded with a simple idea — to help businesses unlock their full potential through technology. What started as a small team of passionate developers has grown into a full-service digital solutions company trusted by businesses worldwide.
           </p>
-          <Link href="/about/story" className="mt-6 inline-flex items-center gap-2 border border-border dark:border-slate-700 bg-card dark:bg-slate-800 px-5 py-2.5 rounded-xl font-semibold hover:bg-muted dark:hover:bg-slate-700 transition">
-            Read Our Journey <ArrowRight className="w-4 h-4" />
-          </Link>
+
+          <Button asChild variant="outline" size="md" className="mt-6 glass-effect border-border hover:bg-muted/50">
+            <Link href="/about/story">
+              Read Our Journey <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
 
+        {/* Right side (Timeline) */}
         <div className="relative">
-          <div className="absolute top-8 left-0 right-0 h-px border-t border-dashed border-gray-300 dark:border-slate-700" />
+          {/* Dashed line */}
+          <div className="absolute top-8 left-0 right-0 h-px border-t border-dashed border-border" />
+
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 relative">
             {steps.map((s, i) => (
-              <div key={s.year} className="text-center" data-reveal data-delay={String(i + 1)}>
-                <div className="mx-auto w-16 h-16 rounded-full bg-card dark:bg-slate-800 border border-border dark:border-slate-700 shadow-elegant grid place-items-center text-primary dark:text-blue-400">
+              <div key={s.year} className="text-center">
+                <div className="mx-auto w-16 h-16 rounded-full glass-effect border-border grid place-items-center text-primary">
                   <s.icon className="w-7 h-7" />
                 </div>
-                <div className="font-bold mt-4 text-dark dark:text-white">{s.year}</div>
-                <div className="font-semibold text-sm mt-1 text-dark dark:text-white">{s.title}</div>
-                <p className="text-xs text-muted-foreground dark:text-slate-400 mt-2 leading-relaxed">{s.text}</p>
+                <div className="font-bold mt-4 text-foreground">{s.year}</div>
+                <div className="font-semibold text-sm mt-1 text-foreground">{s.title}</div>
+                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{s.text}</p>
               </div>
             ))}
           </div>
@@ -45,4 +52,4 @@ export const Story = () => {
       </div>
     </section>
   );
-}
+};

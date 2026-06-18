@@ -3,6 +3,7 @@ import { PageHeading } from "@/components/common/PageHeading/PageHeading";
 import {
   ContactHero,
   ContactForm,
+  ConsultBanner,
 } from "@/features/contact/components/";
 
 export const metadata = {
@@ -19,13 +20,15 @@ export default function ContactPage() {
         
         {/* Contact Form Section */}
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
-          {/* <PageHeading
-            title="Send Us a Message"
-            description="Fill out the form below and our team will get back to you within 24 hours."
-          /> */}
           <div className="mt-8 max-w-7xl mx-auto">
             <ContactForm />
           </div>
+
+          <div className="mt-8 max-w-7xl mx-auto">
+             <ConsultBanner />
+          </div>
+
+         
         </Section>
       </main>
     </div>

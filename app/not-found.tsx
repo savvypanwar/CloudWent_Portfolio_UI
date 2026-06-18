@@ -1,15 +1,19 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/Button/Button";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6">
-      <h1 className="text-6xl font-bold text-blue-600 mb-4">404</h1>
-      <h2 className="text-2xl font-semibold text-gray-900 mb-2">Page Not Found</h2>
-      <p className="text-gray-500 mb-8 text-center max-w-md">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-[#0B101B] px-6 transition-colors">
+      <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
+      <h2 className="text-2xl font-semibold text-foreground mb-2">Page Not Found</h2>
+      <p className="text-muted-foreground mb-8 text-center max-w-md">
         The page you're looking for doesn't exist or has been moved.
       </p>
-      <Button href="/" variant="gradient" size="lg">
-        Return Home
+      {/* ✅ Correct way: use asChild with Link */}
+      <Button asChild variant="gradient" size="lg">
+        <Link href="/">
+          Return Home
+        </Link>
       </Button>
     </div>
   );

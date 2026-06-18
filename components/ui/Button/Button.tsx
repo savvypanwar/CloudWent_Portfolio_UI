@@ -1,87 +1,51 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import Link from "next/link";
-import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-blue-600",
+  "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-primary",
   {
     variants: {
       variant: {
-        primary: "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-blue-500/30",
-        gradient: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-indigo-500/30",
-        outline: "border border-gray-200 bg-transparent hover:bg-gray-50 text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:border-gray-600",
-        ghost: "bg-transparent hover:bg-gray-100 text-gray-900 dark:text-gray-100 dark:hover:bg-gray-800",
-        dark: "bg-[#0B101B] hover:bg-[#1a2332] text-white border border-gray-800",
+        primary: "bg-primary text-primary-foreground hover:opacity-90 shadow-md",
+        gradient: "bg-gradient-cta text-primary-foreground shadow-glow hover:opacity-95",
+        outline: "bg-transparent hover:bg-muted/50 text-foreground", // ✅ border removed
+        ghost: "bg-transparent hover:bg-muted text-foreground",
+        dark: "bg-dark text-dark-foreground hover:bg-dark/80", // ✅ border removed
       },
       size: {
-        sm: "h-9 px-4 text-sm",
-        md: "h-11 px-6 text-base",
-        lg: "h-14 px-8 text-lg font-semibold",
-        icon: "h-10 w-10",
+        sm: "h-8 px-3 text-xs",          // ✅ smaller
+        md: "h-10 px-5 text-sm",         // ✅ smaller
+        lg: "h-12 px-6 text-base",       // ✅ smaller
+        icon: "h-9 w-9",
       },
     },
     defaultVariants: {
-      variant: "gradient",
+      variant: "primary",
       size: "lg",
     },
   }
 );
 
-type SharedButtonProps = VariantProps<typeof buttonVariants> & {
-  className?: string;
-};
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 
-type NativeButtonProps = SharedButtonProps &
-  Omit<ComponentPropsWithoutRef<"button">, keyof SharedButtonProps | "href"> & {
-    href?: undefined;
-  };
-
-type LinkButtonProps = SharedButtonProps &
-  Omit<ComponentPropsWithoutRef<typeof Link>, keyof SharedButtonProps | "href"> & {
-    disabled?: boolean;
-    href: ComponentPropsWithoutRef<typeof Link>["href"];
-  };
-
-export type ButtonProps = NativeButtonProps | LinkButtonProps;
-
-export const Button = (props: ButtonProps) => {
-  const { className, variant, size } = props;
-  const classes = cn(buttonVariants({ variant, size }), className);
-
-  if ("href" in props && props.href) {
-    const {
-      className: _className,
-      variant: _variant,
-      size: _size,
-      href,
-      disabled,
-      ...linkProps
-    } = props;
-
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
     return (
-      <Link
-        href={href}
-        aria-disabled={disabled}
-        tabIndex={disabled ? -1 : linkProps.tabIndex}
-        className={cn(
-          classes,
-          disabled && "pointer-events-none opacity-50"
-        )}
-        {...linkProps}
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
       />
     );
   }
+);
+Button.displayName = "Button";
 
-  const nativeProps = props as NativeButtonProps;
-  const {
-    className: _className,
-    variant: _variant,
-    size: _size,
-    ...buttonProps
-  } = nativeProps;
-
-  return (
-    <button className={classes} {...buttonProps} />
-  );
-};
+export { Button, buttonVariants };

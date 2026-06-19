@@ -62,8 +62,8 @@ export const Team = () => {
             
             {/* ✅ Updated Button */}
             <Button asChild variant="outline" size="md" className="mt-6 glass-effect border-border hover:bg-muted/50">
-              <Link href="#">
-                View all team <ArrowRight className="w-4 h-4" />
+              <Link href="/team">
+               <span className="px-2"> View all team</span> <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
           </div>

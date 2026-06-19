@@ -1,5 +1,4 @@
 import { Section } from "@/components/layout/Section/Section";
-import { PageHeading } from "@/components/common/PageHeading/PageHeading";
 import {
   TeamHero,
   TeamSection,
@@ -15,23 +14,19 @@ export const metadata = {
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B] flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         {/* Hero Section */}
         <TeamHero />
         
         {/* Stats Section */}
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <TeamStats stats={stats} />
         </Section>
 
         {/* Team Sections */}
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <div className="max-w-7xl mx-auto">
-            <PageHeading
-              title="Our Team"
-              description="Passionate professionals with expertise in modern technologies."
-            />
             <div className="mt-8 space-y-16">
               {teamSections.map(({ key, label, subtitle }) => {
                 const members = teamMembers.filter((m) => m.team === key);
@@ -48,7 +43,7 @@ export default function TeamPage() {
           </div>
         </Section>
 
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-[#0B101B]">
+        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <CTA  />
         </Section>
       </main>

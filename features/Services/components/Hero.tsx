@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Star, Code2, Brain, Smartphone, CloudCog } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Code2, Brain, Smartphone, CloudCog, Play } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button/Button";
 import heroImg from "@/assets/images/hero-cloud.png";
@@ -41,17 +41,23 @@ export const Hero = () => {
             </p>
             
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
-                <Link href="/contact">
-                  Start a Project <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
 
-              <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
-                <a href="#pricing">
-                  View Pricing
-                </a>
-              </Button>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+            {/* Start Your Project Button */}
+            <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
+              <Link href="/contact">
+                <span className="px-2">Start A Project</span>  <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+
+            {/* View Our Work Button */}
+            <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
+              <Link href="#pricing">
+                <span className="px-2">View Pricing</span> <Play className="w-4 h-4 fill-current" />
+              </Link>
+            </Button>
+          </div>
             </div>
             
             <div className="mt-8 flex items-center gap-5">

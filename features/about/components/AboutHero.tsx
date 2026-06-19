@@ -16,10 +16,11 @@ export const AboutHero = () => {
   return (
     <section className="relative overflow-hidden py-10">
       {/* Light Mode Gradient */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
-      {/* Dark Mode Gradient */}
-      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 -z-10 bg--background dark:hidden" />
       
+      {/* ✅ Dark Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg--foreground" />
+
       <div className="max-w-7xl mx-auto px-6 pb-6 grid lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Side */}

@@ -36,11 +36,11 @@ export const PageHeading = ({
       )}
     >
       <div>
-        <h1 className={cn("font-bold text-gray-900", titleSizeClasses[size])}>
+        <h1 className={cn("font-bold text-foreground", titleSizeClasses[size])}>
           {title}
         </h1>
         {description && (
-          <p className={cn("mt-2 text-gray-500 max-w-2xl", descSizeClasses[size])}>
+          <p className={cn("mt-2 text-muted-foreground max-w-2xl", descSizeClasses[size])}>
             {description}
           </p>
         )}
@@ -50,4 +50,4 @@ export const PageHeading = ({
   );
 };
 
-export default PageHeading;
+export default PageHeading; 

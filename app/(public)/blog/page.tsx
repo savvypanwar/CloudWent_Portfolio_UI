@@ -84,15 +84,15 @@ const posts = [
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0B101B] flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <BlogHero />
         
         {/* Featured Article */}
-        <section className="py-12 bg-white dark:bg-[#0B101B] transition-colors">
+        <section className="py-12 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Article</h2>
+              <h2 className="text-2xl font-bold text-foreground">Featured Article</h2>
             </div>
             <FeaturedArticle
               slug={featuredPost.slug}
@@ -106,13 +106,10 @@ export default function BlogPage() {
           </div>
         </section>
         
-        {/* Blog Grid with Sidebar - ✅ FIXED LAYOUT */}
-        <section className="py-24 bg-white dark:bg-[#0B101B] transition-colors">
+        {/* Blog Grid with Sidebar */}
+        <section className="py-24 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
-            
-            {/* ✅ Title ko grid ke bahar le aaya */}
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">All Articles</h2>
-            
+            <h2 className="text-2xl font-bold text-foreground mb-8">All Articles</h2>
             <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
               <BlogSidebar />
               <div>

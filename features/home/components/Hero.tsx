@@ -24,9 +24,9 @@ export const Hero = () => {
   return (
     <section className="relative overflow-hidden py-10">
       {/* Light Mode Gradient */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
+      <div className="absolute inset-0 -z-10 bg-background dark:hidden" />
       {/* Dark Mode Gradient */}
-      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 -z-10 hidden dark:block bg-foreground" />
       
       <div className="max-w-7xl mx-auto px-6 pb-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side */}
@@ -49,15 +49,15 @@ export const Hero = () => {
           <div className="mt-8 flex flex-wrap gap-3">
             {/* Start Your Project Button */}
             <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
-              <Link href="#contact">
-                Start Your Project <ArrowRight className="w-4 h-4" />
+              <Link href="/contact">
+                <span className="px-2">Start Your Project</span>  <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
 
             {/* View Our Work Button */}
             <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
               <Link href="#work">
-                View Our Work <Play className="w-4 h-4 fill-current" />
+                <span className="px-2">View Our Work</span> <Play className="w-4 h-4 fill-current" />
               </Link>
             </Button>
           </div>

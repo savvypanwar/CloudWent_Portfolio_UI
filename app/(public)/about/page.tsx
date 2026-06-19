@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0B101B] flex flex-col transition-colors">
+    <div className="min-h-screen bg-background dark:bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <AboutHero />
         <MissionVision />

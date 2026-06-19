@@ -1,29 +1,45 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
 export interface SectionProps {
   children: ReactNode;
   className?: string;
-  variant?: "default" | "gray" | "dark" | "gradient";
   id?: string;
+  variant?: "default" | "gray" | "dark" | "gradient";
+  size?: "sm" | "md" | "lg"; // ✅ Yeh add karo
 }
 
 const variantClasses = {
-  default: "bg-white",
-  gray: "bg-gray-50/50",
-  dark: "bg-[#0B101B]",
+  default: "bg-background", // Root color use kiya
+  gray: "bg-surface",
+  dark: "bg-dark text-dark-foreground",
   gradient: "bg-gradient-to-r from-blue-600 to-indigo-700",
 };
 
-export const Section = ({ children, className, variant = "default", id }: SectionProps) => {
+const sizeClasses = {
+  sm: "py-12",
+  md: "py-16 md:py-20",
+  lg: "py-20 md:py-24",
+};
+
+export const Section = ({
+  children,
+  className,
+  id,
+  variant = "default",
+  size = "lg",
+}: SectionProps) => {
   return (
     <section
       id={id}
-      className={cn("py-24", variantClasses[variant], className)}
+      className={cn(
+        "w-full transition-colors duration-300",
+        variantClasses[variant],
+        sizeClasses[size],
+        className
+      )}
     >
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {children}
       </div>
     </section>

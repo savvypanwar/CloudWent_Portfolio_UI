@@ -1,5 +1,3 @@
-"use client";
-
 import { Rocket, Users, ShieldCheck, Calendar } from "lucide-react";
 
 interface TeamStatsProps {
@@ -19,13 +17,10 @@ export const TeamStats = ({ stats }: TeamStatsProps) => {
   ];
 
   return (
-    <section className="py-10">
+    <section className="py-10 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        
-        
         {/* Main Container */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#0B101B] p-6 md:p-8">
-          
+        <div className="relative overflow-hidden rounded-3xl bg-dark p-6 md:p-8 shadow-glow">
           {/* Glow Effect */}
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,oklch(0.6_0.2_260)_0%,transparent_50%)]" />
 
@@ -48,7 +43,7 @@ export const TeamStats = ({ stats }: TeamStatsProps) => {
                     <span className="text-2xl font-bold text-white md:text-3xl">
                       {stat.value}
                     </span>
-                    <span className="text-xs text-gray-400 md:text-sm">
+                    <span className="text-xs text-muted-foreground md:text-sm">
                       {stat.label}
                     </span>
                   </div>

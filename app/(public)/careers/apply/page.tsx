@@ -1,6 +1,6 @@
 import { Section } from "@/components/layout/Section/Section";
 import { PageHeading } from "@/components/common/PageHeading/PageHeading";
-import { JobApplicationForm } from "@/features/careers/components//JobApplicationForm";
+import { JobApplicationForm } from "@/features/careers/components/JobApplicationForm";
 
 export const metadata = {
   title: "Apply Now | CloudWent Careers",

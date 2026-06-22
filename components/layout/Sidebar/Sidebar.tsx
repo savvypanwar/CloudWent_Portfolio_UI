@@ -30,6 +30,7 @@ export const Sidebar = () => {
       section: "Management",
       items: [
         { icon: Users, label: "Users", href: "/users" },
+        { icon: Briefcase, label: "Applications", href: "/applications" },
         { icon: UserCog, label: "Team Members", href: "#" },
         { icon: Server, label: "Services", href: "#" },
         { icon: FolderKanban, label: "Projects", href: "#" },

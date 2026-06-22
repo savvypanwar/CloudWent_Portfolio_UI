@@ -179,7 +179,7 @@ export default function DashboardPage() {
                 </button>
               </div>
               <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 800, height: 256 }}>
                   <LineChart data={lineChartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke={strokeColor} />
                     <XAxis dataKey="name" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
@@ -258,7 +258,7 @@ export default function DashboardPage() {
                 <Link href="#" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View All</Link>
               </div>
               <div className="h-64 flex flex-col items-center justify-center">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 260, height: 256 }}>
                   <PieChart>
                     <Pie data={pieChartData} cx="50%" cy="50%" innerRadius={40} outerRadius={80} paddingAngle={2} dataKey="value">
                       {pieChartData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}

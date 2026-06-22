@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google"; // ✅ Import font
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar/Navbar";
 import { Footer } from "@/components/layout/Footer/Footer";
-
-// ✅ Load font aur variable assign karo
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-display",
-});
 
 export const metadata: Metadata = {
   title: "CloudWent",
@@ -21,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* ... head scripts ... */}
       </head>

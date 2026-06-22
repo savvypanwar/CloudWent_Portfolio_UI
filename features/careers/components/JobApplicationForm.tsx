@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/Button/Button";
 import { Upload, X, CheckCircle } from "lucide-react";
+import { submitJobApplication } from "@/app/actions/submit-job";
 
 export const JobApplicationForm = ({ jobTitle = "General Application" }: { jobTitle?: string }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ export const JobApplicationForm = ({ jobTitle = "General Application" }: { jobTi
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -28,6 +30,7 @@ export const JobApplicationForm = ({ jobTitle = "General Application" }: { jobTi
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
+      setError(null);
     }
   };
 
@@ -38,30 +41,70 @@ export const JobApplicationForm = ({ jobTitle = "General Application" }: { jobTi
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
     if (!file) {
       alert("Please upload your resume/CV.");
       return;
     }
+
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      linkedin: "",
-      portfolio: "",
-      coverLetter: "",
-      jobPosition: jobTitle,
-    });
-    setFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+
+    try {
+      // Step 1: Upload resume file
+      const fileFormData = new FormData();
+      fileFormData.append("resume", file);
+
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: fileFormData,
+      });
+
+      if (!uploadRes.ok) {
+        const errorData = await uploadRes.json();
+        throw new Error(errorData.error || "File upload failed");
+      }
+
+      const uploadData = await uploadRes.json();
+      const resumeUrl = uploadData.url;
+
+      // Step 2: Submit application with resume URL
+      const form = new FormData();
+      form.append("name", formData.name);
+      form.append("email", formData.email);
+      form.append("phone", formData.phone || "");
+      form.append("linkedin", formData.linkedin || "");
+      form.append("portfolio", formData.portfolio || "");
+      form.append("coverLetter", formData.coverLetter || "");
+      form.append("jobTitle", formData.jobPosition || jobTitle);
+      form.append("resumeUrl", resumeUrl);
+
+      const result = await submitJobApplication(form);
+
+      if (result.success) {
+        setSubmitted(true);
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          linkedin: "",
+          portfolio: "",
+          coverLetter: "",
+          jobPosition: jobTitle,
+        });
+        setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      } else {
+        // Show validation errors from server
+        const errorMessages = result.errors ? Object.values(result.errors).flat().join("\n") : "Something went wrong.";
+        setError(errorMessages);
+      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -80,6 +123,12 @@ export const JobApplicationForm = ({ jobTitle = "General Application" }: { jobTi
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 rounded-xl bg-destructive/10 text-destructive border border-destructive/20">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-foreground mb-1.5">Full Name <span className="text-destructive">*</span></label>

@@ -2,7 +2,6 @@ export const homeContent = {
   heroStack: [
     { name: "Next.js", icon: "nextjs", alt: "Next.js", position: "top-4 left-2" },
     { name: "NestJS", icon: "nestjs", alt: "NestJS", position: "top-32 left-0" },
-    { name: "PostgreSQL", icon: "postgres", alt: "PostgreSQL", position: "top-64 left-8" },
     { name: "AWS", icon: "aws", alt: "AWS", position: "top-4 right-2" },
     { name: "React.js", icon: "react", alt: "React.js", position: "top-32 right-0" },
     { name: "Docker", icon: "docker", alt: "Docker", position: "top-64 right-8" },
@@ -14,7 +13,6 @@ export const homeContent = {
     { name: "", icon: "aws" },
     { name: "Docker", icon: "docker" },
     { name: "", icon: "vercel" },
-    { name: "PostgreSQL", icon: "postgres" },
   ],
   services: [
     { icon: "code", title: "Web Development", desc: "Modern, responsive and high-performance websites and web applications.", color: "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" },
@@ -44,9 +42,9 @@ export const homeContent = {
     { icon: "rocket", number: "06", title: "Launch", desc: "We deploy and support your long-term growth", color: "text-teal-600" },
   ],
   projects: [
-    { id: 1, title: "EduSmart LMS", desc: "A comprehensive learning management system for modern education.", tag: "LMS Platform", tagColor: "bg-blue-500", image: "lms", stack: ["Next.js", "NestJS", "PostgreSQL", "AWS"] },
-    { id: 2, title: "CloudFinance", desc: "SaaS platform for financial management and analytics.", tag: "SaaS Product", tagColor: "bg-amber-500", image: "finance", stack: ["Next.js", "TypeScript", "Prisma", "AWS"] },
-    { id: 3, title: "HealthCare+", desc: "Cross-platform mobile app for healthcare booking and patient management.", tag: "Mobile App", tagColor: "bg-emerald-500", image: "health", stack: ["React Native", "NestJS", "PostgreSQL"] },
+    { id: 1, title: "EduSmart LMS", desc: "A comprehensive learning management system for modern education.", tag: "LMS Platform", tagColor: "bg-blue-500", image: "lms", stack: ["Next.js", "NestJS", "API Routes", "AWS"] },
+    { id: 2, title: "CloudFinance", desc: "SaaS platform for financial management and analytics.", tag: "SaaS Product", tagColor: "bg-amber-500", image: "finance", stack: ["Next.js", "TypeScript", "API Routes", "AWS"] },
+    { id: 3, title: "HealthCare+", desc: "Cross-platform mobile app for healthcare booking and patient management.", tag: "Mobile App", tagColor: "bg-emerald-500", image: "health", stack: ["React Native", "NestJS", "REST API"] },
   ],
   teamPreview: [
     { name: "Waseem Ahmad", role: "CEO & Founder", grad: "from-blue-300 to-blue-500", initials: "WA" },
@@ -82,7 +80,7 @@ export const servicesContent = {
     { title: "Build", desc: "Incremental delivery with demos, test coverage and transparent delivery checkpoints." },
     { title: "Launch", desc: "Production release, monitoring, training and iteration plans after handoff." },
   ],
-  technologies: ["Next.js", "React", "Node.js", "NestJS", "PostgreSQL", "AWS", "Docker", "TypeScript", "Tailwind CSS", "Prisma", "Redis", "Stripe"],
+  technologies: ["Next.js", "React", "Node.js", "NestJS", "AWS", "Docker", "TypeScript", "Tailwind CSS", "API Routes", "Redis", "Stripe"],
   plans: [
     { name: "Starter", price: "$4,900", sub: "/ project", desc: "For landing pages, MVPs and small marketing sites.", features: ["Up to 6 pages", "CMS integration", "Responsive design", "Basic SEO", "2 weeks delivery"], cta: "Start small", featured: false },
     { name: "Growth", price: "$14,900", sub: "/ project", desc: "For SaaS dashboards, web apps and production launches.", features: ["Custom web app", "Auth & payments", "API + database", "Analytics & SEO", "6-8 weeks delivery"], cta: "Most popular", featured: true },
@@ -129,7 +127,7 @@ export const blogContent = {
     { id: 2, title: "Cloud-Native DevOps Strategies for Modern Teams", excerpt: "Explore best practices for implementing cloud-native DevOps workflows that accelerate delivery and improve reliability.", author: "Bilal Ahmed", date: "December 20, 2024", category: "Cloud", image: "devops", slug: "cloud-native-devops-strategies" },
     { id: 3, title: "Designing for AI Interfaces: UX Best Practices", excerpt: "A comprehensive guide to designing intuitive, user-centered interfaces for AI-powered applications.", author: "Sarah Ahmed", date: "December 10, 2024", category: "Design", image: "design", slug: "designing-for-ai-interfaces" },
     { id: 4, title: "Top 10 Productivity Hacks for Developers in 2025", excerpt: "Practical tips and tools to help developers code smarter, not harder, and boost daily productivity.", author: "Waseem Ahmad", date: "November 28, 2024", category: "Productivity", image: "productivity", slug: "productivity-hacks-2025" },
-    { id: 5, title: "PostgreSQL Performance Optimization: Advanced Techniques", excerpt: "Deep dive into query optimization, indexing strategies, and performance tuning for PostgreSQL databases.", author: "Ahmed Hassan", date: "November 15, 2024", category: "Development", image: "postgres", slug: "postgresql-performance-optimization" },
+    { id: 5, title: "API Performance Optimization: Advanced Techniques", excerpt: "Deep dive into request optimization, caching strategies, and performance tuning for modern APIs.", author: "Ahmed Hassan", date: "November 15, 2024", category: "Development", image: "api", slug: "api-performance-optimization" },
   ],
   categories: ["All", "Technology", "AI/ML", "Cloud", "Design", "Development", "Productivity"],
 };

@@ -146,7 +146,7 @@ export const teamMembers = [
     linkedin: "https://linkedin.com/in/ranjan",
     expertise: ["Backend Development", "API Design", "Database Management"],
     bio: "Ranjan is a backend developer focused on building scalable APIs and managing databases.",
-    skills: ["Node.js", "PostgreSQL", "MongoDB", "GraphQL"],
+    skills: ["Node.js", "REST APIs", "GraphQL"],
     experience_timeline: [
       { period: "2023 - Present", title: "Backend Developer", company: "CloudWent", desc: "Developing APIs and services." },
       { period: "2021 - 2023", title: "Junior Developer", company: "BackendHub", desc: "Built backend services." },
@@ -155,7 +155,7 @@ export const teamMembers = [
       { degree: "BTech Computer Science", school: "DTU Delhi", years: "2017-2021" },
     ],
     projects: [
-      { name: "CloudWent API", type: "Backend", desc: "REST API for CloudWent platform.", tags: ["Node.js", "PostgreSQL"], badge: "Live" },
+      { name: "CloudWent API", type: "Backend", desc: "REST API for CloudWent platform.", tags: ["Node.js", "REST API"], badge: "Live" },
     ],
     certifications: ["MongoDB Certified Developer"],
   },

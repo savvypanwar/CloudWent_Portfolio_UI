@@ -6,7 +6,6 @@ import heroImg from "@/assets/images/hero-cloud.png";
 // Import your downloaded PNG icons
 import nextjsIcon from "@/assets/icons/nextjs.svg";
 import nestjsIcon from "@/assets/icons/nestjs.svg";
-import postgresIcon from "@/assets/icons/PostgresSQL.svg";
 import awsIcon from "@/assets/icons/aws-svgrepo-com.svg";
 import aiIcon from "@/assets/icons/reactjs.svg";
 import dockerIcon from "@/assets/icons/Docker.svg";
@@ -15,7 +14,6 @@ export const Hero = () => {
   const stack = [
     { name: "Next.js", icon: nextjsIcon, alt: "Next.js", position: "top-4 left-2" },
     { name: "NestJS", icon: nestjsIcon, alt: "NestJS", position: "top-32 left-0" },
-    { name: "PostgreSQL", icon: postgresIcon, alt: "PostgreSQL", position: "top-64 left-8" },
     { name: "AWS", icon: awsIcon, alt: "AWS", position: "top-4 right-2" },
     { name: "React.js", icon: aiIcon, alt: "AI", position: "top-32 right-0" },
     { name: "Docker", icon: dockerIcon, alt: "Docker", position: "top-64 right-8" },

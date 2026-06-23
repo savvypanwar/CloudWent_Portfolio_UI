@@ -5,7 +5,6 @@ import {
   AWSIcon,
   DockerIconSrc,
   VercelIcon,
-  PostgresqlIconSrc,
 } from "@/assets/icons";
 import { IconWrapper } from "@/assets/icons/IconWrapper";
 
@@ -17,7 +16,6 @@ export const TechnologyBar = () => {
     { name: "", icon: <IconWrapper src={AWSIcon} alt="AWS" className="h-10 w-auto object-contain" /> },
     { name: "Docker", icon: <IconWrapper src={DockerIconSrc} alt="Docker" className="h-10 w-auto object-contain" /> },
     { name: "", icon: <IconWrapper src={VercelIcon} alt="Vercel" className="h-4 w-auto object-contain" /> },
-    { name: "PostgreSQL", icon: <IconWrapper src={PostgresqlIconSrc} alt="PostgreSQL" className="h-8 w-auto object-contain" /> },
   ];
 
   return (

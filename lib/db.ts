@@ -1,29 +1,25 @@
-import { fileURLToPath } from "node:url";
-import { createRequire } from "node:module";
-import path from "node:path";
-
-type SqliteStatement = {
-  all: (...values: unknown[]) => Record<string, unknown>[];
-  run: (...values: unknown[]) => unknown;
-};
-
-type SqliteDatabase = {
-  exec: (sql: string) => void;
-  prepare: (sql: string) => SqliteStatement;
-};
-
-type DatabaseSyncConstructor = new (path: string) => SqliteDatabase;
-
-type JobApplicationCreateInput = {
+type JobApplication = {
+  id: string;
   name: string;
   email: string;
+  phone: string | null;
+  linkedin: string | null;
+  portfolio: string | null;
+  coverLetter: string | null;
+  resumeUrl: string;
+  jobTitle: string;
+  status: string;
+  createdAt: Date;
+};
+
+type JobApplicationCreateInput = Omit<
+  JobApplication,
+  "id" | "createdAt" | "phone" | "linkedin" | "portfolio" | "coverLetter"
+> & {
   phone?: string | null;
   linkedin?: string | null;
   portfolio?: string | null;
   coverLetter?: string | null;
-  resumeUrl: string;
-  jobTitle: string;
-  status?: string;
 };
 
 type ContactCreateInput = {
@@ -33,142 +29,169 @@ type ContactCreateInput = {
   message: string;
 };
 
-type JobApplication = Omit<JobApplicationCreateInput, "status"> & {
+export type User = {
   id: string;
-  status: string;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type UserCreateInput = {
+  name: string;
+  email: string;
+  password: string;
+  role?: string;
+};
+
+type Contact = ContactCreateInput & {
+  id: string;
   createdAt: Date;
 };
 
-const require = createRequire(import.meta.url);
-let DatabaseSync: DatabaseSyncConstructor | undefined;
-
-const getDatabaseSync = () => {
-  if (!DatabaseSync) {
-    DatabaseSync = (require("node:sqlite") as {
-      DatabaseSync: DatabaseSyncConstructor;
-    }).DatabaseSync;
-  }
-
-  return DatabaseSync;
+type MemoryStore = {
+  jobApplications: JobApplication[];
+  contacts: Contact[];
+  users: User[];
 };
 
-const getDatabasePath = () => {
-  const databaseUrl = process.env.DATABASE_URL ?? "file:./dev.db";
-
-  if (databaseUrl.startsWith("file:")) {
-    if (databaseUrl === "file:./dev.db") {
-      return path.join(/*turbopackIgnore: true*/ process.cwd(), "dev.db");
-    }
-
-    return fileURLToPath(databaseUrl);
-  }
-
-  return path.resolve(/*turbopackIgnore: true*/ process.cwd(), databaseUrl);
-};
-
-const getDatabase = () => {
-  const globalForSqlite = globalThis as typeof globalThis & {
-    cloudwentDb?: SqliteDatabase;
-  };
-
-  if (!globalForSqlite.cloudwentDb) {
-    const database = new (getDatabaseSync())(getDatabasePath());
-
-    database.exec(`
-      CREATE TABLE IF NOT EXISTS JobApplication (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        phone TEXT,
-        linkedin TEXT,
-        portfolio TEXT,
-        coverLetter TEXT,
-        resumeUrl TEXT NOT NULL,
-        jobTitle TEXT NOT NULL,
-        status TEXT NOT NULL DEFAULT 'pending',
-        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-      );
-
-      CREATE TABLE IF NOT EXISTS Contact (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        subject TEXT NOT NULL,
-        message TEXT NOT NULL,
-        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-
-    globalForSqlite.cloudwentDb = database;
-  }
-
-  return globalForSqlite.cloudwentDb;
-};
+const seedPassword = "$2b$10$H3FY4D5YlfXNz8xZ653EDeZI416jOJ1N.VRwZlXo2ZN.XpiAitk4S";
 
 const normalizeOptionalString = (value?: string | null) => {
   if (!value) return null;
   return value;
 };
 
+const getStore = () => {
+  const globalForStore = globalThis as typeof globalThis & {
+    cloudwentMemoryStore?: MemoryStore;
+  };
+
+  if (!globalForStore.cloudwentMemoryStore) {
+    const now = new Date();
+
+    globalForStore.cloudwentMemoryStore = {
+      jobApplications: [],
+      contacts: [],
+      users: [
+        {
+          id: "seed-admin",
+          name: "Admin User",
+          email: "admin@cloudwent.com",
+          password: seedPassword,
+          role: "admin",
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "seed-hr",
+          name: "HR User",
+          email: "hr@cloudwent.com",
+          password: seedPassword,
+          role: "hr",
+          createdAt: now,
+          updatedAt: now,
+        },
+        {
+          id: "seed-employee",
+          name: "Employee User",
+          email: "employee@cloudwent.com",
+          password: seedPassword,
+          role: "employee",
+          createdAt: now,
+          updatedAt: now,
+        },
+      ],
+    };
+  }
+
+  return globalForStore.cloudwentMemoryStore;
+};
+
 export const db = {
   jobApplication: {
-    findMany: ({ orderBy }: { orderBy?: { createdAt?: "asc" | "desc" } } = {}): JobApplication[] => {
-      const direction = orderBy?.createdAt === "asc" ? "ASC" : "DESC";
-      const rows = getDatabase()
-        .prepare(`SELECT * FROM JobApplication ORDER BY createdAt ${direction}`)
-        .all();
+    findMany: ({ orderBy }: { orderBy?: { createdAt?: "asc" | "desc" } } = {}) => {
+      const applications = [...getStore().jobApplications];
+      const direction = orderBy?.createdAt === "asc" ? 1 : -1;
 
-      return rows.map((row) => ({
-        id: String(row.id),
-        name: String(row.name),
-        email: String(row.email),
-        phone: normalizeOptionalString(row.phone ? String(row.phone) : null),
-        linkedin: normalizeOptionalString(row.linkedin ? String(row.linkedin) : null),
-        portfolio: normalizeOptionalString(row.portfolio ? String(row.portfolio) : null),
-        coverLetter: normalizeOptionalString(row.coverLetter ? String(row.coverLetter) : null),
-        resumeUrl: String(row.resumeUrl),
-        jobTitle: String(row.jobTitle),
-        status: String(row.status),
-        createdAt: new Date(String(row.createdAt)),
-      }));
+      return applications.sort(
+        (first, second) => direction * (first.createdAt.getTime() - second.createdAt.getTime())
+      );
     },
     create: ({ data }: { data: JobApplicationCreateInput }) => {
-      const id = crypto.randomUUID();
+      const application: JobApplication = {
+        id: crypto.randomUUID(),
+        name: data.name,
+        email: data.email,
+        phone: normalizeOptionalString(data.phone),
+        linkedin: normalizeOptionalString(data.linkedin),
+        portfolio: normalizeOptionalString(data.portfolio),
+        coverLetter: normalizeOptionalString(data.coverLetter),
+        resumeUrl: data.resumeUrl,
+        jobTitle: data.jobTitle,
+        status: data.status,
+        createdAt: new Date(),
+      };
 
-      getDatabase()
-        .prepare(
-          `INSERT INTO JobApplication (
-            id, name, email, phone, linkedin, portfolio, coverLetter, resumeUrl, jobTitle, status
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        )
-        .run(
-          id,
-          data.name,
-          data.email,
-          normalizeOptionalString(data.phone),
-          normalizeOptionalString(data.linkedin),
-          normalizeOptionalString(data.portfolio),
-          normalizeOptionalString(data.coverLetter),
-          data.resumeUrl,
-          data.jobTitle,
-          data.status ?? "pending"
-        );
+      getStore().jobApplications.push(application);
 
-      return { id, ...data };
+      return application;
     },
   },
   contact: {
     create: ({ data }: { data: ContactCreateInput }) => {
-      const id = crypto.randomUUID();
+      const contact: Contact = {
+        id: crypto.randomUUID(),
+        ...data,
+        createdAt: new Date(),
+      };
 
-      getDatabase()
-        .prepare(
-          `INSERT INTO Contact (id, name, email, subject, message)
-           VALUES (?, ?, ?, ?, ?)`
-        )
-        .run(id, data.name, data.email, data.subject, data.message);
+      getStore().contacts.push(contact);
 
-      return { id, ...data };
+      return contact;
     },
   },
+  user: {
+    findUnique: ({ where }: { where: { email: string } }) => {
+      return getStore().users.find((user) => user.email === where.email) ?? null;
+    },
+    upsert: ({
+      where,
+      update,
+      create,
+    }: {
+      where: { email: string };
+      update: Partial<UserCreateInput>;
+      create: UserCreateInput;
+    }) => {
+      const existing = db.user.findUnique({ where });
+
+      if (existing) {
+        existing.name = update.name ?? existing.name;
+        existing.password = update.password ?? existing.password;
+        existing.role = update.role ?? existing.role;
+        existing.updatedAt = new Date();
+
+        return existing;
+      }
+
+      const now = new Date();
+      const user: User = {
+        id: crypto.randomUUID(),
+        name: create.name,
+        email: create.email,
+        password: create.password,
+        role: create.role ?? "employee",
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      getStore().users.push(user);
+
+      return user;
+    },
+  },
+  $disconnect: async () => {},
 };

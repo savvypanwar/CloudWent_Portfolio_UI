@@ -6,7 +6,17 @@ import { FiLinkedin, FiTwitter, FiGithub } from "react-icons/fi";
 interface TeamSectionProps {
   label: string;
   subtitle: string;
-  members: any[];
+  members: {
+    slug: string;
+    name: string;
+    role: string;
+    image?: string;
+    initials: string;
+    color: string;
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+  }[];
   viewAllLink?: string;
 }
 
@@ -35,48 +45,76 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {members.map(({ name, role, image, initials, color }) => (
-            <Link
+          {members.map(({ slug, name, role, image, initials, color, linkedin, twitter, github }) => (
+            <article
               key={name}
-              href={`/team/${name.toLowerCase().replace(/ /g, "-")}`}
               className="group glass-effect border-border rounded-2xl p-6 hover:shadow-md hover:border-primary/30 transition-all text-center"
             >
-              {/* Photo */}
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                {image ? (
-                  <Image
-                    src={image}
-                    alt={name}
-                    width={96}
-                    height={96}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center`}>
-                    <span className="text-white text-2xl font-bold">{initials}</span>
-                  </div>
-                )}
-              </div>
+              <Link href={`/team/${slug}`} className="block">
+                {/* Photo */}
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={name}
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center`}>
+                      <span className="text-white text-2xl font-bold">{initials}</span>
+                    </div>
+                  )}
+                </div>
 
-              {/* Name & Role */}
-              <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-primary transition-colors">
-                {name}
-              </h3>
-              <p className="text-sm text-muted-foreground">{role}</p>
+                {/* Name & Role */}
+                <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-primary transition-colors">
+                  {name}
+                </h3>
+                <p className="text-sm text-muted-foreground">{role}</p>
+              </Link>
 
               {/* Social Icons */}
               <div className="flex items-center justify-center gap-3 mt-4">
-                <a href="#" className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all">
-                  <FiLinkedin className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all">
-                  <FiTwitter className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all">
-                  <FiGithub className="w-4 h-4" />
-                </a>
-              </div>
-            </Link>
+                {linkedin ? (
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${name} on LinkedIn`}
+                    className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <FiLinkedin className="w-4 h-4" />
+                  </a>
+                ) : null}
+                {twitter ? (
+                  <a
+                    href={twitter}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${name} on Twitter`}
+                    className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <FiTwitter className="w-4 h-4" />
+                  </a>
+                ) : null}
+                {github ? (
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${name} on GitHub`}
+                    className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <FiGithub className="w-4 h-4" />
+                  </a>
+                ) : null}
+                {!linkedin && !twitter && !github ? (
+                  <div className="h-8" aria-hidden="true" />
+                ) : null}
+                  </div>
+            </article>
           ))}
         </div>
 

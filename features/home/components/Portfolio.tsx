@@ -16,7 +16,7 @@ export const Portfolio = () => {
       tag: "LMS Platform",
       tagColor: "bg-blue-500",
       image: portfolioLms,
-      stack: ["Next.js", "NestJS", "PostgreSQL", "AWS"],
+      stack: ["Next.js", "NestJS", "API Routes", "AWS"],
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export const Portfolio = () => {
       tag: "SaaS Product",
       tagColor: "bg-amber-500",
       image: portfolioFinance,
-      stack: ["Next.js", "TypeScript", "Prisma", "AWS"],
+      stack: ["Next.js", "TypeScript", "API Routes", "AWS"],
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export const Portfolio = () => {
       tag: "Mobile App",
       tagColor: "bg-emerald-500",
       image: portfolioHealth,
-      stack: ["React Native", "NestJS", "PostgreSQL"],
+      stack: ["React Native", "NestJS", "REST API"],
     },
   ];
 

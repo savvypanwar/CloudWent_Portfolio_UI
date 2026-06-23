@@ -1,6 +1,6 @@
 const technologies = [
   "React", "TypeScript", "Next.js", "TanStack", "Node.js", "Python",
-  "PostgreSQL", "Supabase", "AWS", "GCP", "Docker", "Kubernetes",
+  "Supabase", "AWS", "GCP", "Docker", "Kubernetes",
   "Tailwind", "Figma", "OpenAI", "LangChain",
 ];
 

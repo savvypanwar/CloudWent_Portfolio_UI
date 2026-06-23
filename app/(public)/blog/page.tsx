@@ -12,7 +12,7 @@ import featuredImage1 from "@/assets/images/blog/971.jpg";
 import devopsImg from "@/assets/images/blog/7046558.jpg";
 import aiUxImg from "@/assets/images/blog/5785419.jpg";
 import productivityImg from "@/assets/images/blog/20944170.jpg";
-import postgresImg from "@/assets/images/blog/6505016.jpg";
+import apiImg from "@/assets/images/blog/6505016.jpg";
 
 export const metadata = {
   title: "Blog | CloudWent",
@@ -72,13 +72,13 @@ const posts = [
   },
   {
     id: 5,
-    title: "PostgreSQL Performance Optimization: Advanced Techniques",
-    excerpt: "Deep dive into query optimization, indexing strategies, and performance tuning for PostgreSQL databases.",
+    title: "API Performance Optimization: Advanced Techniques",
+    excerpt: "Deep dive into request optimization, caching strategies, and performance tuning for modern APIs.",
     author: "Ahmed Hassan",
     date: "November 15, 2024",
     category: "Development",
-    image: postgresImg,
-    slug: "postgresql-performance-optimization",
+    image: apiImg,
+    slug: "api-performance-optimization",
   },
 ];
 

@@ -4,7 +4,6 @@ import Image from "next/image";
 import NextJsIconSrc from "./nextjs.svg";
 import ReactIconSrc from "./reactjs.svg";
 import NestJsIconSrc from "./nestjs.svg";
-import PostgresqlIconSrc from "./PostgresSQL.svg";
 import DockerIconSrc from "./Docker.svg";
 import TailwindCSSSrc from "./TailwindCSS.svg";
 
@@ -16,9 +15,6 @@ export const ReactIcon = () => (
 );
 export const NestJsIcon = () => (
   <Image src={NestJsIconSrc} alt="NestJS" width={24} height={24} />
-);
-export const PostgresqlIcon = () => (
-  <Image src={PostgresqlIconSrc} alt="PostgreSQL" width={24} height={24} />
 );
 export const DockerIcon = () => (
   <Image src={DockerIconSrc} alt="Docker" width={24} height={24} />

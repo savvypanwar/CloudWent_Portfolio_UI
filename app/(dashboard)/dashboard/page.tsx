@@ -1,277 +1,229 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
 import {
-  LayoutDashboard,
-  Users,
-  UserCog,
-  Server,
-  FolderKanban,
-  FileText,
-  Briefcase,
-  MessageSquare,
-  Settings,
-  Lock,
   Activity,
-  Layers,
-  CreditCard,
-  Menu,
-  Bell,
-  Search,
-  Calendar,
-  ChevronDown,
-  Plus,
-  ArrowUpRight,
-  ArrowDownRight,
-  MoreHorizontal,
-  Eye,
-  Edit,
-  Trash2,
-  Download,
-  Cloud,
-  Zap,
+  BarChart3,
+  Briefcase,
   CheckCircle,
   Clock,
-  AlertCircle,
+  FileText,
+  FolderKanban,
+  MessageSquare,
+  Settings,
+  ShieldCheck,
+  UserCog,
+  Users,
 } from "lucide-react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-  PieChart,
-  Pie,
-} from "recharts";
-import { useTheme } from "@/hooks/useTheme";
 import { Sidebar } from "@/components/layout/Sidebar/Sidebar";
+import { authOptions } from "@/lib/auth";
 
-// --- Data ---
-const statsData = [
-  { title: "Total Visitors", value: "12.4K", change: "+18.2%", trend: "up", icon: <Cloud className="w-5 h-5 text-white" />, color: "bg-blue-500", period: "vs last 7 days" },
-  { title: "New Inquiries", value: "84", change: "+22.5%", trend: "up", icon: <Zap className="w-5 h-5 text-white" />, color: "bg-emerald-500", period: "vs last 7 days" },
-  { title: "Total Projects", value: "32", change: "-15.3%", trend: "down", icon: <FolderKanban className="w-5 h-5 text-white" />, color: "bg-purple-500", period: "vs last 7 days" },
-  { title: "Active Clients", value: "24", change: "+12.1%", trend: "up", icon: <Users className="w-5 h-5 text-white" />, color: "bg-orange-500", period: "vs last 7 days" },
-  { title: "Revenue (Est.)", value: "$48.2K", change: "+20.4%", trend: "up", icon: <CreditCard className="w-5 h-5 text-white" />, color: "bg-blue-600", period: "vs last 7 days" },
-];
+export const dynamic = "force-dynamic";
 
-const lineChartData = [
-  { name: "May 20", visitors: 4000, views: 2400, sessions: 2400 },
-  { name: "May 21", visitors: 3000, views: 1398, sessions: 2210 },
-  { name: "May 22", visitors: 2000, views: 9800, sessions: 2290 },
-  { name: "May 23", visitors: 2780, views: 3908, sessions: 2000 },
-  { name: "May 24", visitors: 1890, views: 4800, sessions: 2181 },
-  { name: "May 25", visitors: 2390, views: 3800, sessions: 2500 },
-  { name: "May 26", visitors: 3490, views: 4300, sessions: 2100 },
-];
+type DashboardRole = "admin" | "hr" | "employee";
 
-const pieChartData = [
-  { name: "Web Development", value: 35, color: "#3b82f6" },
-  { name: "Mobile Development", value: 25, color: "#a855f7" },
-  { name: "Cloud & DevOps", value: 20, color: "#f59e0b" },
-  { name: "AI & Automation", value: 12, color: "#10b981" },
-  { name: "UI/UX Design", value: 8, color: "#ec4899" },
-];
+type DashboardConfig = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  stats: { label: string; value: string; note: string; icon: React.ReactNode; color: string }[];
+  actions: { label: string; description: string; href: string; icon: React.ReactNode }[];
+  focus: { title: string; items: { label: string; meta: string; status: string }[] };
+};
 
-const recentActivity = [
-  { id: 1, user: "John Doe", action: "new inquiry from", target: "Web Development", time: "2 minutes ago", type: "inquiry", icon: <MessageSquare className="w-4 h-4 text-emerald-600" /> },
-  { id: 2, user: "EduSmart LMS", action: "new project", target: "added", time: "1 hour ago", type: "project", icon: <FolderKanban className="w-4 h-4 text-blue-600" /> },
-  { id: 3, user: "Sarah Johnson", action: "applied for", target: "UI/UX Designer", time: "3 hours ago", type: "career", icon: <Briefcase className="w-4 h-4 text-purple-600" /> },
-  { id: 4, user: "CloudWent", action: "new blog post", target: "Top 10 Cloud Trends", time: "5 hours ago", type: "blog", icon: <FileText className="w-4 h-4 text-orange-600" /> },
-  { id: 5, user: "TechNova Inc.", action: "new testimonial from", target: "received", time: "1 day ago", type: "testimonial", icon: <MessageSquare className="w-4 h-4 text-pink-600" /> },
-];
+const roleLabels: Record<DashboardRole, string> = {
+  admin: "Admin",
+  hr: "HR",
+  employee: "Employee",
+};
 
-const quickActions = [
-  { title: "Add New Project", desc: "Create a new case study", icon: <Plus className="w-5 h-5 text-blue-500" />, href: "#" },
-  { title: "Add New Blog Post", desc: "Write & publish a blog", icon: <FileText className="w-5 h-5 text-purple-500" />, href: "#" },
-  { title: "Add New Service", desc: "Create a new service", icon: <Server className="w-5 h-5 text-emerald-500" />, href: "#" },
-  { title: "Add Team Member", desc: "Invite new team member", icon: <UserCog className="w-5 h-5 text-orange-500" />, href: "#" },
-  { title: "View Inquiries", desc: "See all messages", icon: <MessageSquare className="w-5 h-5 text-pink-500" />, href: "#" },
-];
+const dashboards: Record<DashboardRole, DashboardConfig> = {
+  admin: {
+    eyebrow: "Admin Control Center",
+    title: "Manage the full CloudWent workspace",
+    description: "Track site activity, users, content, hiring, and operational settings from one place.",
+    stats: [
+      { label: "Total Users", value: "24", note: "3 roles active", icon: <Users className="h-5 w-5" />, color: "bg-blue-500" },
+      { label: "Open Leads", value: "18", note: "6 need review", icon: <MessageSquare className="h-5 w-5" />, color: "bg-emerald-500" },
+      { label: "Projects", value: "32", note: "8 in progress", icon: <FolderKanban className="h-5 w-5" />, color: "bg-violet-500" },
+      { label: "System Health", value: "99.9%", note: "stable", icon: <Activity className="h-5 w-5" />, color: "bg-cyan-500" },
+    ],
+    actions: [
+      { label: "Manage Users", description: "Create users and review permissions", href: "/users", icon: <UserCog className="h-5 w-5" /> },
+      { label: "Review Applications", description: "See all job applications", href: "/applications", icon: <Briefcase className="h-5 w-5" /> },
+      { label: "Website Settings", description: "Update global business settings", href: "#", icon: <Settings className="h-5 w-5" /> },
+    ],
+    focus: {
+      title: "Admin Priorities",
+      items: [
+        { label: "Approve new HR access", meta: "Security queue", status: "Pending" },
+        { label: "Publish June case study", meta: "Portfolio", status: "Ready" },
+        { label: "Review analytics report", meta: "Traffic summary", status: "Today" },
+      ],
+    },
+  },
+  hr: {
+    eyebrow: "HR Hiring Desk",
+    title: "Review candidates and hiring activity",
+    description: "Focus on job applications, candidate status, interviews, and team growth.",
+    stats: [
+      { label: "Applications", value: "42", note: "12 new this week", icon: <Briefcase className="h-5 w-5" />, color: "bg-emerald-500" },
+      { label: "Interviews", value: "7", note: "scheduled", icon: <Clock className="h-5 w-5" />, color: "bg-amber-500" },
+      { label: "Shortlisted", value: "9", note: "awaiting feedback", icon: <CheckCircle className="h-5 w-5" />, color: "bg-blue-500" },
+      { label: "Open Roles", value: "5", note: "active careers", icon: <FileText className="h-5 w-5" />, color: "bg-pink-500" },
+    ],
+    actions: [
+      { label: "View Applications", description: "Screen candidate submissions", href: "/applications", icon: <Briefcase className="h-5 w-5" /> },
+      { label: "Careers Content", description: "Update open roles and hiring copy", href: "#", icon: <FileText className="h-5 w-5" /> },
+      { label: "Team Directory", description: "Review employee profiles", href: "#", icon: <Users className="h-5 w-5" /> },
+    ],
+    focus: {
+      title: "HR Priorities",
+      items: [
+        { label: "Screen UI/UX Designer applicants", meta: "12 profiles", status: "New" },
+        { label: "Send interview slots", meta: "Engineering candidates", status: "Today" },
+        { label: "Update remote policy note", meta: "Careers page", status: "Draft" },
+      ],
+    },
+  },
+  employee: {
+    eyebrow: "Employee Workspace",
+    title: "Your CloudWent work hub",
+    description: "See personal tasks, profile details, announcements, and the work that needs your attention.",
+    stats: [
+      { label: "My Tasks", value: "8", note: "3 due today", icon: <CheckCircle className="h-5 w-5" />, color: "bg-blue-500" },
+      { label: "Messages", value: "5", note: "2 unread", icon: <MessageSquare className="h-5 w-5" />, color: "bg-emerald-500" },
+      { label: "Assigned Projects", value: "3", note: "active", icon: <FolderKanban className="h-5 w-5" />, color: "bg-violet-500" },
+      { label: "Profile", value: "90%", note: "almost complete", icon: <ShieldCheck className="h-5 w-5" />, color: "bg-orange-500" },
+    ],
+    actions: [
+      { label: "Open Profile", description: "Update your personal information", href: "/profile", icon: <UserCog className="h-5 w-5" /> },
+      { label: "My Projects", description: "View assigned project work", href: "#", icon: <FolderKanban className="h-5 w-5" /> },
+      { label: "Announcements", description: "Read company updates", href: "#", icon: <MessageSquare className="h-5 w-5" /> },
+    ],
+    focus: {
+      title: "Employee Priorities",
+      items: [
+        { label: "Complete weekly update", meta: "Team sync", status: "Today" },
+        { label: "Review project handoff notes", meta: "Client portal", status: "Open" },
+        { label: "Finish profile skills section", meta: "Directory", status: "Soon" },
+      ],
+    },
+  },
+};
 
-const recentInquiries = [
-  { id: 1, name: "John Doe", email: "john@example.com", subject: "Web Development", date: "May 26, 2024", status: "New", statusColor: "bg-blue-100 text-blue-700" },
-  { id: 2, name: "Sarah Johnson", email: "sarah@example.com", subject: "Mobile App Development", date: "May 26, 2024", status: "In Progress", statusColor: "bg-yellow-100 text-yellow-700" },
-  { id: 3, name: "Michael Brown", email: "michael@example.com", subject: "Cloud Migration", date: "May 25, 2024", status: "Replied", statusColor: "bg-green-100 text-green-700" },
-  { id: 4, name: "David Wilson", email: "david@example.com", subject: "AI/ML Solution", date: "May 25, 2024", status: "Closed", statusColor: "bg-gray-100 text-gray-700" },
-  { id: 5, name: "Emily Davis", email: "emily@example.com", subject: "UI/UX Design", date: "May 24, 2024", status: "New", statusColor: "bg-blue-100 text-blue-700" },
-];
+const normalizeRole = (role?: string | null): DashboardRole => {
+  if (role === "admin" || role === "hr" || role === "employee") return role;
+  return "employee";
+};
 
-// --- Components ---
+export async function RoleDashboardPage({
+  roleOverride,
+}: {
+  roleOverride?: DashboardRole;
+} = {}) {
+  const session = await getServerSession(authOptions);
 
-const StatCard = ({ stat }: { stat: any }) => (
-  <div className="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm border border-gray-200 dark:border-slate-800">
-    <div className="flex justify-between items-start">
-      <div>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</p>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{stat.value}</h3>
-        <div className="flex items-center gap-2 mt-2">
-          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${stat.trend === "up" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"}`}>
-            {stat.change}
-          </span>
-          <span className="text-xs text-gray-400">{stat.period}</span>
-        </div>
-      </div>
-      <div className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center shadow-lg shadow-blue-500/20`}>
-        {stat.icon}
-      </div>
-    </div>
-  </div>
-);
+  if (!session?.user) {
+    redirect("/login");
+  }
 
-export default function DashboardPage() {
-  const { resolvedTheme } = useTheme();
-  const strokeColor = resolvedTheme === "dark" ? "#1f2937" : "#e5e7eb";
+  const role = roleOverride ?? normalizeRole(session.user.role);
+  const dashboard = dashboards[role];
+  const name = session.user.name ?? "there";
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B]">
-      <Sidebar />
+      <Sidebar name={name} role={role} />
       <div className="lg:ml-64">
-        {/* Top Bar */}
-        <header className="sticky top-0 z-40 bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 px-6 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <button className="lg:hidden text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-              <Menu className="w-6 h-6" />
-            </button>
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input type="text" placeholder="Search anything..." className="pl-9 pr-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-64" />
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"><Bell className="w-5 h-5" /></button>
-            <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"><Clock className="w-5 h-5" /></button>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
-              <Calendar className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm text-gray-700 dark:text-gray-300">May 20 - May 26, 2024</span>
-              <ChevronDown className="w-3 h-3 text-gray-400" />
-            </div>
-          </div>
-        </header>
-
-        <main className="p-6">
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome back, Uttam! 🎉</h1>
-            <p className="text-gray-500 dark:text-gray-400 mt-1">Here's what's happening with CloudWent today.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-            {statsData.map((stat) => <StatCard key={stat.title} stat={stat} />)}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-800">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Website Analytics</h3>
-                  <div className="flex items-center gap-3 mt-1 text-xs">
-                    <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400"><div className="w-2 h-2 rounded-full bg-blue-500" /> <span>Visitors</span></div>
-                    <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400"><div className="w-2 h-2 rounded-full bg-purple-500" /> <span>Page Views</span></div>
-                    <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400"><div className="w-2 h-2 rounded-full bg-emerald-500" /> <span>Sessions</span></div>
-                  </div>
+        <main className="p-6 lg:p-8">
+          <section className="mb-8 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/40 px-3 py-1 text-xs font-semibold text-blue-700 dark:text-blue-300">
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  {dashboard.eyebrow}
                 </div>
-                <button className="px-3 py-1.5 text-sm border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-1">
-                  Last 7 Days <ChevronDown className="w-3 h-3" />
-                </button>
+                <h1 className="mt-4 text-2xl lg:text-3xl font-bold text-gray-950 dark:text-white">
+                  Welcome, {name}
+                </h1>
+                <p className="mt-2 max-w-3xl text-sm text-gray-600 dark:text-gray-400">
+                  {dashboard.title}. {dashboard.description}
+                </p>
               </div>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 800, height: 256 }}>
-                  <LineChart data={lineChartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke={strokeColor} />
-                    <XAxis dataKey="name" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
-                    <YAxis tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="visitors" stroke="#3b82f6" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                    <Line type="monotone" dataKey="views" stroke="#a855f7" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                    <Line type="monotone" dataKey="sessions" stroke="#10b981" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                  </LineChart>
-                </ResponsiveContainer>
+              <div className="rounded-xl border border-gray-200 dark:border-slate-800 px-4 py-3">
+                <p className="text-xs text-gray-500 dark:text-gray-400">Signed in as</p>
+                <p className="text-sm font-semibold text-gray-950 dark:text-white">{roleLabels[role]}</p>
               </div>
             </div>
+          </section>
 
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Recent Activity</h3>
-                <Link href="#" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View All</Link>
-              </div>
-              <div className="space-y-1">
-                {recentActivity.map((item) => (
-                  <div key={item.id} className="flex items-start gap-3 py-3 border-b border-gray-100 dark:border-slate-800 last:border-0">
-                    <div className="w-8 h-8 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">{item.icon}</div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-semibold">{item.user}</span> {item.action} <span className="font-medium text-gray-900 dark:text-white">{item.target}</span></p>
-                      <p className="text-xs text-gray-400 mt-0.5">{item.time}</p>
-                    </div>
+          <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+            {dashboard.stats.map((stat) => (
+              <div key={stat.label} className="rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</p>
+                    <p className="mt-2 text-2xl font-bold text-gray-950 dark:text-white">{stat.value}</p>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{stat.note}</p>
                   </div>
-                ))}
+                  <div className={`${stat.color} text-white rounded-xl p-3`}>{stat.icon}</div>
+                </div>
               </div>
-            </div>
-          </div>
+            ))}
+          </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-            <div className="lg:col-span-1 bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Quick Actions</h3>
-                <Link href="#" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View All</Link>
+          <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div className="xl:col-span-2 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
+              <div className="flex items-center justify-between gap-3 mb-5">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Quick Actions</h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Role-specific shortcuts for your work.</p>
+                </div>
+                <BarChart3 className="h-5 w-5 text-gray-400" />
               </div>
-              <div className="space-y-3">
-                {quickActions.map((action) => (
-                  <Link key={action.title} href={action.href} className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 hover:shadow-md hover:border-blue-500 transition-all">
-                    <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-lg bg-gray-50 dark:bg-slate-800 flex items-center justify-center">{action.icon}</div><div><p className="text-sm font-semibold text-gray-900 dark:text-white">{action.title}</p><p className="text-xs text-gray-500 dark:text-gray-400">{action.desc}</p></div></div>
-                    <ChevronDown className="w-4 h-4 text-gray-400 -rotate-90" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {dashboard.actions.map((action) => (
+                  <Link
+                    key={action.label}
+                    href={action.href}
+                    className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all"
+                  >
+                    <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
+                      {action.icon}
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-950 dark:text-white">{action.label}</h3>
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{action.description}</p>
                   </Link>
                 ))}
               </div>
             </div>
 
-            <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-800 overflow-hidden">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Recent Inquiries</h3>
-                <Link href="#" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View All</Link>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead><tr className="text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider"><th className="px-4 py-3">Name</th><th className="px-4 py-3">Email</th><th className="px-4 py-3">Subject</th><th className="px-4 py-3">Date</th><th className="px-4 py-3">Status</th><th className="px-4 py-3 text-right">Action</th></tr></thead>
-                  <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
-                    {recentInquiries.map((inquiry) => (
-                      <tr key={inquiry.id} className="hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
-                        <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{inquiry.name}</td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{inquiry.email}</td>
-                        <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{inquiry.subject}</td>
-                        <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{inquiry.date}</td>
-                        <td className="px-4 py-3"><span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${inquiry.statusColor}`}>{inquiry.status}</span></td>
-                        <td className="px-4 py-3 text-right"><button className="text-gray-400 hover:text-blue-600 transition-colors"><MoreHorizontal className="w-4 h-4" /></button></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            <div className="rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
+              <h2 className="text-lg font-semibold text-gray-950 dark:text-white">{dashboard.focus.title}</h2>
+              <div className="mt-5 space-y-3">
+                {dashboard.focus.items.map((item) => (
+                  <div key={item.label} className="rounded-xl bg-gray-50 dark:bg-slate-900 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-gray-950 dark:text-white">{item.label}</p>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{item.meta}</p>
+                      </div>
+                      <span className="rounded-full bg-white dark:bg-slate-950 px-2.5 py-1 text-xs font-medium text-blue-700 dark:text-blue-300">
+                        {item.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white">Top Services</h3>
-                <Link href="#" className="text-xs text-blue-600 dark:text-blue-400 hover:underline">View All</Link>
-              </div>
-              <div className="h-64 flex flex-col items-center justify-center">
-                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 260, height: 256 }}>
-                  <PieChart>
-                    <Pie data={pieChartData} cx="50%" cy="50%" innerRadius={40} outerRadius={80} paddingAngle={2} dataKey="value">
-                      {pieChartData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="text-center -mt-8"><p className="text-2xl font-bold text-gray-900 dark:text-white">128</p><p className="text-xs text-gray-500 dark:text-gray-400">Total Projects</p></div>
-              </div>
-            </div>
-          </div>
+          </section>
         </main>
       </div>
     </div>
   );
+}
+
+export default async function DashboardPage() {
+  return <RoleDashboardPage />;
 }

@@ -11,16 +11,15 @@ const jobSchema = z.object({
   portfolio: z.string().url("Invalid URL").optional().or(z.literal("")),
   coverLetter: z.string().optional(),
   jobTitle: z.string().min(1, "Job title is required"),
-  resumeUrl: z.string().url("Invalid resume URL"),
+  resumeUrl: z.string().min(1, "Resume URL is required"), // ✅ FIX: Accepts relative paths
 });
 
 export async function submitJobApplication(formData: FormData) {
   const rawData = Object.fromEntries(formData.entries());
 
-  // Parse optional fields properly
   const parsed = jobSchema.safeParse({
     ...rawData,
-    resumeUrl: rawData.resumeUrl || "", // Will be handled by upload API
+    resumeUrl: rawData.resumeUrl || "", 
   });
 
   if (!parsed.success) {

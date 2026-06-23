@@ -25,7 +25,6 @@ const skillIcons: Record<string, string> = {
   Kubernetes: "⚙️",
   "Next.js": "N",
   NextUI: "U",
-  PostgreSQL: "🐘",
   TypeScript: "TS",
   React: "⚛️",
   "Node.js": "🟢",

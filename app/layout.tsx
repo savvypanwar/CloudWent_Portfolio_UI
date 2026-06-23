@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/layout/Navbar/Navbar";
 import { Footer } from "@/components/layout/Footer/Footer";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
+         <Toaster position="top-center" />
       </body>
     </html>
   );

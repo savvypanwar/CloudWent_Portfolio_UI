@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
+import { Toast } from "@/services/toast.service";
 
 const adminLogin = {
   email: "admin@cloudwent.com",
@@ -13,54 +13,74 @@ const adminLogin = {
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
 
-    const result = await signIn("credentials", {
-      email: email.trim(),
-      password,
-      redirect: false,
-    });
+    const loadingToast = Toast.loading("Signing in...");
 
-    setLoading(false);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+        }),
+      });
 
-    if (result?.error || !result?.ok) {
-      setError("Invalid email or password");
-    } else {
-      const session = await getSession();
-      if (!session?.user?.role) {
-        setError("Login succeeded, but your role is missing. Please contact admin.");
+      const data = await res.json();
+
+      Toast.dismiss(loadingToast);
+      setLoading(false);
+
+      if (!res.ok || !data.success) {
+        Toast.error(data.message || "Invalid email or password");
         return;
       }
 
+      //  store auth data
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      Toast.success("Login successful 🚀");
+
       router.replace("/dashboard");
       router.refresh();
+    } catch (err) {
+      Toast.dismiss(loadingToast);
+      setLoading(false);
+
+      Toast.error("Something went wrong. Please try again.");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="glass-effect border-border rounded-3xl p-8 md:p-10 max-w-md w-full shadow-glow">
+        {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold text-foreground">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">Sign in to your CloudWent dashboard</p>
+          <h1 className="text-3xl font-extrabold text-foreground">
+            Welcome Back
+          </h1>
+          <p className="text-muted-foreground mt-2">
+            Sign in to your CloudWent dashboard
+          </p>
         </div>
 
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
-            <div className="p-3 rounded-xl bg-destructive/10 text-destructive border border-destructive/20 text-sm">
-              {error}
-            </div>
-          )}
-
+          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -71,8 +91,11 @@ export default function LoginPage() {
             />
           </div>
 
+          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Password</label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Password
+            </label>
             <input
               type="password"
               value={password}
@@ -83,16 +106,17 @@ export default function LoginPage() {
             />
           </div>
 
-          <Button type="submit" variant="primary" size="lg" className="w-full shadow-md" disabled={loading}>
+          {/* Button */}
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="w-full shadow-md"
+            disabled={loading}
+          >
             {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
-
-        <div className="mt-6 rounded-xl border border-border bg-muted/20 p-3 text-xs text-muted-foreground">
-          <p className="font-semibold text-foreground">Admin Login</p>
-          <p className="mt-1">ID: {adminLogin.email}</p>
-          <p>Password: {adminLogin.password}</p>
-        </div>
       </div>
     </div>
   );

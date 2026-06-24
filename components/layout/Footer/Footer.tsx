@@ -65,15 +65,15 @@ export const Footer = () => {
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-primary" />
-              <span>hello@cloudwent.com</span>
+              <span>info@cloudwent.com</span>
             </li>
             <li className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-primary" />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 7489828908</span>
             </li>
             <li className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" />
-              <span>New York, USA</span>
+              <span>BHOPAL Madhya Pradesh (India)</span>
             </li>
           </ul>
         </div>

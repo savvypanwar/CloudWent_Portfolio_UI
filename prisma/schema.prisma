@@ -24,7 +24,13 @@ enum AuthProvider {
 enum UserRole {
   SUPER_ADMIN
   ADMIN
+  HR
+  EMPLOYEE
   USER
+  admin
+  hr
+  employee
+  user
 }
 
 model User {
@@ -71,3 +77,42 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+model JobApplication {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  phone String?
+  coverLetter String?
+  resumeUrl String?
+  linkedin String?
+  portfolio String?
+  jobTitle String
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Contact {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  subject String
+  message String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Application {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  phone String?
+  coverLetter String?
+  resumeUrl String?
+  linkedin String?
+  portfolio String?
+  status String @default("pending")
+  jobTitle String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

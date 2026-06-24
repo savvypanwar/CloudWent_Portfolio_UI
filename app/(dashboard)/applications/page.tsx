@@ -1,4 +1,5 @@
 import { getApplications } from "@/app/actions/get-applications";
+import { Application } from "@/lib/generated/prisma/client";
 import Link from "next/link";
 import { Eye, Trash2, Calendar, User, Briefcase, CheckCircle, XCircle, Clock, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
@@ -75,7 +76,7 @@ export default async function ApplicationsPage() {
                   </td>
                 </tr>
               ) : (
-                applications.map((app) => (
+                applications.map((app: Application) => (
                   <tr key={app.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">

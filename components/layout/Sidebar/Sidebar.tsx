@@ -35,12 +35,6 @@ const roleLabels: Record<SidebarRole, string> = {
   employee: "Employee",
 };
 
-const dashboardRoutes: Record<SidebarRole, string> = {
-  admin: "/admin-dashboard",
-  hr: "/hr-dashboard",
-  employee: "/employee-dashboard",
-};
-
 const getInitials = (name?: string | null) => {
   if (!name) return "CW";
   return name
@@ -54,89 +48,79 @@ const getInitials = (name?: string | null) => {
 export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProps) => {
   const pathname = usePathname();
   const initials = getInitials(name);
-  const roleDashboardHref = dashboardRoutes[role];
+
+  // 👇 Role ke hisaab se menu items
   const menuItems =
     role === "admin"
       ? [
-    {
-      section: "Main",
-      items: [
-        { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-        { icon: ShieldCheck, label: "Admin Dashboard", href: "/admin-dashboard" },
-        { icon: Users, label: "HR Dashboard", href: "/hr-dashboard" },
-        { icon: UserCog, label: "Employee Dashboard", href: "/employee-dashboard" },
-      ],
-    },
-    {
-      section: "Management",
-      items: [
-        { icon: Users, label: "Users", href: "/users" },
-        { icon: Briefcase, label: "Applications", href: "/applications" },
-        { icon: UserCog, label: "Team Members", href: "#" },
-        { icon: Server, label: "Services", href: "#" },
-        { icon: FolderKanban, label: "Projects", href: "#" },
-        { icon: FileText, label: "Blog Posts", href: "#" },
-        { icon: Briefcase, label: "Careers", href: "#" },
-        { icon: MessageSquare, label: "Testimonials", href: "#" },
-        { icon: Layers, label: "Technologies", href: "#" },
-        { icon: Calendar, label: "Contact Inquiries", href: "#" },
-        { icon: Activity, label: "Newsletter", href: "#" },
-      ],
-    },
-    {
-      section: "Settings",
-      items: [
-        { icon: Settings, label: "Website Settings", href: "#" },
-        { icon: Lock, label: "SEO Settings", href: "#" },
-        { icon: Activity, label: "Analytics", href: "#" },
-        { icon: Layers, label: "Roles & Permissions", href: "#" },
-        { icon: Activity, label: "Activity Logs", href: "#" },
-        { icon: CreditCard, label: "Backups", href: "#" },
-      ],
-    },
-  ]
+          {
+            section: "Main",
+            items: [{ icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" }],
+          },
+          {
+            section: "Management",
+            items: [
+              { icon: Users, label: "Users", href: "/users" },
+              { icon: Briefcase, label: "Applications", href: "/applications" },
+              { icon: UserCog, label: "Team Members", href: "#" },
+              { icon: Server, label: "Services", href: "#" },
+              { icon: FolderKanban, label: "Projects", href: "#" },
+              { icon: FileText, label: "Blog Posts", href: "#" },
+              { icon: Briefcase, label: "Careers", href: "#" },
+              { icon: MessageSquare, label: "Testimonials", href: "#" },
+              { icon: Layers, label: "Technologies", href: "#" },
+              { icon: Calendar, label: "Contact Inquiries", href: "#" },
+              { icon: Activity, label: "Newsletter", href: "#" },
+            ],
+          },
+          {
+            section: "Settings",
+            items: [
+              { icon: Settings, label: "Website Settings", href: "#" },
+              { icon: Lock, label: "SEO Settings", href: "#" },
+              { icon: Activity, label: "Analytics", href: "#" },
+              { icon: Layers, label: "Roles & Permissions", href: "#" },
+              { icon: Activity, label: "Activity Logs", href: "#" },
+              { icon: CreditCard, label: "Backups", href: "#" },
+            ],
+          },
+        ]
       : role === "hr"
-        ? [
-            {
-              section: "Main",
-              items: [
-                { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-                { icon: Briefcase, label: "HR Dashboard", href: roleDashboardHref },
-              ],
-            },
-            {
-              section: "Hiring",
-              items: [
-                { icon: Briefcase, label: "Applications", href: "/applications" },
-                { icon: FileText, label: "Careers", href: "#" },
-                { icon: Users, label: "Team Directory", href: "#" },
-              ],
-            },
-            {
-              section: "Tools",
-              items: [
-                { icon: Calendar, label: "Interview Calendar", href: "#" },
-                { icon: Activity, label: "Hiring Reports", href: "#" },
-              ],
-            },
-          ]
-        : [
-            {
-              section: "Main",
-              items: [
-                { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-                { icon: UserCog, label: "Employee Dashboard", href: roleDashboardHref },
-              ],
-            },
-            {
-              section: "Workspace",
-              items: [
-                { icon: UserCog, label: "Profile", href: "/profile" },
-                { icon: FolderKanban, label: "My Projects", href: "#" },
-                { icon: MessageSquare, label: "Announcements", href: "#" },
-              ],
-            },
-          ];
+      ? [
+          {
+            section: "Main",
+            items: [{ icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" }],
+          },
+          {
+            section: "Hiring",
+            items: [
+              { icon: Briefcase, label: "Applications", href: "/applications" },
+              { icon: FileText, label: "Careers", href: "#" },
+              { icon: Users, label: "Team Directory", href: "#" },
+            ],
+          },
+          {
+            section: "Tools",
+            items: [
+              { icon: Calendar, label: "Interview Calendar", href: "#" },
+              { icon: Activity, label: "Hiring Reports", href: "#" },
+            ],
+          },
+        ]
+      : [
+          {
+            section: "Main",
+            items: [{ icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" }],
+          },
+          {
+            section: "Workspace",
+            items: [
+              { icon: UserCog, label: "Profile", href: "/profile" },
+              { icon: FolderKanban, label: "My Projects", href: "#" },
+              { icon: MessageSquare, label: "Announcements", href: "#" },
+            ],
+          },
+        ];
 
   return (
     <aside className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-950 border-r border-gray-200 dark:border-slate-800 z-50 overflow-y-auto hidden lg:block [&::-webkit-scrollbar]:hidden">
@@ -158,20 +142,23 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
               {group.section}
             </div>
             <div className="space-y-1 mt-2">
-              {group.items.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
-                    pathname === item.href
-                      ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-medium"
-                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white"
-                  }`}
-                >
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
-                </Link>
-              ))}
+              {group.items.map((item) => {
+                const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/");
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-medium"
+                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <item.icon className="w-4 h-4" />
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         ))}

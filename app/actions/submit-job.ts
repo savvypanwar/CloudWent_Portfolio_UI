@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma/prisma";
 import { z } from "zod";
 
 const jobSchema = z.object({
@@ -11,7 +11,7 @@ const jobSchema = z.object({
   portfolio: z.string().url("Invalid URL").optional().or(z.literal("")),
   coverLetter: z.string().optional(),
   jobTitle: z.string().min(1, "Job title is required"),
-  resumeUrl: z.string().min(1, "Resume URL is required"), // ✅ FIX: Accepts relative paths
+  resumeUrl: z.string().min(1, "Resume URL is required"),
 });
 
 export async function submitJobApplication(formData: FormData) {
@@ -19,7 +19,7 @@ export async function submitJobApplication(formData: FormData) {
 
   const parsed = jobSchema.safeParse({
     ...rawData,
-    resumeUrl: rawData.resumeUrl || "", 
+    resumeUrl: rawData.resumeUrl || "",
   });
 
   if (!parsed.success) {
@@ -30,7 +30,7 @@ export async function submitJobApplication(formData: FormData) {
   }
 
   try {
-    await db.jobApplication.create({
+    await prisma.jobApplication.create({
       data: {
         ...parsed.data,
         status: "pending",

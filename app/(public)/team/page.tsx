@@ -27,7 +27,7 @@ export default function TeamPage() {
         {/* Team Sections */}
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <div className="max-w-7xl mx-auto">
-            <div className="mt-8 space-y-16">
+            <div className="mt-8 ">
               {teamSections.map(({ key, label, subtitle }) => {
                 const members = teamMembers.filter((m) => m.team === key);
                 return (

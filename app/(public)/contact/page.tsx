@@ -5,6 +5,7 @@ import {
   ConsultBanner,
   OfficeLocation,
 } from "@/features/contact/components/";
+import { CTA } from "@/features/home/components";
 
 export const metadata = {
   title: "Contact Us | CloudWent",
@@ -29,6 +30,9 @@ export default function ContactPage() {
           </div>
           <div className="mt-8 max-w-7xl mx-auto">
              <OfficeLocation />
+          </div>
+          <div className="mt-8 max-w-7xl mx-auto">
+             <CTA />
           </div>
 
          

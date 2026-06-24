@@ -92,7 +92,7 @@ export default function BlogPage() {
         <section className="py-12 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-foreground">Featured Article</h2>
+              <span className="text-primary font-semibold tracking-wider text-sm">Featured Article</span>
             </div>
             <FeaturedArticle
               slug={featuredPost.slug}
@@ -109,7 +109,7 @@ export default function BlogPage() {
         {/* Blog Grid with Sidebar */}
         <section className="py-24 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl font-bold text-foreground mb-8">All Articles</h2>
+              <span className="text-primary font-semibold tracking-wider text-sm m  b-10">All Articles</span>
             <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
               <BlogSidebar />
               <div>

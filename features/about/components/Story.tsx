@@ -4,12 +4,9 @@ import { Button } from "@/components/ui/Button/Button";
 
 export const Story = () => {
   const steps = [
-    { icon: Cloud, year: "2019", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions." },
-    { icon: Users, year: "2020", title: "Team Growth", text: "Grew our team and expanded our service offerings." },
-    { icon: Rocket, year: "2021", title: "Global Reach", text: "Started working with clients across different countries." },
-    { icon: Medal, year: "2023", title: "Milestone Achieved", text: "200+ projects delivered with 5-star client satisfaction." },
-    { icon: Flag, year: "Future", title: "Looking Ahead", text: "Continuing our mission to build a better digital future together." },
-  ];
+    { icon: Cloud, year: "2026", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions." },
+    { icon: Users, year: "2026", title: "Team Growth", text: "Grew our team and expanded our service offerings." },
+   ];
 
   return (
     <section className="max-w-7xl mx-auto px-6 pb-20">

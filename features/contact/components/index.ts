@@ -3,4 +3,5 @@ export * from "./ContactForm";
 export * from "./ConsultBanner";
 export * from "./OfficeLocation";
 export * from "./FAQ";
+export * from "./CTA"
 

@@ -1,32 +1,37 @@
+
+
 import Link from "next/link";
-import { ArrowRight, Briefcase } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
 export const ContactCta = () => {
   return (
-    <section className="pb-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-16 py-14 md:py-20 text-center shadow-glow">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,oklch(0.6_0.2_260)_0%,transparent_50%)]" />
-          <div className="relative">
-            <Briefcase className="w-10 h-10 mx-auto mb-4 text-primary" />
-            <h2 className="text-3xl md:text-5xl font-extrabold text-foreground">Ready to do your best work?</h2>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+    <section className="max-w-7xl mx-auto px-6 pb-16">
+      <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-12 py-10 shadow-glow">
+        {/* Decorative Cloud Shape */}
+        <div className="absolute -left-4 -top-4 opacity-20">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" className="text-primary/30">
+            <path d="M17.5 19a3.5 3.5 0 1 0 0-7h-1.5A5.5 5.5 0 0 0 5 12.5a5.5 5.5 0 0 0 5.5 5.5h7z" />
+          </svg>
+        </div>
+
+        <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Text */}
+          <div className="text-foreground max-w-xl">
+            <h3 className="text-3xl md:text-4xl font-extrabold">
+             Ready to do your best work?
+            </h3>
+            <p className="mt-2 text-muted-foreground">
               Browse open roles, or send an open application — we love meeting talented people even when there's no posting.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3 justify-center">
-              <Button asChild variant="primary" size="lg" className="shadow-md hover:scale-105 transition-transform">
-                <Link href="#openings">
-                  See Open Roles <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
-                <Link href="/contact">
-                  Send Open Application
-                </Link>
-              </Button>
-            </div>
           </div>
+
+          {/* Button */}
+          <Button asChild variant="primary" size="lg" className="shadow-md hover:scale-105 transition-transform">
+            <Link href="/contact">
+               See Open Roles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

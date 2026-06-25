@@ -5,37 +5,38 @@ import {
   TeamStats,
   CTA,
 } from "@/features/team/components/";
-import { teamMembers, teamSections, stats } from "@/lib/team-data";
+import { getTeamMembers, stats, teamSections } from "@/lib/team";
 
 export const metadata = {
   title: "Our Team | CloudWent",
-  description: "Meet the experts behind CloudWent. Passionate professionals building scalable digital solutions for ambitious businesses.",
+  description:
+    "Meet the experts behind CloudWent. Passionate professionals building scalable digital solutions for ambitious businesses.",
 };
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const teamMembers = await getTeamMembers();
+
   return (
     <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
-        {/* Hero Section */}
         <TeamHero />
-        
-        {/* Stats Section */}
+
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <TeamStats stats={stats} />
         </Section>
 
-        {/* Team Sections */}
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <div className="max-w-7xl mx-auto">
             <div className="mt-8 ">
               {teamSections.map(({ key, label, subtitle }) => {
-                const members = teamMembers.filter((m) => m.team === key);
+                const members = teamMembers.filter((member) => member.team === key);
                 return (
                   <TeamSection
                     key={key}
                     label={label}
                     subtitle={subtitle}
                     members={members}
+                    viewAllLink="/team"
                   />
                 );
               })}
@@ -44,7 +45,7 @@ export default function TeamPage() {
         </Section>
 
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
-          <CTA  />
+          <CTA />
         </Section>
       </main>
     </div>

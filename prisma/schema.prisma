@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -115,4 +114,31 @@ model Application {
   jobTitle String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
+}
+
+model TeamMember {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug               String   @unique
+  name               String
+  role               String
+  initials           String
+  avatarColor        String
+  bio                String?
+  location           String?
+  experience         String?
+  email              String?
+  linkedin           String?
+  twitter            String?
+  github             String?
+  team               String
+  order              Int      @default(0)
+  image              String?
+  expertise          String[] @default([])
+  skills             String[] @default([])
+  experienceTimeline Json?
+  education          Json?
+  projects           Json?
+  certifications     String[] @default([])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

@@ -1,4 +1,4 @@
-import { UserRole } from "@/lib/generated/prisma/client";
+import { UserRole } from "@prisma/client";
 import { cookies } from "next/headers";
 
 import { prisma } from "@/lib/prisma/prisma";

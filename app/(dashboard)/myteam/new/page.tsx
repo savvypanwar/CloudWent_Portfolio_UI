@@ -1,0 +1,319 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/Button/Button";
+import { Input } from "@/components/ui/Input/Input";
+import { Toast } from "@/services/toast.service";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+
+const avatarColors = [
+  "from-blue-600 to-indigo-700",
+  "from-pink-500 to-rose-600",
+  "from-green-500 to-emerald-600",
+  "from-purple-500 to-violet-700",
+  "from-orange-500 to-amber-600",
+  "from-cyan-500 to-blue-600",
+];
+
+const teamOptions = ["leadership", "engineering", "design"];
+
+export default function AddTeamMemberPage() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    slug: "",
+    role: "",
+    initials: "",
+    avatarColor: avatarColors[0],
+    bio: "",
+    location: "",
+    experience: "",
+    email: "",
+    linkedin: "",
+    twitter: "",
+    github: "",
+    team: teamOptions[0],
+    order: 0,
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const toastId = Toast.loading("Creating team member...");
+
+    try {
+      const res = await fetch("/api/team", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          order: Number(formData.order),
+        }),
+      });
+
+      const data = await res.json();
+      Toast.dismiss(toastId);
+
+      if (!res.ok) {
+        Toast.error(data.error || "Failed to create team member");
+        setIsSubmitting(false);
+        return;
+      }
+
+      Toast.success("Team member created successfully! 🎉");
+      router.push("/myteam");
+      router.refresh();
+    } catch (err) {
+      Toast.dismiss(toastId);
+      Toast.error("Something went wrong.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="p-6 max-w-3xl mx-auto">
+      <div className="flex items-center gap-4 mb-6">
+        <Link
+          href="/myteam"
+          className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back
+        </Link>
+        <h1 className="text-2xl font-bold text-foreground">Add Team Member</h1>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="glass-effect border-border rounded-3xl p-8 md:p-10 space-y-6"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Full Name <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="John Doe"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Role <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+              placeholder="CEO & Founder"
+              className="border-border bg-surface"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Slug <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="slug"
+              value={formData.slug}
+              onChange={handleChange}
+              required
+              placeholder="john-doe"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Initials <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="initials"
+              value={formData.initials}
+              onChange={handleChange}
+              required
+              placeholder="JD"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Team <span className="text-destructive">*</span>
+            </label>
+            <select
+              name="team"
+              value={formData.team}
+              onChange={handleChange}
+              className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+            >
+              {teamOptions.map((t) => (
+                <option key={t} value={t}>
+                  {t.charAt(0).toUpperCase() + t.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Avatar Color <span className="text-destructive">*</span>
+            </label>
+            <select
+              name="avatarColor"
+              value={formData.avatarColor}
+              onChange={handleChange}
+              className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+            >
+              {avatarColors.map((color) => (
+                <option key={color} value={color}>
+                  {color.replace("from-", "").replace(" to-", " → ")}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Order
+            </label>
+            <Input
+              type="number"
+              name="order"
+              value={formData.order}
+              onChange={handleChange}
+              className="border-border bg-surface"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-1.5">
+            Bio
+          </label>
+          <textarea
+            name="bio"
+            rows={3}
+            value={formData.bio}
+            onChange={handleChange}
+            placeholder="Tell us about this team member..."
+            className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-y"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Location
+            </label>
+            <Input
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              placeholder="New York, USA"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Experience
+            </label>
+            <Input
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              placeholder="10+ years"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Email
+            </label>
+            <Input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="john@cloudwent.com"
+              className="border-border bg-surface"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              LinkedIn URL
+            </label>
+            <Input
+              type="url"
+              name="linkedin"
+              value={formData.linkedin}
+              onChange={handleChange}
+              placeholder="https://linkedin.com/in/johndoe"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Twitter URL
+            </label>
+            <Input
+              type="url"
+              name="twitter"
+              value={formData.twitter}
+              onChange={handleChange}
+              placeholder="https://twitter.com/johndoe"
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              GitHub URL
+            </label>
+            <Input
+              type="url"
+              name="github"
+              value={formData.github}
+              onChange={handleChange}
+              placeholder="https://github.com/johndoe"
+              className="border-border bg-surface"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-4 pt-4 border-t border-border">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.back()}
+            disabled={isSubmitting}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" variant="primary" disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : "Save Team Member"}
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+}

@@ -1,28 +1,29 @@
-// app/(public)/about/page.tsx
-
-import { 
-  AboutHero, 
-  MissionVision, 
-  Story, 
-  Team, 
-  Culture, 
+import {
+  AboutHero,
+  MissionVision,
+  Story,
+  Team,
+  Culture,
   Testimonials,
-  AboutCta
+  AboutCta,
 } from "@/features/about/components";
+import { getTeamMembers } from "@/lib/team";
 
 export const metadata = {
   title: "About | CloudWent",
   description: "Meet CloudWent — builders of scalable digital products that drive real impact.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const teamPreview = await getTeamMembers({ limit: 5 });
+
   return (
     <div className="min-h-screen bg-background dark:bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <AboutHero />
         <MissionVision />
         <Story />
-        <Team />
+        <Team members={teamPreview} />
         <Culture />
         <Testimonials />
         <AboutCta />

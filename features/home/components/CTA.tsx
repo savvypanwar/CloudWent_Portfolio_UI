@@ -27,7 +27,7 @@ export const CTA = () => {
 
           {/* Button */}
           <Button asChild variant="primary" size="lg" className="shadow-md hover:scale-105 transition-transform">
-            <Link href="#">
+            <Link href="/contact">
              <span className="px-2">Book a Free Consultation</span>  <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>

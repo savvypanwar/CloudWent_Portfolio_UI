@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation"; // ✅ Router import kiya
+import { logout } from "@/app/actions/auth"; // ✅ Logout action import kiya
+
+import Logo from "@/components/common/Logo/Logo";
 import {
   LayoutDashboard,
   ShieldCheck,
@@ -20,7 +23,9 @@ import {
   Cloud,
   Calendar,
   ChevronDown,
+  LogOut, // ✅ Logout icon import kiya
 } from "lucide-react";
+import { Button } from "@/components/ui/Button/Button";
 
 type SidebarRole = "admin" | "hr" | "employee";
 
@@ -47,9 +52,24 @@ const getInitials = (name?: string | null) => {
 
 export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProps) => {
   const pathname = usePathname();
+  const router = useRouter();
   const initials = getInitials(name);
 
-  // 👇 Role ke hisaab se menu items
+  // ✅ Logout handler
+  const handleLogout = async () => {
+    // 1. Client-side storage clear karo (safe fallback)
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("user");
+      localStorage.removeItem("authUser");
+    }
+
+    // 2. Server-side cookie clear karo aur redirect karo
+    await logout();
+  };
+
+  // Role ke hisaab se menu items
   const menuItems =
     role === "admin"
       ? [
@@ -62,6 +82,7 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
             items: [
               { icon: Users, label: "Users", href: "/users" },
               { icon: Briefcase, label: "Applications", href: "/applications" },
+              { icon: UserCog, label: "Team Members", href: "/myteam" },
               { icon: UserCog, label: "Team Members", href: "#" },
               { icon: Server, label: "Services", href: "#" },
               { icon: FolderKanban, label: "Projects", href: "#" },
@@ -125,13 +146,8 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
   return (
     <aside className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-950 border-r border-gray-200 dark:border-slate-800 z-50 overflow-y-auto hidden lg:block [&::-webkit-scrollbar]:hidden">
       {/* Logo */}
-      <div className="p-6 border-b border-gray-200 dark:border-slate-800">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
-            <Cloud className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-xl font-bold text-gray-900 dark:text-white">CLOUDWENT</span>
-        </Link>
+      <div className="p-6 border-b border-gray-200 dark:border-slate-800 h-10">
+        <Logo />
       </div>
 
       {/* Navigation */}
@@ -164,9 +180,9 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
         ))}
       </nav>
 
-      {/* User Profile */}
+      {/* User Profile + Logout Button */}
       <div className="p-4 border-t border-gray-200 dark:border-slate-800 mt-auto">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold">
             {initials}
           </div>
@@ -176,6 +192,19 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
           </div>
           <ChevronDown className="w-4 h-4 text-gray-400" />
         </div>
+        
+        {/* ✅ Logout Button */}
+        <form action={handleLogout}>
+          <Button
+            type="submit"
+            variant="outline"
+            size="sm"
+            className="w-full glass-effect border-border hover:bg-destructive/10 hover:text-destructive transition-colors flex items-center justify-center gap-2"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
+        </form>
       </div>
     </aside>
   );

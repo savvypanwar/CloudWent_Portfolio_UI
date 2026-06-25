@@ -50,7 +50,7 @@ export default function LoginPage() {
 
       Toast.success("Login successful 🚀");
 
-      router.replace("/");
+      router.replace("/dashboard");
       router.refresh();
     } catch (err) {
       Toast.dismiss(loadingToast);

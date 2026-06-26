@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -74,8 +75,20 @@ export default async function TeamPage() {
                   <tr key={member.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-white font-bold text-sm`}>
-                          {member.initials}
+                        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-muted">
+                          {member.image ? (
+                            <Image
+                              src={member.image}
+                              alt={member.name}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center text-white font-bold text-sm`}>
+                              {member.initials}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <p className="font-medium text-foreground text-sm">{member.name}</p>

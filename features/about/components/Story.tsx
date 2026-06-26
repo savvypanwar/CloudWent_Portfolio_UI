@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { ArrowRight, Cloud, Users, Rocket, Medal, Flag } from "lucide-react";
+import { ArrowRight, Cloud, Users, Rocket, Medal, Flag, Zap, Globe } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
 export const Story = () => {
   const steps = [
-    { icon: Cloud, year: "2026", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions." },
-    { icon: Users, year: "2026", title: "Team Growth", text: "Grew our team and expanded our service offerings." },
-   ];
+    { icon: Cloud, year: "2020", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions for modern businesses." },
+    { icon: Users, year: "2021", title: "Team Growth", text: "Grew our team to 10+ experts and expanded our service offerings across cloud & web." },
+    { icon: Zap, year: "2023", title: "First Major Clients", text: "Partnered with enterprise clients and delivered high-impact digital transformations." },
+    { icon: Globe, year: "2024", title: "Global Reach", text: "Expanded operations to serve clients across North America, Europe, and Asia." },
+    { icon: Rocket, year: "2025", title: "AI & Innovation", text: "Launched AI-powered solutions and next-gen cloud-native platforms." },
+    { icon: Medal, year: "2026", title: "50+ Projects", text: "Surpassed 50 successful project deliveries with 99.9% uptime reliability." },
+  ];
 
   return (
     <section className="max-w-7xl mx-auto px-6 pb-20">
@@ -33,8 +37,8 @@ export const Story = () => {
           {/* Dashed line */}
           <div className="absolute top-8 left-0 right-0 h-px border-t border-dashed border-border" />
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 relative">
-            {steps.map((s, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 relative">
+            {steps.map((s) => (
               <div key={s.year} className="text-center">
                 <div className="mx-auto w-16 h-16 rounded-full glass-effect border-border grid place-items-center text-primary">
                   <s.icon className="w-7 h-7" />

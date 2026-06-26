@@ -1,26 +1,26 @@
-"use client";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { Sidebar } from "@/components/layout/Sidebar/Sidebar";
 
-import { useEffect } from "react";
+export const dynamic = "force-dynamic";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // ✅ Dashboard page pe Navbar aur Footer ko forcefully hide karo
-  useEffect(() => {
-    // Navbar aur Footer ko select karo aur hide karo
-    const navbar = document.querySelector("header");
-    const footer = document.querySelector("footer");
-    if (navbar) navbar.style.display = "none";
-    if (footer) footer.style.display = "none";
+  const { user } = await auth();
 
-    // Cleanup: page leave karne par wapas show karo
-    return () => {
-      if (navbar) navbar.style.display = "";
-      if (footer) footer.style.display = "";
-    };
-  }, []);
+  if (!user) {
+    redirect("/login");
+  }
 
-  return <>{children}</>;
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B]">
+      <Sidebar name={user.name} role={user.role} />
+      <div className="lg:ml-64">
+        {children}
+      </div>
+    </div>
+  );
 }

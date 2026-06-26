@@ -8,6 +8,7 @@ import {
   AboutCta,
 } from "@/features/about/components";
 import { getTeamMembers } from "@/lib/team";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "About | CloudWent",
@@ -15,7 +16,17 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const teamPreview = await getTeamMembers({ limit: 5 });
+  const [teamPreview, testimonials] = await Promise.all([
+    getTeamMembers({ limit: 5 }),
+    prisma.testimonial.findMany({ where: { featured: true }, orderBy: { order: "asc" }, take: 3 }),
+  ]);
+
+  const mappedTestimonials = testimonials.map((t) => ({
+    id: t.id,
+    content: t.content,
+    name: t.name,
+    role: t.role,
+  }));
 
   return (
     <div className="min-h-screen bg-background dark:bg-background flex flex-col transition-colors">
@@ -25,7 +36,7 @@ export default async function AboutPage() {
         <Story />
         <Team members={teamPreview} />
         <Culture />
-        <Testimonials />
+        <Testimonials testimonials={mappedTestimonials} />
         <AboutCta />
       </main>
     </div>

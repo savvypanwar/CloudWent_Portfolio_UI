@@ -5,21 +5,32 @@ import {
   ConsultBanner,
   OfficeLocation,
 } from "@/features/contact/components/";
+import { FAQ } from "@/features/contact/components";
 import { CTA } from "@/features/home/components";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Contact Us | CloudWent",
   description: "Get in touch with CloudWent for web development, mobile apps, AI solutions, and cloud services. Let's build something amazing together.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const faqs = await prisma.faq.findMany({
+    where: { category: "contact" },
+    orderBy: { order: "asc" },
+  });
+
+  const mappedFaqs = faqs.map((f) => ({
+    id: f.id,
+    question: f.question,
+    answer: f.answer,
+  }));
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-background flex flex-col transition-colors">
       <main className="flex-grow">
-        {/* Hero Section */}
         <ContactHero />
         
-        {/* Contact Form Section */}
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
           <div className="mt-8 max-w-7xl mx-auto">
             <ContactForm />
@@ -32,10 +43,11 @@ export default function ContactPage() {
              <OfficeLocation />
           </div>
           <div className="mt-8 max-w-7xl mx-auto">
+             <FAQ faqs={mappedFaqs} />
+          </div>
+          <div className="mt-8 max-w-7xl mx-auto">
              <CTA />
           </div>
-
-         
         </Section>
       </main>
     </div>

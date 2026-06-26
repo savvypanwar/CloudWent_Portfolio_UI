@@ -37,6 +37,7 @@ function mapStaticMember(
     email: member.email,
     linkedin: member.linkedin,
     order: index,
+    image: (member as { image?: string }).image,
     expertise: member.expertise,
     skills: member.skills,
     experience_timeline: member.experience_timeline,

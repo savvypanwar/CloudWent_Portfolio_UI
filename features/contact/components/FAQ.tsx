@@ -3,15 +3,17 @@
 import { useState } from "react";
 import { Minus, Plus, HelpCircle } from "lucide-react";
 
-export const FAQ = () => {
-  const faqs = [
-    { q: "How quickly will you respond to my inquiry?", a: "We respond to all inquiries within 24 hours on business days." },
-    { q: "What industries do you work with?", a: "Education, fintech, healthcare, e-commerce, and SaaS across many verticals." },
-    { q: "What information should I include in my message?", a: "Project goals, timeline, budget range, and any technical constraints." },
-    { q: "Can you help with an ongoing project?", a: "Absolutely — we routinely join existing teams to ship and stabilise." },
-    { q: "Do you offer free consultations?", a: "Yes. The first 30-minute discovery call is on us." },
-    { q: "Do you sign NDA for projects?", a: "Yes, we're happy to sign your NDA or provide our standard one." },
-  ];
+interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface FAQProps {
+  faqs: FaqItem[];
+}
+
+export const FAQ = ({ faqs }: FAQProps) => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -25,16 +27,16 @@ export const FAQ = () => {
                 const isOpen = open === i;
                 return (
                   <button
-                    key={i}
+                    key={f.id}
                     type="button"
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="text-left bg-surface border border-border rounded-xl px-4 py-3.5 hover:border-primary/40 transition"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-sm font-semibold">{f.q}</span>
+                      <span className="text-sm font-semibold">{f.question}</span>
                       {isOpen ? <Minus className="w-4 h-4 text-primary shrink-0" /> : <Plus className="w-4 h-4 text-muted-foreground shrink-0" />}
                     </div>
-                    {isOpen && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{f.a}</p>}
+                    {isOpen && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{f.answer}</p>}
                   </button>
                 );
               })}

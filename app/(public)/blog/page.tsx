@@ -5,120 +5,97 @@ import {
   BlogSidebar,
   BlogCta,
 } from "@/features/blog/components";
-
-// ✅ Imported images
-import featuredImage from "@/assets/images/blog/19362653.jpg";
-import featuredImage1 from "@/assets/images/blog/971.jpg";
-import devopsImg from "@/assets/images/blog/7046558.jpg";
-import aiUxImg from "@/assets/images/blog/5785419.jpg";
-import productivityImg from "@/assets/images/blog/20944170.jpg";
-import apiImg from "@/assets/images/blog/6505016.jpg";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
 };
 
-const featuredPost = {
-  slug: "future-of-web-development-2025",
-  title: "The Future of Web Development: Trends to Watch in 2025",
-  excerpt: "Discover the emerging technologies and frameworks shaping the future of web development, from AI-driven tools to edge computing.",
-  author: "Aamila Khan",
-  date: "January 15, 2025",
-  category: "Technology",
-  image: featuredImage, 
-};
+export default async function BlogPage() {
+  const posts = await prisma.blogPost.findMany({
+    where: { status: "PUBLISHED" },
+    orderBy: { publishedAt: "desc" },
+    take: 6,
+  });
 
-const posts = [
-  {
-    id: 1,
-    title: "Building Scalable AI Solutions for Enterprise Applications",
-    excerpt: "Learn how to design and implement AI-powered features that scale seamlessly across large enterprise environments.",
-    author: "Usman Tariq",
-    date: "January 8, 2025",
-    category: "AI/ML",
-    image: featuredImage1,
-    slug: "building-scalable-ai-solutions",
-  },
-  {
-    id: 2,
-    title: "Cloud-Native DevOps Strategies for Modern Teams",
-    excerpt: "Explore best practices for implementing cloud-native DevOps workflows that accelerate delivery and improve reliability.",
-    author: "Bilal Ahmed",
-    date: "December 20, 2024",
-    category: "Cloud",
-    image: devopsImg,
-    slug: "cloud-native-devops-strategies",
-  },
-  {
-    id: 3,
-    title: "Designing for AI Interfaces: UX Best Practices",
-    excerpt: "A comprehensive guide to designing intuitive, user-centered interfaces for AI-powered applications.",
-    author: "Sarah Ahmed",
-    date: "December 10, 2024",
-    category: "Design",
-    image: aiUxImg,
-    slug: "designing-for-ai-interfaces",
-  },
-  {
-    id: 4,
-    title: "Top 10 Productivity Hacks for Developers in 2025",
-    excerpt: "Practical tips and tools to help developers code smarter, not harder, and boost daily productivity.",
-    author: "Waseem Ahmad",
-    date: "November 28, 2024",
-    category: "Productivity",
-    image: productivityImg,
-    slug: "productivity-hacks-2025",
-  },
-  {
-    id: 5,
-    title: "API Performance Optimization: Advanced Techniques",
-    excerpt: "Deep dive into request optimization, caching strategies, and performance tuning for modern APIs.",
-    author: "Ahmed Hassan",
-    date: "November 15, 2024",
-    category: "Development",
-    image: apiImg,
-    slug: "api-performance-optimization",
-  },
-];
+  const allPublishedPosts = await prisma.blogPost.findMany({
+    where: { status: "PUBLISHED" },
+    select: { category: true },
+  });
 
-export default function BlogPage() {
+  const categoryCounts = allPublishedPosts.reduce((acc, post) => {
+    acc[post.category] = (acc[post.category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const categories = Object.entries(categoryCounts).map(([name, count]) => ({ name, count }));
+
+  const recentPosts = posts.slice(0, 4).map((post) => ({
+    title: post.title,
+    slug: post.slug,
+  }));
+
+  const featuredPost = posts[0];
+  const remainingPosts = posts.slice(1);
+
+  const formattedFeatured = featuredPost ? {
+    slug: featuredPost.slug,
+    title: featuredPost.title,
+    excerpt: featuredPost.excerpt,
+    author: featuredPost.author,
+    date: featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
+    category: featuredPost.category,
+    image: featuredPost.image || "/placeholder.jpg",
+  } : null;
+
+  const formattedPosts = remainingPosts.map((post) => ({
+    id: Number(post.id.slice(-4)),
+    title: post.title,
+    excerpt: post.excerpt,
+    author: post.author,
+    date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
+    category: post.category,
+    image: post.image || "/placeholder.jpg",
+    slug: post.slug,
+  }));
+
   return (
     <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <BlogHero />
-        
-        {/* Featured Article */}
-        <section className="py-12 bg-background transition-colors">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <span className="text-primary font-semibold tracking-wider text-sm">Featured Article</span>
+
+        {formattedFeatured && (
+          <section className="py-12 bg-background transition-colors">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="mb-8">
+                <span className="text-primary font-semibold tracking-wider text-sm">Featured Article</span>
+              </div>
+              <FeaturedArticle
+                slug={formattedFeatured.slug}
+                title={formattedFeatured.title}
+                excerpt={formattedFeatured.excerpt}
+                author={formattedFeatured.author}
+                date={formattedFeatured.date}
+                category={formattedFeatured.category}
+                image={formattedFeatured.image}
+              />
             </div>
-            <FeaturedArticle
-              slug={featuredPost.slug}
-              title={featuredPost.title}
-              excerpt={featuredPost.excerpt}
-              author={featuredPost.author}
-              date={featuredPost.date}
-              category={featuredPost.category}
-              image={featuredPost.image}
-            />
-          </div>
-        </section>
-        
-        {/* Blog Grid with Sidebar */}
+          </section>
+        )}
+
         <section className="py-24 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
-              <span className="text-primary font-semibold tracking-wider text-sm m  b-10">All Articles</span>
+            <span className="text-primary font-semibold tracking-wider text-sm mb-10">All Articles</span>
             <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
-              <BlogSidebar />
+              <BlogSidebar categories={categories} recentPosts={recentPosts} />
               <div>
-                <BlogGrid posts={posts} />
+                <BlogGrid posts={formattedPosts} />
               </div>
             </div>
           </div>
         </section>
-        
+
         <BlogCta />
       </main>
     </div>

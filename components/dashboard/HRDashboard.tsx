@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   BarChart3,
@@ -10,11 +8,25 @@ import {
   Users,
 } from "lucide-react";
 import { DashboardStatCard } from "@/components/dashboard/DashboardStatCard";
+import { prisma } from "@/lib/prisma/prisma";
 
-export const HRDashboard = () => {
+export const HRDashboard = async () => {
+  const [appCount, interviewCount, shortlistedCount, openRolesCount] = await Promise.all([
+    prisma.application.count(),
+    prisma.application.count({ where: { status: "interview" } }),
+    prisma.application.count({ where: { status: "reviewed" } }),
+    prisma.jobOpening.count({ where: { status: "PUBLISHED" } }),
+  ]);
+
+  const stats = [
+    { label: "Applications", value: String(appCount), note: "total submissions", icon: <Briefcase className="h-5 w-5" />, color: "bg-emerald-500" },
+    { label: "Interviews", value: String(interviewCount), note: "scheduled", icon: <Clock className="h-5 w-5" />, color: "bg-amber-500" },
+    { label: "Shortlisted", value: String(shortlistedCount), note: "awaiting feedback", icon: <CheckCircle className="h-5 w-5" />, color: "bg-blue-500" },
+    { label: "Open Roles", value: String(openRolesCount), note: "active careers", icon: <FileText className="h-5 w-5" />, color: "bg-pink-500" },
+  ];
+
   return (
     <div className="p-6 lg:p-8">
-      {/* Welcome Banner */}
       <section className="mb-8 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -36,39 +48,19 @@ export const HRDashboard = () => {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-        <DashboardStatCard
-          label="Applications"
-          value="42"
-          note="12 new this week"
-          icon={<Briefcase className="h-5 w-5" />}
-          color="bg-emerald-500"
-        />
-        <DashboardStatCard
-          label="Interviews"
-          value="7"
-          note="scheduled"
-          icon={<Clock className="h-5 w-5" />}
-          color="bg-amber-500"
-        />
-        <DashboardStatCard
-          label="Shortlisted"
-          value="9"
-          note="awaiting feedback"
-          icon={<CheckCircle className="h-5 w-5" />}
-          color="bg-blue-500"
-        />
-        <DashboardStatCard
-          label="Open Roles"
-          value="5"
-          note="active careers"
-          icon={<FileText className="h-5 w-5" />}
-          color="bg-pink-500"
-        />
+        {stats.map((stat) => (
+          <DashboardStatCard
+            key={stat.label}
+            label={stat.label}
+            value={stat.value}
+            note={stat.note}
+            icon={stat.icon}
+            color={stat.color}
+          />
+        ))}
       </section>
 
-      {/* Actions + Focus */}
       <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
           <div className="flex items-center justify-between gap-3 mb-5">
@@ -86,14 +78,14 @@ export const HRDashboard = () => {
               <h3 className="text-sm font-semibold text-gray-950 dark:text-white">View Applications</h3>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Screen candidate submissions</p>
             </Link>
-            <Link href="#" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+            <Link href="/careers" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
               <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
                 <FileText className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Careers Content</h3>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Update open roles and hiring copy</p>
             </Link>
-            <Link href="#" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+            <Link href="/myteam" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
               <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
                 <Users className="h-5 w-5" />
               </div>
@@ -107,9 +99,9 @@ export const HRDashboard = () => {
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">HR Priorities</h2>
           <div className="mt-5 space-y-3">
             {[
-              { label: "Screen UI/UX Designer applicants", meta: "12 profiles", status: "New" },
-              { label: "Send interview slots", meta: "Engineering candidates", status: "Today" },
-              { label: "Update remote policy note", meta: "Careers page", status: "Draft" },
+              { label: "Screen pending applications", meta: "Hiring queue", status: "New" },
+              { label: "Update open job listings", meta: "Careers page", status: "Today" },
+              { label: "Review team directory", meta: "Team management", status: "Draft" },
             ].map((item) => (
               <div key={item.label} className="rounded-xl bg-gray-50 dark:bg-slate-900 p-4">
                 <div className="flex items-start justify-between gap-3">

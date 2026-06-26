@@ -1,10 +1,13 @@
-const technologies = [
-  "React", "TypeScript", "Next.js", "TanStack", "Node.js", "Python",
-  "Supabase", "AWS", "GCP", "Docker", "Kubernetes",
-  "Tailwind", "Figma", "OpenAI", "LangChain",
-];
+interface TechnologyItem {
+  id: string;
+  name: string;
+}
 
-export const Technologies = () => {
+interface TechnologiesProps {
+  technologies: TechnologyItem[];
+}
+
+export const Technologies = ({ technologies }: TechnologiesProps) => {
   return (
     <section className="border-y border-border bg-background dark:bg-dark py-20 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
@@ -20,12 +23,12 @@ export const Technologies = () => {
           </p>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {technologies.map((t, i) => (
+          {technologies.map((t) => (
             <span
-              key={t}
+              key={t.id}
               className="px-5 py-2.5 rounded-full glass-effect border-border text-sm font-semibold text-foreground hover:bg-muted/50 hover:-translate-y-0.5 transition-all"
             >
-              {t}
+              {t.name}
             </span>
           ))}
         </div>

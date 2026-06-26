@@ -1,63 +1,46 @@
 import { Star } from "lucide-react";
 
-export const Testimonials = () => {
-  const items = [
-    {
-      quote: "CloudWent transformed our idea into a powerful platform. Their technical expertise and communication are exceptional.",
-      name: "James Carter",
-      role: "CTO, EduSmart",
-    },
-    {
-      quote: "The team is professional, responsive and truly invested in our success. Highly recommended!",
-      name: "Sarah Johnson",
-      role: "Head of Operations, LearnHub",
-    },
-    {
-      quote: "Reliable, innovative and a great partner for our digital journey. We're extremely satisfied.",
-      name: "Michael Brown",
-      role: "CEO, FinTrack",
-    },
-  ];
+interface TestimonialItem {
+  id: string;
+  content: string;
+  name: string;
+  role: string;
+  rating: number;
+}
 
+interface TestimonialsProps {
+  testimonials: TestimonialItem[];
+}
+
+export const Testimonials = ({ testimonials }: TestimonialsProps) => {
   return (
     <section className="relative overflow-hidden py-24 transition-colors">
-      {/* Light Mode Gradient (Bilkul Hero jaisa) */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
-      
-      {/* Dark Mode Gradient (Bilkul Hero jaisa) */}
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header */}
         <p className="text-xs font-bold tracking-[0.2em] text-primary mb-10">
           WHAT OUR CLIENTS SAY
         </p>
 
-        {/* Cards Grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {items.map((item, i) => (
+          {testimonials.map((item) => (
             <div
-              key={i}
+              key={item.id}
               className="glass-effect border-border rounded-2xl p-6 transition"
             >
-              {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <Star key={j} className={`w-4 h-4 ${j < item.rating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`} />
                 ))}
               </div>
 
-              {/* Quote */}
               <p className="text-foreground leading-relaxed">
-                "{item.quote}"
+                "{item.content}"
               </p>
 
-              {/* Author */}
               <div className="flex items-center gap-3 mt-6 pt-5 border-t border-border">
-                {/* Avatar Placeholder */}
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-300 to-purple-500" />
-                
                 <div>
                   <div className="font-bold text-sm text-foreground">
                     {item.name}

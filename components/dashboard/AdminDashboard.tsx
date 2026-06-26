@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   Activity,
@@ -12,11 +10,25 @@ import {
   Users,
 } from "lucide-react";
 import { DashboardStatCard } from "@/components/dashboard/DashboardStatCard";
+import { prisma } from "@/lib/prisma/prisma";
 
-export const AdminDashboard = () => {
+export const AdminDashboard = async () => {
+  const [userCount, contactCount, projectCount, appCount] = await Promise.all([
+    prisma.user.count(),
+    prisma.contact.count(),
+    prisma.project.count(),
+    prisma.application.count(),
+  ]);
+
+  const stats = [
+    { label: "Total Users", value: String(userCount), note: "registered accounts", icon: <Users className="h-5 w-5" />, color: "bg-blue-500" },
+    { label: "Open Leads", value: String(contactCount), note: "contact inquiries", icon: <MessageSquare className="h-5 w-5" />, color: "bg-emerald-500" },
+    { label: "Projects", value: String(projectCount), note: "in portfolio", icon: <FolderKanban className="h-5 w-5" />, color: "bg-violet-500" },
+    { label: "Applications", value: String(appCount), note: "job submissions", icon: <Briefcase className="h-5 w-5" />, color: "bg-cyan-500" },
+  ];
+
   return (
     <div className="p-6 lg:p-8">
-      {/* Welcome Banner */}
       <section className="mb-8 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -38,39 +50,19 @@ export const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-        <DashboardStatCard
-          label="Total Users"
-          value="24"
-          note="3 roles active"
-          icon={<Users className="h-5 w-5" />}
-          color="bg-blue-500"
-        />
-        <DashboardStatCard
-          label="Open Leads"
-          value="18"
-          note="6 need review"
-          icon={<MessageSquare className="h-5 w-5" />}
-          color="bg-emerald-500"
-        />
-        <DashboardStatCard
-          label="Projects"
-          value="32"
-          note="8 in progress"
-          icon={<FolderKanban className="h-5 w-5" />}
-          color="bg-violet-500"
-        />
-        <DashboardStatCard
-          label="System Health"
-          value="99.9%"
-          note="stable"
-          icon={<Activity className="h-5 w-5" />}
-          color="bg-cyan-500"
-        />
+        {stats.map((stat) => (
+          <DashboardStatCard
+            key={stat.label}
+            label={stat.label}
+            value={stat.value}
+            note={stat.note}
+            icon={stat.icon}
+            color={stat.color}
+          />
+        ))}
       </section>
 
-      {/* Actions + Focus */}
       <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
           <div className="flex items-center justify-between gap-3 mb-5">
@@ -95,12 +87,12 @@ export const AdminDashboard = () => {
               <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Review Applications</h3>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">See all job applications</p>
             </Link>
-            <Link href="#" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+            <Link href="/services" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
               <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
                 <Settings className="h-5 w-5" />
               </div>
-              <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Website Settings</h3>
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Update global business settings</p>
+              <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Website Services</h3>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Update services and offerings</p>
             </Link>
           </div>
         </div>
@@ -109,9 +101,9 @@ export const AdminDashboard = () => {
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Admin Priorities</h2>
           <div className="mt-5 space-y-3">
             {[
-              { label: "Approve new HR access", meta: "Security queue", status: "Pending" },
-              { label: "Publish June case study", meta: "Portfolio", status: "Ready" },
-              { label: "Review analytics report", meta: "Traffic summary", status: "Today" },
+              { label: "Review new applications", meta: "Hiring queue", status: "Pending" },
+              { label: "Check contact inquiries", meta: "Leads", status: "Today" },
+              { label: "Update portfolio projects", meta: "Content", status: "Ready" },
             ].map((item) => (
               <div key={item.label} className="rounded-xl bg-gray-50 dark:bg-slate-900 p-4">
                 <div className="flex items-start justify-between gap-3">

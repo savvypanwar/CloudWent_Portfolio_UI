@@ -4,13 +4,18 @@ import { Button } from "@/components/ui/Button/Button";
 import Image from "next/image";
 import heroImg from "@/assets/images/hero-cloud.png";
 
-export const Testimonials = () => {
-  const quotes = [
-    { name: "James Carter", role: "CTO, EduSmart", text: "CloudWent transformed our idea into a powerful platform. Their technical expertise and communication are exceptional." },
-    { name: "Sarah Johnson", role: "Head of Operations, LearnHub", text: "The team is professional, responsive and truly invested in our success. Highly recommended!" },
-    { name: "Michael Brown", role: "CEO, FinTrack", text: "Reliable, innovative and a great partner for our digital journey. We're extremely satisfied." },
-  ];
+interface TestimonialItem {
+  id: string;
+  content: string;
+  name: string;
+  role: string;
+}
 
+interface TestimonialsProps {
+  testimonials: TestimonialItem[];
+}
+
+export const Testimonials = ({ testimonials }: TestimonialsProps) => {
   return (
     <section className="max-w-7xl mx-auto px-6 pb-20">
       <div className="flex items-center justify-between mb-8">
@@ -19,13 +24,13 @@ export const Testimonials = () => {
       <div className="grid lg:grid-cols-[2fr_1fr] gap-6 items-stretch">
         <div className="relative">
           <div className="grid md:grid-cols-3 gap-4">
-            {quotes.map((q, i) => (
+            {testimonials.map((q) => (
               <div
-                key={q.name}
+                key={q.id}
                 className="rounded-2xl border border-border bg-background p-6 hover-lift"
               >
                 <Quote className="w-7 h-7 text-primary/30" />
-                <p className="mt-3 text-sm text-foreground leading-relaxed">"{q.text}"</p>
+                <p className="mt-3 text-sm text-foreground leading-relaxed">"{q.content}"</p>
                 <div className="flex items-center gap-3 mt-5">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
                   <div>
@@ -52,7 +57,6 @@ export const Testimonials = () => {
             Have a project in mind? We'd love to hear from you and explore how we can help.
           </p>
           
-          {/* ✅ Updated Button */}
           <Button asChild variant="primary" size="md" className="mt-6 shadow-md hover:opacity-90 transition">
             <Link href="/contact">
               Start a Project <ArrowRight className="w-4 h-4" />

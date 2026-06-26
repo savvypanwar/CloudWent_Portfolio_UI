@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FiLinkedin, FiTwitter, FiGithub } from "react-icons/fi";
@@ -41,10 +42,20 @@ export const Team = ({ members }: TeamProps) => {
                 href={`/team/${member.slug}`}
                 className="glass-effect border-border rounded-2xl p-4 text-center hover:shadow-lg transition block"
               >
-                <div
-                  className={`w-full aspect-square rounded-xl bg-gradient-to-br ${member.color} mb-3 grid place-items-center text-3xl font-bold text-white/90`}
-                >
-                  {member.initials}
+                <div className="w-full aspect-square rounded-xl overflow-hidden mb-3">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={200}
+                      height={200}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${member.color} grid place-items-center text-3xl font-bold text-white/90`}>
+                      {member.initials}
+                    </div>
+                  )}
                 </div>
 
                 <h3 className="font-bold text-sm text-foreground">

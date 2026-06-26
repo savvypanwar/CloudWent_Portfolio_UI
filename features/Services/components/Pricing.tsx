@@ -2,37 +2,22 @@ import Link from "next/link";
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
-const plans = [
-  {
-    name: "Starter",
-    price: "₹4,900",
-    sub: "/ project",
-    desc: "For landing pages, MVPs and small marketing sites.",
-    features: ["Up to 6 pages", "CMS integration", "Responsive design", "Basic SEO", "2 weeks delivery"],
-    cta: "Start small",
-    featured: false,
-  },
-  {
-    name: "Growth",
-    price: "₹14,900",
-    sub: "/ project",
-    desc: "For SaaS dashboards, web apps and production launches.",
-    features: ["Custom web app", "Auth & payments", "API + database", "Analytics & SEO", "6–8 weeks delivery"],
-    cta: "Most popular",
-    featured: true,
-  },
-  {
-    name: "Scale",
-    price: "Custom",
-    sub: "",
-    desc: "For multi-product platforms, AI features and enterprise needs.",
-    features: ["Dedicated squad", "Cloud architecture", "AI integrations", "SLA + on-call", "Quarterly roadmaps"],
-    cta: "Talk to us",
-    featured: false,
-  },
-];
+interface PricingPlan {
+  id: string;
+  name: string;
+  price: string;
+  sub?: string | null;
+  description: string;
+  features: string[];
+  cta: string;
+  featured: boolean;
+}
 
-export const Pricing = () => {
+interface PricingProps {
+  plans: PricingPlan[];
+}
+
+export const Pricing = ({ plans }: PricingProps) => {
   return (
     <section id="pricing" className="py-24 border-y border-border bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
@@ -49,9 +34,9 @@ export const Pricing = () => {
         </div>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {plans.map((p, i) => (
+          {plans.map((p) => (
             <div
-              key={p.name}
+              key={p.id}
               className={
                 "relative rounded-2xl p-8 border transition-all hover:-translate-y-1 " +
                 (p.featured
@@ -67,9 +52,9 @@ export const Pricing = () => {
               <h3 className="font-bold text-lg text-foreground">{p.name}</h3>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="text-4xl font-extrabold text-foreground">{p.price}</span>
-                <span className="text-sm text-muted-foreground">{p.sub}</span>
+                <span className="text-sm text-muted-foreground">{p.sub || ""}</span>
               </div>
-              <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{p.description}</p>
               <ul className="mt-6 space-y-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
@@ -78,17 +63,18 @@ export const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <Button asChild variant={p.featured ? "primary" : "outline"} size="md" className="mt-8 w-full justify-center shadow-md">
+              <Button
+                asChild
+                variant={p.featured ? "primary" : "outline"}
+                size="md"
+                className="mt-8 w-full"
+              >
                 <Link href="/contact">
                   {p.cta} <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
             </div>
           ))}
-        </div>
-
-        <div className="mt-10 text-center text-sm text-muted-foreground inline-flex items-center gap-2 justify-center w-full">
-          <ShieldCheck className="w-4 h-4 text-primary" /> All plans include NDA, source code ownership, and 30 days of post-launch support.
         </div>
       </div>
     </section>

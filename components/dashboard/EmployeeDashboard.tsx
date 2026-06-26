@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   BarChart3,
@@ -10,11 +8,24 @@ import {
   UserCog,
 } from "lucide-react";
 import { DashboardStatCard } from "@/components/dashboard/DashboardStatCard";
+import { prisma } from "@/lib/prisma/prisma";
 
-export const EmployeeDashboard = () => {
+export const EmployeeDashboard = async () => {
+  const [projectCount, blogCount, serviceCount] = await Promise.all([
+    prisma.project.count(),
+    prisma.blogPost.count(),
+    prisma.service.count(),
+  ]);
+
+  const stats = [
+    { label: "My Tasks", value: "—", note: "3 due today", icon: <CheckCircle className="h-5 w-5" />, color: "bg-blue-500" },
+    { label: "Messages", value: "—", note: "2 unread", icon: <MessageSquare className="h-5 w-5" />, color: "bg-emerald-500" },
+    { label: "Assigned Projects", value: String(projectCount), note: "active", icon: <FolderKanban className="h-5 w-5" />, color: "bg-violet-500" },
+    { label: "Profile", value: "90%", note: "almost complete", icon: <ShieldCheck className="h-5 w-5" />, color: "bg-orange-500" },
+  ];
+
   return (
     <div className="p-6 lg:p-8">
-      {/* Welcome Banner */}
       <section className="mb-8 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -36,39 +47,19 @@ export const EmployeeDashboard = () => {
         </div>
       </section>
 
-      {/* Stats */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-        <DashboardStatCard
-          label="My Tasks"
-          value="8"
-          note="3 due today"
-          icon={<CheckCircle className="h-5 w-5" />}
-          color="bg-blue-500"
-        />
-        <DashboardStatCard
-          label="Messages"
-          value="5"
-          note="2 unread"
-          icon={<MessageSquare className="h-5 w-5" />}
-          color="bg-emerald-500"
-        />
-        <DashboardStatCard
-          label="Assigned Projects"
-          value="3"
-          note="active"
-          icon={<FolderKanban className="h-5 w-5" />}
-          color="bg-violet-500"
-        />
-        <DashboardStatCard
-          label="Profile"
-          value="90%"
-          note="almost complete"
-          icon={<ShieldCheck className="h-5 w-5" />}
-          color="bg-orange-500"
-        />
+        {stats.map((stat) => (
+          <DashboardStatCard
+            key={stat.label}
+            label={stat.label}
+            value={stat.value}
+            note={stat.note}
+            icon={stat.icon}
+            color={stat.color}
+          />
+        ))}
       </section>
 
-      {/* Actions + Focus */}
       <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 rounded-2xl bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 p-6">
           <div className="flex items-center justify-between gap-3 mb-5">
@@ -86,14 +77,14 @@ export const EmployeeDashboard = () => {
               <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Open Profile</h3>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Update your personal information</p>
             </Link>
-            <Link href="#" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+            <Link href="/portfolio" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
               <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
                 <FolderKanban className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-semibold text-gray-950 dark:text-white">My Projects</h3>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">View assigned project work</p>
             </Link>
-            <Link href="#" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+            <Link href="/blog" className="rounded-xl border border-gray-200 dark:border-slate-800 p-4 hover:border-blue-400 hover:shadow-sm transition-all">
               <div className="mb-4 inline-flex rounded-lg bg-gray-50 dark:bg-slate-900 p-3 text-blue-600 dark:text-blue-300">
                 <MessageSquare className="h-5 w-5" />
               </div>

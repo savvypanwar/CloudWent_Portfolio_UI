@@ -5,7 +5,8 @@ import {
   TeamStats,
   CTA,
 } from "@/features/team/components/";
-import { getTeamMembers, stats, teamSections } from "@/lib/team";
+import { getTeamMembers, teamSections } from "@/lib/team";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Our Team | CloudWent",
@@ -14,7 +15,15 @@ export const metadata = {
 };
 
 export default async function TeamPage() {
-  const teamMembers = await getTeamMembers();
+  const [teamMembers, stats] = await Promise.all([
+    getTeamMembers(),
+    prisma.siteStat.findMany({ where: { section: "about" }, orderBy: { order: "asc" } }),
+  ]);
+
+  const mappedStats = stats.map((s) => ({
+    value: s.value,
+    label: s.label,
+  }));
 
   return (
     <div className="min-h-screen bg-background flex flex-col transition-colors">
@@ -22,7 +31,7 @@ export default async function TeamPage() {
         <TeamHero />
 
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
-          <TeamStats stats={stats} />
+          <TeamStats stats={mappedStats} />
         </Section>
 
         <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">

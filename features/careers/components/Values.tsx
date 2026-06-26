@@ -1,13 +1,13 @@
-const valuesData = [
-  "Ship weekly, learn faster",
-  "Write things down",
-  "Bias for the user",
-  "Default to transparency",
-  "Disagree, decide, commit",
-  "Have fun on the way",
-];
+interface ValueItem {
+  id: string;
+  title: string;
+}
 
-export const Values = () => {
+interface ValuesProps {
+  values: ValueItem[];
+}
+
+export const Values = ({ values }: ValuesProps) => {
   return (
     <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
@@ -16,12 +16,12 @@ export const Values = () => {
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Values We Hire For</h2>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {valuesData.map((v, i) => (
+          {values.map((v) => (
             <span
-              key={v}
+              key={v.id}
               className="px-5 py-2.5 rounded-full glass-effect border-border text-sm font-semibold text-foreground hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
-              {v}
+              {v.title}
             </span>
           ))}
         </div>

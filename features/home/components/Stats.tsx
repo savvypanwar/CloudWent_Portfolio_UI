@@ -1,74 +1,55 @@
 import { Rocket, Users, ShieldCheck, Calendar } from "lucide-react";
 
-export const Stats = () => {
-  const stats = [
-    {
-      icon: Rocket,
-      value: "50+",
-      label: "Projects Delivered",
-      iconColor: "text-teal-400",
-      boxColor: "bg-teal-400/10",
-      borderColor: "border-teal-400/20",
-    },
-    {
-      icon: Users,
-      value: "20+",
-      label: "Happy Clients",
-      iconColor: "text-blue-400",
-      boxColor: "bg-blue-400/10",
-      borderColor: "border-blue-400/20",
-    },
-    {
-      icon: ShieldCheck,
-      value: "99.9%",
-      label: "Uptime & Reliability",
-      iconColor: "text-yellow-400",
-      boxColor: "bg-yellow-400/10",
-      borderColor: "border-yellow-400/20",
-    },
-    {
-      icon: Calendar,
-      value: "5+",
-      label: "Years of Experience",
-      iconColor: "text-lime-400",
-      boxColor: "bg-lime-400/10",
-      borderColor: "border-lime-400/20",
-    },
-  ];
+interface StatItem {
+  icon: string;
+  value: string;
+  label: string;
+  iconColor: string;
+  boxColor: string;
+  borderColor: string;
+}
 
+interface StatsProps {
+  stats: StatItem[];
+}
+
+const iconMap: Record<string, any> = {
+  rocket: Rocket,
+  users: Users,
+  shield: ShieldCheck,
+  calendar: Calendar,
+};
+
+export const Stats = ({ stats }: StatsProps) => {
   return (
     <section className="py-10 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Main Container */}
         <div className="relative overflow-hidden rounded-3xl bg-dark p-6 md:p-8 shadow-glow">
-          {/* Blue Glow on Left Side */}
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,oklch(0.6_0.2_260)_0%,transparent_50%)]" />
-
-          {/* Grid */}
           <div className="relative grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-4">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-              >
-                {/* Icon Box */}
+            {stats.map((stat, i) => {
+              const IconComponent = iconMap[stat.icon] || Rocket;
+              return (
                 <div
-                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor}`}
+                  key={i}
+                  className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
                 >
-                  <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor}`}
+                  >
+                    <IconComponent className={`h-5 w-5 ${stat.iconColor}`} />
+                  </div>
+                  <div className="flex flex-col items-center md:items-start">
+                    <span className="text-2xl font-bold text-white md:text-3xl">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs text-muted-foreground md:text-sm">
+                      {stat.label}
+                    </span>
+                  </div>
                 </div>
-
-                {/* Text Content */}
-                <div className="flex flex-col items-center md:items-start">
-                  <span className="text-2xl font-bold text-white md:text-3xl">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-muted-foreground md:text-sm">
-                    {stat.label}
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

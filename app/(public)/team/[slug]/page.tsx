@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
@@ -63,12 +64,22 @@ export default async function TeamMemberPage({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="space-y-5">
               <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-800 shadow-sm transition-colors">
-                <div
-                  className={`w-28 h-28 rounded-2xl bg-gradient-to-br ${member.color} mx-auto mb-5 flex items-center justify-center shadow-lg`}
-                >
-                  <span className="text-white text-3xl font-bold">
-                    {member.initials}
-                  </span>
+                <div className="w-28 h-28 rounded-2xl mx-auto mb-5 overflow-hidden shadow-lg">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={112}
+                      height={112}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center`}>
+                      <span className="text-white text-3xl font-bold">
+                        {member.initials}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="text-center mb-5">
                   <h1 className="text-xl font-extrabold text-gray-900 dark:text-white">
@@ -154,12 +165,22 @@ export default async function TeamMemberPage({
                         href={`/team/${m.slug}`}
                         className="flex items-center gap-3 group"
                       >
-                        <div
-                          className={`w-9 h-9 rounded-full bg-gradient-to-br ${m.color} flex items-center justify-center flex-shrink-0`}
-                        >
-                          <span className="text-white text-xs font-bold">
-                            {m.initials}
-                          </span>
+                        <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                          {m.image ? (
+                            <Image
+                              src={m.image}
+                              alt={m.name}
+                              width={36}
+                              height={36}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className={`w-full h-full bg-gradient-to-br ${m.color} flex items-center justify-center`}>
+                              <span className="text-white text-xs font-bold">
+                                {m.initials}
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

@@ -3,23 +3,22 @@
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 
-const categories = [
-  { name: "Technology", count: 12 },
-  { name: "AI/ML", count: 8 },
-  { name: "Cloud", count: 6 },
-  { name: "Design", count: 5 },
-  { name: "Productivity", count: 4 },
-  { name: "Development", count: 7 },
-];
+interface Category {
+  name: string;
+  count: number;
+}
 
-const recentPosts = [
-  { title: "The Future of Web Development", slug: "future-of-web-development-2025" },
-  { title: "Building Scalable AI Solutions", slug: "building-scalable-ai-solutions" },
-  { title: "Cloud-Native DevOps Strategies", slug: "cloud-native-devops-strategies" },
-  { title: "Designing for AI Interfaces", slug: "designing-for-ai-interfaces" },
-];
+interface RecentPost {
+  title: string;
+  slug: string;
+}
 
-export const BlogSidebar = () => {
+interface BlogSidebarProps {
+  categories: Category[];
+  recentPosts: RecentPost[];
+}
+
+export const BlogSidebar = ({ categories, recentPosts }: BlogSidebarProps) => {
   return (
     <div className="space-y-8 ">
       {/* Search */}

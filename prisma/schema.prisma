@@ -32,88 +32,87 @@ enum UserRole {
   user
 }
 
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  // Basic Info
   firstName String?
   lastName  String?
-  name       String?
+  name      String?
 
-  // Authentication
   email    String @unique
   password String?
 
   authProvider AuthProvider @default(EMAIL)
   providerId   String?
 
-  // Verification
-  emailVerified Boolean  @default(false)
-  emailOtp      String?
+  emailVerified  Boolean   @default(false)
+  emailOtp       String?
   emailOtpExpiry DateTime?
 
-  // Password Reset
   resetToken       String?
   resetTokenExpiry DateTime?
 
-  // Security
   role   UserRole   @default(USER)
   status UserStatus @default(PENDING_EMAIL_VERIFY)
 
-  loginAttempts Int @default(0)
+  loginAttempts Int       @default(0)
   lockedUntil   DateTime?
 
-  // Profile
-  phone      String?
-  avatar     String?
+  phone  String?
+  avatar String?
 
-
-  // Last Activity
   lastLoginAt DateTime?
   lastSeenAt  DateTime?
 
-  // Audit
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-model JobApplication {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
-  phone String?
-  coverLetter String?
-  resumeUrl String?
-  linkedin String?
-  portfolio String?
-  jobTitle String
-  status String @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model JobApplication {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String @unique
+  phone       String?
+  coverLetter String?
+  resumeUrl   String?
+  linkedin    String?
+  portfolio   String?
+  jobTitle    String
+  status      String @default("pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Contact {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
-  subject String
-  message String
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("new")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Application {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
-  phone String?
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String
+  phone       String?
   coverLetter String?
-  resumeUrl String?
-  linkedin String?
-  portfolio String?
-  status String @default("pending")
-  jobTitle String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  resumeUrl   String?
+  linkedin    String?
+  portfolio   String?
+  status      String @default("pending")
+  jobTitle    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model TeamMember {
@@ -124,6 +123,7 @@ model TeamMember {
   initials           String
   avatarColor        String
   bio                String?
+  image              String?
   location           String?
   experience         String?
   email              String?
@@ -132,7 +132,6 @@ model TeamMember {
   github             String?
   team               String
   order              Int      @default(0)
-  image              String?
   expertise          String[] @default([])
   skills             String[] @default([])
   experienceTimeline Json?
@@ -141,4 +140,166 @@ model TeamMember {
   certifications     String[] @default([])
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String        @unique
+  title       String
+  excerpt     String
+  content     String?
+  author      String
+  category    String
+  tags        String[]      @default([])
+  image       String?
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Project {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String        @unique
+  title       String
+  description String
+  category    String
+  tags        String[]      @default([])
+  image       String?
+  stack       String[]      @default([])
+  link        String?
+  status      PublishStatus @default(DRAFT)
+  order       Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Testimonial {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  role      String
+  company   String?
+  content   String
+  avatar    String?
+  rating    Int    @default(5)
+  featured  Boolean @default(false)
+  order     Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String @unique
+  name        String
+  description String
+  icon        String
+  color       String
+  features    String[] @default([])
+  techStack   String[] @default([])
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model JobOpening {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  slug         String        @unique
+  title        String
+  department   String
+  location     String
+  type         String
+  salary       String?
+  description  String
+  requirements String[]        @default([])
+  benefits     String[]        @default([])
+  status       PublishStatus @default(DRAFT)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Faq {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+  answer   String
+  category String @default("general")
+  order    Int    @default(0)
+  active   Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Technology {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String @unique
+  icon        String
+  category    String
+  description String?
+  order       Int    @default(0)
+  active      Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProcessStep {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  step        String
+  title       String
+  description String
+  icon        String
+  page        String
+  order       Int    @default(0)
+  active      Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Perk {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  icon        String
+  order       Int    @default(0)
+  active      Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CompanyValue {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  icon        String
+  order       Int    @default(0)
+  active      Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteStat {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  label     String
+  value     String
+  icon      String
+  section   String
+  order     Int    @default(0)
+  active    Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PricingPlan {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       String
+  sub         String?
+  description String
+  features    String[] @default([])
+  cta         String
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

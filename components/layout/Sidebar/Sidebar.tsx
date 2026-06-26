@@ -115,7 +115,7 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
             section: "Hiring",
             items: [
               { icon: Briefcase, label: "Applications", href: "/applications" },
-              { icon: FileText, label: "Careers", href: "/careers" },
+              { icon: FileText, label: "Careers", href: "/careersapplications" },
               { icon: Users, label: "Team Directory", href: "/myteam" },
             ],
           },

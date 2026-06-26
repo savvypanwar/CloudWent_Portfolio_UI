@@ -80,7 +80,7 @@ export default async function ApplicationsPage() {
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
-                        <Link href="#">
+                        <Link href={`/applications/${app.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
                         </Link>
                       </Button>

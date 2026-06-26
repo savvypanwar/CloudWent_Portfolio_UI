@@ -9,7 +9,7 @@ async function deleteServiceAction(formData: FormData) {
   "use server";
   const id = formData.get("id") as string;
   await prisma.service.delete({ where: { id } });
-  redirect("/services");
+  redirect("/allservices");
 }
 
 export default async function ServicesPage() {
@@ -27,7 +27,7 @@ export default async function ServicesPage() {
           </p>
         </div>
         <Button asChild variant="primary" size="sm" className="glass-effect shadow-md">
-          <Link href="#">
+          <Link href="/allservices/new">
             <Plus className="w-4 h-4 mr-2" /> Add Service
           </Link>
         </Button>
@@ -73,7 +73,7 @@ export default async function ServicesPage() {
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
-                        <Link href="#">
+                        <Link href={`/allservices/${service.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
                         </Link>
                       </Button>

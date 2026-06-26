@@ -50,7 +50,7 @@ export default async function UsersPage() {
           </p>
         </div>
         <Button asChild variant="primary" size="sm" className="glass-effect shadow-md">
-          <Link href="#">
+          <Link href="/users/new">
             <Plus className="w-4 h-4 mr-2" /> Add User
           </Link>
         </Button>
@@ -104,7 +104,7 @@ export default async function UsersPage() {
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
-                        <Link href="#">
+                        <Link href={`/users/${user.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
                         </Link>
                       </Button>

@@ -9,7 +9,7 @@ async function deleteJobAction(formData: FormData) {
   "use server";
   const id = formData.get("id") as string;
   await prisma.jobOpening.delete({ where: { id } });
-  redirect("/careers");
+  redirect("/careersapplications");
 }
 
 export default async function CareersPage() {
@@ -27,7 +27,7 @@ export default async function CareersPage() {
           </p>
         </div>
         <Button asChild variant="primary" size="sm" className="glass-effect shadow-md">
-          <Link href="#">
+          <Link href="/careersapplications/new">
             <Plus className="w-4 h-4 mr-2" /> Add Job
           </Link>
         </Button>
@@ -75,7 +75,7 @@ export default async function CareersPage() {
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
-                        <Link href="#">
+                        <Link href={`/careersapplications/${job.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />
                         </Link>
                       </Button>

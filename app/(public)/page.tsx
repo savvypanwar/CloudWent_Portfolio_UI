@@ -13,6 +13,11 @@ import {
 import { getTeamMembers } from "@/lib/team";
 import { prisma } from "@/lib/prisma/prisma";
 
+export const metadata = {
+  title: "CloudWent | Building Scalable Digital Solutions",
+  description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
+};
+
 export default async function HomePage() {
   const [teamPreview, stats, services, projects, testimonials, processSteps, benefits] = await Promise.all([
     getTeamMembers({ limit: 5 }),
@@ -76,7 +81,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <Hero />
         <TechnologyBar />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "CloudWent",
@@ -38,8 +38,9 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen bg-background text-foreground antialiased">
-        <main className="flex-grow">{children}</main>
-        <Toaster position="top-center" />
+        <Providers>
+          <main className="flex-grow">{children}</main>
+        </Providers>
       </body>
     </html>
   );

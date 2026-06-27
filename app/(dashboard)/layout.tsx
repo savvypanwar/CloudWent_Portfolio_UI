@@ -16,7 +16,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B]">
+    <div className="min-h-screen bg-background">
       <Sidebar name={user.name} role={user.role} />
       <div className="lg:ml-64">
         {children}

@@ -30,11 +30,11 @@ export default async function TeamPage() {
       <main className="flex-grow">
         <TeamHero />
 
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
+        <Section variant="default" className="py-12 bg-background">
           <TeamStats stats={mappedStats} />
         </Section>
 
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
+        <Section variant="default" className="py-12 bg-background">
           <div className="max-w-7xl mx-auto">
             <div className="mt-8 ">
               {teamSections.map(({ key, label, subtitle }) => {
@@ -45,7 +45,6 @@ export default async function TeamPage() {
                     label={label}
                     subtitle={subtitle}
                     members={members}
-                    viewAllLink="/team"
                   />
                 );
               })}
@@ -53,7 +52,7 @@ export default async function TeamPage() {
           </div>
         </Section>
 
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
+        <Section variant="default" className="py-12 bg-background">
           <CTA />
         </Section>
       </main>

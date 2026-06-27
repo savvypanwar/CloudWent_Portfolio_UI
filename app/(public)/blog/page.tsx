@@ -86,7 +86,7 @@ export default async function BlogPage() {
 
         <section className="py-24 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-6">
-            <span className="text-primary font-semibold tracking-wider text-sm mb-10">All Articles</span>
+            <span className="text-primary font-semibold tracking-wider text-sm mb-10">Articles</span>
             <div className="grid lg:grid-cols-[1fr_3fr] gap-12">
               <BlogSidebar categories={categories} recentPosts={recentPosts} />
               <div>

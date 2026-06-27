@@ -23,7 +23,8 @@ import {
   Cloud,
   Calendar,
   ChevronDown,
-  LogOut, // ✅ Logout icon import kiya
+  BarChart3,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
@@ -88,20 +89,20 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
               { icon: FileText, label: "Blog Posts", href: "/addblog" },
               { icon: Briefcase, label: "Careers", href: "/careersapplications" },
               { icon: MessageSquare, label: "Testimonials", href: "/testimonials" },
-              { icon: Layers, label: "Technologies", href: "#" },
+              { icon: Layers, label: "Technologies", href: "/technologies" },
               { icon: Calendar, label: "Contact Inquiries", href: "/leads" },
-              { icon: Activity, label: "Newsletter", href: "#" },
+              { icon: Activity, label: "Newsletter", href: "/newsletter" },
             ],
           },
           {
             section: "Settings",
             items: [
-              { icon: Settings, label: "Website Settings", href: "#" },
-              { icon: Lock, label: "SEO Settings", href: "#" },
-              { icon: Activity, label: "Analytics", href: "#" },
-              { icon: Layers, label: "Roles & Permissions", href: "#" },
-              { icon: Activity, label: "Activity Logs", href: "#" },
-              { icon: CreditCard, label: "Backups", href: "#" },
+              { icon: Settings, label: "Website Settings", href: "/website-settings" },
+              { icon: Lock, label: "SEO Settings", href: "/seo-settings" },
+              { icon: BarChart3, label: "Analytics", href: "/analytics" },
+              { icon: ShieldCheck, label: "Roles & Permissions", href: "/roles-permissions" },
+              { icon: Activity, label: "Activity Logs", href: "/activity-logs" },
+              { icon: CreditCard, label: "Backups", href: "/backups" },
             ],
           },
         ]

@@ -1,5 +1,5 @@
 import { Users, MessageSquare, TrendingUp, Heart, Smile } from "lucide-react";
-import { FiInstagram } from "react-icons/fi";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button/Button";
 
@@ -25,7 +25,7 @@ export const Culture = () => {
             {/* ✅ Updated Button */}
             <Button asChild variant="outline" size="sm" className="mt-5 glass-effect border-border hover:bg-muted/50">
               <Link href="#">
-                <FiInstagram className="w-4 h-4" /> Life At CloudWent
+                <Instagram className="w-4 h-4" /> Life At CloudWent
               </Link>
             </Button>
           </div>

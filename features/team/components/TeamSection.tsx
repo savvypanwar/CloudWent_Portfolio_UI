@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Crown } from "lucide-react";
-import { FiLinkedin, FiTwitter, FiGithub } from "react-icons/fi";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 
 interface TeamSectionProps {
   label: string;
@@ -85,7 +85,7 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
                     aria-label={`${name} on LinkedIn`}
                     className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
                   >
-                    <FiLinkedin className="w-4 h-4" />
+                    <Linkedin className="w-4 h-4" />
                   </a>
                 ) : null}
                 {twitter ? (
@@ -96,7 +96,7 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
                     aria-label={`${name} on Twitter`}
                     className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
                   >
-                    <FiTwitter className="w-4 h-4" />
+                    <Twitter className="w-4 h-4" />
                   </a>
                 ) : null}
                 {github ? (
@@ -107,7 +107,7 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
                     aria-label={`${name} on GitHub`}
                     className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
                   >
-                    <FiGithub className="w-4 h-4" />
+                    <Github className="w-4 h-4" />
                   </a>
                 ) : null}
                 {!linkedin && !twitter && !github ? (

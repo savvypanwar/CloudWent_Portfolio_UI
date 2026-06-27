@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { FiLinkedin, FiTwitter, FiGithub, FiYoutube } from "react-icons/fi";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 import Logo from "@/components/common/Logo/Logo";
 
 export const Footer = () => {
@@ -52,7 +52,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="w-9 h-9 grid place-items-center rounded-full border-border hover:bg-muted hover:text-foreground transition"
             >
-              <FiLinkedin className="w-4 h-4" />
+              <Linkedin className="w-4 h-4" />
             </a>
             <a
               href="https://twitter.com/cloudwent"
@@ -60,7 +60,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="w-9 h-9 grid place-items-center rounded-full border-border hover:bg-muted hover:text-foreground transition"
             >
-              <FiTwitter className="w-4 h-4" />
+              <Twitter className="w-4 h-4" />
             </a>
             <a
               href="https://github.com/cloudwent"
@@ -68,7 +68,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="w-9 h-9 grid place-items-center rounded-full border-border hover:bg-muted hover:text-foreground transition"
             >
-              <FiGithub className="w-4 h-4" />
+              <Github className="w-4 h-4" />
             </a>
             <a
               href="mailto:info@cloudwent.com"
@@ -82,7 +82,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="w-9 h-9 grid place-items-center rounded-full border-border hover:bg-muted hover:text-foreground transition"
             >
-              <FiYoutube className="w-4 h-4" />
+              <Youtube className="w-4 h-4" />
             </a>
           </div>
         </div>

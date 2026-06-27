@@ -27,11 +27,11 @@ export default async function ContactPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-background flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <ContactHero />
         
-        <Section variant="default" className="py-12 bg-gray-50 dark:bg-background">
+        <Section variant="default" className="py-12 bg-background">
           <div className="mt-8 max-w-7xl mx-auto">
             <ContactForm />
           </div>

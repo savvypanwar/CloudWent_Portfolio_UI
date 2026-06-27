@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { FiLinkedin, FiTwitter, FiGithub } from "react-icons/fi";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 import { Button } from "@/components/ui/Button/Button";
 import type { TeamMemberProfile } from "@/lib/team";
 
@@ -56,13 +56,13 @@ export const Team = ({ members }: TeamProps) => {
                 <div className="text-xs text-muted-foreground">{member.role}</div>
                 <div className="flex justify-center gap-3 mt-3 text-muted-foreground">
                   {member.linkedin ? (
-                    <FiLinkedin className="w-4 h-4 hover:text-primary cursor-pointer" />
+                    <Linkedin className="w-4 h-4 hover:text-primary cursor-pointer" />
                   ) : null}
                   {member.twitter ? (
-                    <FiTwitter className="w-4 h-4 hover:text-primary cursor-pointer" />
+                    <Twitter className="w-4 h-4 hover:text-primary cursor-pointer" />
                   ) : null}
                   {member.github ? (
-                    <FiGithub className="w-4 h-4 hover:text-primary cursor-pointer" />
+                    <Github className="w-4 h-4 hover:text-primary cursor-pointer" />
                   ) : null}
                 </div>
               </div>

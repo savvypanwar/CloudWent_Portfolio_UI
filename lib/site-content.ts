@@ -129,7 +129,7 @@ export const blogContent = {
     { id: 4, title: "Top 10 Productivity Hacks for Developers in 2025", excerpt: "Practical tips and tools to help developers code smarter, not harder, and boost daily productivity.", author: "Waseem Ahmad", date: "November 28, 2024", category: "Productivity", image: "productivity", slug: "productivity-hacks-2025" },
     { id: 5, title: "API Performance Optimization: Advanced Techniques", excerpt: "Deep dive into request optimization, caching strategies, and performance tuning for modern APIs.", author: "Ahmed Hassan", date: "November 15, 2024", category: "Development", image: "api", slug: "api-performance-optimization" },
   ],
-  categories: ["All", "Technology", "AI/ML", "Cloud", "Design", "Development", "Productivity"],
+  categories: ["Technology", "AI/ML", "Cloud", "Design", "Development", "Productivity"],
 };
 
 export const contactContent = {

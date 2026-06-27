@@ -289,6 +289,63 @@ model SiteStat {
   updatedAt DateTime @updatedAt
 }
 
+model NewsletterSubscriber {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  email     String @unique
+  name      String?
+  status    String @default("active")
+  source    String @default("website")
+  tags      String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  action    String
+  entity    String
+  entityId  String?
+  userId    String?
+  userName  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model SeoSetting {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  page        String @unique
+  title       String?
+  description String?
+  keywords    String[] @default([])
+  ogImage     String?
+  canonical   String?
+  noIndex     Boolean @default(false)
+  schemaJson  String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model WebsiteSetting {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  key       String @unique
+  value     String
+  group     String @default("general")
+  label     String?
+  type      String @default("text")
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Backup {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  filePath  String
+  fileSize  Int    @default(0)
+  status    String @default("completed")
+  createdAt DateTime @default(now())
+}
+
 model PricingPlan {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String

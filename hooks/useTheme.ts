@@ -8,8 +8,7 @@ const getSystemTheme = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
 export const useTheme = () => {
-  const { theme, resolvedTheme, setTheme, toggleTheme, setResolvedTheme } =
-    useThemeStore();
+  const { theme, resolvedTheme, setTheme, toggleTheme } = useThemeStore();
 
   useEffect(() => {
     const applyTheme = () => {
@@ -29,7 +28,6 @@ export const useTheme = () => {
       const nextResolvedTheme =
         nextTheme === "system" ? getSystemTheme() : nextTheme;
 
-      setResolvedTheme(nextResolvedTheme);
       document.documentElement.classList.toggle(
         "dark",
         nextResolvedTheme === "dark"
@@ -46,7 +44,7 @@ export const useTheme = () => {
     mediaQuery.addEventListener("change", applyTheme);
 
     return () => mediaQuery.removeEventListener("change", applyTheme);
-  }, [theme, setTheme, setResolvedTheme]);
+  }, [theme, setTheme]);
 
   return { theme, resolvedTheme, setTheme, toggleTheme };
 };

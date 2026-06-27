@@ -8,7 +8,6 @@ export interface CategoriesProps {
 
 export const Categories = ({ activeCategory }: CategoriesProps) => {
   const categories = [
-    { name: "All", slug: "" },
     { name: "Technology", slug: "technology" },
     { name: "Productivity", slug: "productivity" },
     { name: "Development", slug: "development" },

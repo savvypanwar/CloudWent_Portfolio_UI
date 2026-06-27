@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { ImFacebook2, ImTwitter, ImInstagram, ImLinkedin } from "react-icons/im";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 
 export interface SocialLinksProps {
   className?: string;
@@ -22,10 +22,10 @@ export const SocialLinks = ({
   variant = "light",
 }: SocialLinksProps) => {
   const links = [
-    { href: "#", icon: ImFacebook2, label: "Facebook" },
-    { href: "#", icon: ImTwitter, label: "Twitter" },
-    { href: "#", icon: ImInstagram, label: "Instagram" },
-    { href: "#", icon: ImLinkedin, label: "LinkedIn" },
+    { href: "#", icon: Facebook, label: "Facebook" },
+    { href: "#", icon: Twitter, label: "Twitter" },
+    { href: "#", icon: Instagram, label: "Instagram" },
+    { href: "#", icon: Linkedin, label: "LinkedIn" },
   ];
 
   return (

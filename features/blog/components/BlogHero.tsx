@@ -36,7 +36,7 @@ export const BlogHero = () => {
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
                 <Link href="/blog">
-                  Browse All Posts <ArrowRight className="w-4 h-4" />
+                  Browse Posts <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">

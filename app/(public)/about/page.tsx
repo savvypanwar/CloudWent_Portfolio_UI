@@ -29,7 +29,7 @@ export default async function AboutPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow">
         <AboutHero />
         <MissionVision />

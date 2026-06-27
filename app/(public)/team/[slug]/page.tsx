@@ -11,7 +11,7 @@ import {
   Briefcase,
   ArrowRight,
 } from "lucide-react";
-import { FiLinkedin, FiTwitter, FiGithub } from "react-icons/fi";
+import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 
 import { getTeamMemberByIdentifier, getTeamMembers, getTeamSlugs } from "@/lib/team";
 
@@ -58,7 +58,7 @@ export default async function TeamMemberPage({
   const bioParagraphs = (member.bio ?? "").split("\n\n").filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0B101B] flex flex-col transition-colors">
+    <div className="min-h-screen bg-background flex flex-col transition-colors">
       <main className="flex-grow pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -95,7 +95,7 @@ export default async function TeamMemberPage({
                     { icon: MapPin, label: "Location", value: member.location },
                     { icon: Clock, label: "Experience", value: member.experience },
                     { icon: Mail, label: "Email", value: member.email },
-                    { icon: FiLinkedin, label: "LinkedIn", value: member.linkedin },
+                    { icon: Linkedin, label: "LinkedIn", value: member.linkedin },
                   ]
                     .filter((item) => item.value)
                     .map(({ icon: Icon, label, value }) => (
@@ -115,9 +115,9 @@ export default async function TeamMemberPage({
 
                 <div className="flex gap-2 justify-center pt-4 border-t border-gray-100 dark:border-slate-700">
                   {[
-                    { href: member.linkedin, Icon: FiLinkedin },
-                    { href: member.twitter, Icon: FiTwitter },
-                    { href: member.github, Icon: FiGithub },
+                    { href: member.linkedin, Icon: Linkedin },
+                    { href: member.twitter, Icon: Twitter },
+                    { href: member.github, Icon: Github },
                     { href: member.email ? `mailto:${member.email}` : undefined, Icon: Mail },
                   ]
                     .filter((item) => item.href)

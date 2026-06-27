@@ -13,7 +13,7 @@ export default function Error({
 
       <button
         onClick={() => reset()}
-        className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white"
+        className="mt-4 rounded-lg bg-primary px-4 py-2 text-primary-foreground"
       >
         Try Again
       </button>

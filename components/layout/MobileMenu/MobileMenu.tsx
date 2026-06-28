@@ -15,18 +15,18 @@ export const MobileMenu = ({ isOpen, onClose, navLinks }: MobileMenuProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="lg:hidden fixed inset-0 z-40 bg-white dark:bg-[#0B101B] animate-in fade-in slide-in-from-top-2">
+    <div className="lg:hidden fixed inset-0 z-40 bg-background dark:bg-[#0B101B] animate-in fade-in slide-in-from-top-2">
       <div className="flex justify-end p-6">
-        <button onClick={onClose} className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+        <button onClick={onClose} className="text-muted-foreground hover:text-primary">
           <X className="h-6 w-6" />
         </button>
       </div>
-      <nav className="flex flex-col gap-2 px-6 text-lg font-medium text-gray-700 dark:text-gray-200">
+      <nav className="flex flex-col gap-2 px-6 text-lg font-medium text-foreground dark:text-gray-200">
         {navLinks.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="py-3 border-b border-gray-100 dark:border-gray-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="py-3 border-b border-border dark:border-gray-800 hover:text-primary transition-colors"
             onClick={onClose}
           >
             {link.label}

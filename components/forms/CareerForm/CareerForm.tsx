@@ -70,7 +70,7 @@ export const CareerForm = () => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
             Full Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -83,7 +83,7 @@ export const CareerForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
             Email Address <span className="text-red-500">*</span>
           </label>
           <Input
@@ -99,7 +99,7 @@ export const CareerForm = () => {
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
           Phone Number <span className="text-red-500">*</span>
         </label>
         <Input
@@ -114,7 +114,7 @@ export const CareerForm = () => {
       </div>
 
       <div>
-        <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="position" className="block text-sm font-medium text-foreground mb-1">
           Position Applying For <span className="text-red-500">*</span>
         </label>
         <Select
@@ -134,7 +134,7 @@ export const CareerForm = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Resume / CV <span className="text-red-500">*</span>
         </label>
         <div className="mt-1 flex items-center gap-4">
@@ -152,14 +152,14 @@ export const CareerForm = () => {
             </Button>
           </div>
           {fileName && (
-            <span className="text-sm text-gray-600">{fileName}</span>
+            <span className="text-sm text-muted-foreground">{fileName}</span>
           )}
         </div>
-        <p className="text-xs text-gray-500 mt-1">Accepted: PDF, DOC, DOCX, TXT (Max 5MB)</p>
+        <p className="text-xs text-muted-foreground mt-1">Accepted: PDF, DOC, DOCX, TXT (Max 5MB)</p>
       </div>
 
       <div>
-        <label htmlFor="coverLetter" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="coverLetter" className="block text-sm font-medium text-foreground mb-1">
           Cover Letter
         </label>
         <Textarea
@@ -173,7 +173,7 @@ export const CareerForm = () => {
       </div>
 
       <div>
-        <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="linkedin" className="block text-sm font-medium text-foreground mb-1">
           LinkedIn Profile URL
         </label>
         <Input

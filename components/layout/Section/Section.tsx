@@ -12,7 +12,7 @@ export interface SectionProps {
 const variantClasses = {
   default: "bg-background", // Root color use kiya
   gray: "bg-surface",
-  dark: "bg-dark text-dark-foreground",
+  dark: "bg-dark text-foreground-foreground",
   gradient: "bg-gradient-to-r from-blue-600 to-indigo-700",
 };
 

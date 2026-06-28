@@ -17,15 +17,15 @@ export const NoData = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center py-12 px-4 text-center border border-dashed border-gray-200 rounded-lg",
+        "flex flex-col items-center justify-center py-12 px-4 text-center border border-dashed border-border rounded-lg",
         className
       )}
     >
-      <div className="mb-3 rounded-full bg-gray-50 p-3">
-        <FileX className="h-8 w-8 text-gray-400" />
+      <div className="mb-3 rounded-full bg-surface p-3">
+        <FileX className="h-8 w-8 text-muted-foreground" />
       </div>
-      <h4 className="text-sm font-semibold text-gray-700 mb-1">{title}</h4>
-      <p className="text-sm text-gray-500">{description}</p>
+      <h4 className="text-sm font-semibold text-foreground mb-1">{title}</h4>
+      <p className="text-sm text-muted-foreground">{description}</p>
     </div>
   );
 };

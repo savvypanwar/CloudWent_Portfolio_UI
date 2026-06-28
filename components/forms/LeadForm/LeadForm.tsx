@@ -49,7 +49,7 @@ export const LeadForm = () => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
             Full Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -62,7 +62,7 @@ export const LeadForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="company" className="block text-sm font-medium text-foreground mb-1">
             Company Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -78,7 +78,7 @@ export const LeadForm = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
             Email Address <span className="text-red-500">*</span>
           </label>
           <Input
@@ -92,7 +92,7 @@ export const LeadForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
             Phone Number
           </label>
           <Input
@@ -107,7 +107,7 @@ export const LeadForm = () => {
       </div>
 
       <div>
-        <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="service" className="block text-sm font-medium text-foreground mb-1">
           Service Interested In <span className="text-red-500">*</span>
         </label>
         <Select
@@ -128,7 +128,7 @@ export const LeadForm = () => {
       </div>
 
       <div>
-        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="budget" className="block text-sm font-medium text-foreground mb-1">
           Budget Range
         </label>
         <Select
@@ -147,7 +147,7 @@ export const LeadForm = () => {
       </div>
 
       <div>
-        <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="details" className="block text-sm font-medium text-foreground mb-1">
           Project Details <span className="text-red-500">*</span>
         </label>
         <Textarea
@@ -162,7 +162,7 @@ export const LeadForm = () => {
       </div>
 
       <div>
-        <label htmlFor="source" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="source" className="block text-sm font-medium text-foreground mb-1">
           How Did You Hear About Us?
         </label>
         <Select

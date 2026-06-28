@@ -23,7 +23,7 @@ const Sheet = forwardRef<
       <div
         ref={ref}
         className={cn(
-          "absolute bg-white shadow-xl p-6",
+          "absolute bg-background shadow-xl p-6",
           sideClasses[side],
           className
         )}

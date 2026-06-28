@@ -21,7 +21,7 @@ const Tooltip = forwardRef<
       <div
         ref={ref}
         className={cn(
-          "absolute z-50 whitespace-nowrap rounded-md bg-gray-900 px-3 py-1.5 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+          "absolute z-50 whitespace-nowrap rounded-md bg-gray-900 px-3 py-1.5 text-xs text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
           sideClasses[side],
           className
         )}

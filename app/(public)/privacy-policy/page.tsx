@@ -11,10 +11,10 @@ export default function PrivacyPolicyPage() {
       <main className="flex-grow">
         <Section className="py-24">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Privacy Policy
             </h1>
-            <div className="text-gray-600 space-y-4">
+            <div className="text-muted-foreground space-y-4">
               <p>
                 This Privacy Policy describes how CloudWent collects, uses, and shares your personal information when you visit our website or use our services.
               </p>

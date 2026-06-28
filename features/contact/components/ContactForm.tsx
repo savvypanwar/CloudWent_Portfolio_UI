@@ -41,10 +41,10 @@ export const ContactForm = () => {
   }
 
   // Input classes with dark mode support
-  const inputCls = "w-full bg-surface dark:bg-slate-800 border border-border dark:border-slate-700 rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground dark:placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition";
+  const inputCls = "w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition";
 
   const others = [
-    { icon: Mail, color: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400", title: "Email Us", desc: "Drop us an email anytime.", action: "hello@cloudwent.com" },
+    { icon: Mail, color: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-primary", title: "Email Us", desc: "Drop us an email anytime.", action: "hello@cloudwent.com" },
     { icon: Phone, color: "bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400", title: "Call Us", desc: "Mon – Fri, 9AM – 6PM (EST)", action: "+1 (630) 123-4567" },
     { icon: MessageSquare, color: "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400", title: "Live Chat", desc: "Chat with our team instantly.", action: "Start Live Chat →" },
     { icon: Building2, color: "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400", title: "Office", desc: "1520 Market St, Suite 1000\nSan Francisco, CA 94102, USA" },
@@ -60,10 +60,10 @@ export const ContactForm = () => {
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
       <div className="max-w-7xl mx-auto px-6">
         
-        <div className="bg-card dark:bg-slate-900 border border-border dark:border-slate-800 rounded-3xl shadow-card p-8 md:p-10 grid lg:grid-cols-[1.1fr_1fr] gap-10">
+        <div className="bg-card border border-border rounded-3xl shadow-card p-8 md:p-10 grid lg:grid-cols-[1.1fr_1fr] gap-10">
           <div>
-            <h2 className="text-3xl font-extrabold text-dark dark:text-white">Get In Touch</h2>
-            <p className="text-sm text-muted-foreground dark:text-slate-400 mt-2">Fill out the form and our team will get back to you shortly.</p>
+            <h2 className="text-3xl font-extrabold text-foreground">Get In Touch</h2>
+            <p className="text-sm text-muted-foreground mt-2">Fill out the form and our team will get back to you shortly.</p>
             {submitted && (
               <div className="mt-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 px-4 py-3 text-sm">
                 Thanks! Your message has been received. We'll be in touch within 24h.
@@ -72,11 +72,11 @@ export const ContactForm = () => {
             <form onSubmit={onSubmit} className="mt-6 grid sm:grid-cols-2 gap-4" noValidate>
               <div>
                 <input name="name" placeholder="Your Name" className={inputCls} maxLength={100} />
-                {errors.name && <p className="text-xs text-destructive dark:text-red-400 mt-1">{errors.name}</p>}
+                {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
               </div>
               <div>
                 <input name="email" type="email" placeholder="Your Email" className={inputCls} maxLength={255} />
-                {errors.email && <p className="text-xs text-destructive dark:text-red-400 mt-1">{errors.email}</p>}
+                {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
               </div>
               <input name="company" placeholder="Company Name" className={inputCls} maxLength={120} />
               <input name="phone" placeholder="Phone Number" className={inputCls} maxLength={30} />
@@ -90,33 +90,33 @@ export const ContactForm = () => {
                   <option>AI Solutions</option>
                   <option>Cloud & DevOps</option>
                 </select>
-                {errors.service && <p className="text-xs text-destructive dark:text-red-400 mt-1">{errors.service}</p>}
+                {errors.service && <p className="text-xs text-destructive mt-1">{errors.service}</p>}
               </div>
               <div className="sm:col-span-2">
                 <textarea name="message" rows={5} placeholder="Tell us about your project..." className={inputCls} maxLength={1000} />
-                {errors.message && <p className="text-xs text-destructive dark:text-red-400 mt-1">{errors.message}</p>}
+                {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
               </div>
               <button type="submit" className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-gradient-cta text-primary-foreground px-6 py-3.5 rounded-xl font-semibold shadow-glow hover:opacity-95 transition">
                 Send Message <ArrowRight className="w-4 h-4" />
                 </button>
-              <p className="sm:col-span-2 flex items-center justify-center gap-1.5 text-xs text-muted-foreground dark:text-slate-500">
+              <p className="sm:col-span-2 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
                 <Lock className="w-3 h-3" /> We respect your privacy. Your information is safe with us.
               </p>
             </form>
           </div>
 
           <div>
-            <h2 className="text-3xl font-extrabold text-dark dark:text-white">Other Ways to Connect</h2>
-            <p className="text-sm text-muted-foreground dark:text-slate-400 mt-2">Choose the way that works best for you.</p>
+            <h2 className="text-3xl font-extrabold text-foreground">Other Ways to Connect</h2>
+            <p className="text-sm text-muted-foreground mt-2">Choose the way that works best for you.</p>
             <div className="mt-6 grid sm:grid-cols-2 gap-4">
               {others.map(o => (
-                <div key={o.title} className="bg-surface dark:bg-slate-800 border border-border dark:border-slate-700 rounded-2xl p-5">
+                <div key={o.title} className="bg-surface border border-border rounded-2xl p-5">
                   <div className={`w-11 h-11 rounded-xl grid place-items-center ${o.color}`}>
                     <o.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-bold mt-3 dark:text-white">{o.title}</h3>
-                  <p className="text-xs text-muted-foreground dark:text-slate-400 mt-1 whitespace-pre-line">{o.desc}</p>
-                  {o.action && <p className="text-sm font-semibold text-primary dark:text-blue-400 mt-2">{o.action}</p>}
+                  <h3 className="font-bold mt-3 text-foreground">{o.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1 whitespace-pre-line">{o.desc}</p>
+                  {o.action && <p className="text-sm font-semibold text-primary mt-2">{o.action}</p>}
                 </div>
               ))}
             </div>

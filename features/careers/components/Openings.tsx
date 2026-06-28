@@ -17,7 +17,7 @@ interface OpeningsProps {
 }
 
 const defaultColors = [
-  "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+  "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-primary",
   "bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
   "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
   "bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-900/30 dark:text-fuchsia-400",

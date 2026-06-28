@@ -57,7 +57,7 @@ export default async function TestimonialsPage() {
                   <tr key={t.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-primary-foreground">
                           <MessageSquare className="w-4 h-4" />
                         </div>
                         <div>
@@ -69,7 +69,7 @@ export default async function TestimonialsPage() {
                     <td className="px-6 py-4 text-sm text-muted-foreground max-w-xs truncate">{t.content}</td>
                     <td className="px-6 py-4 text-sm text-foreground">{t.rating}/5</td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${t.featured ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" : "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300"}`}>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${t.featured ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" : "bg-surface text-foreground dark:bg-gray-900/30 dark:text-gray-300"}`}>
                         {t.featured ? "Yes" : "No"}
                       </span>
                     </td>

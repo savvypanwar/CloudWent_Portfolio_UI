@@ -85,7 +85,7 @@ export default async function TeamPage() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center text-white font-bold text-sm`}>
+                            <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center text-primary-foreground font-bold text-sm`}>
                               {member.initials}
                             </div>
                           )}

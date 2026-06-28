@@ -33,7 +33,7 @@ export const WhyChooseUs = ({ benefits }: WhyChooseUsProps) => {
               <span className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
                 Why Choose Us
               </span>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground dark:text-white">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
                 Built for Performance<br />and Scale
               </h2>
             </div>
@@ -46,14 +46,14 @@ export const WhyChooseUs = ({ benefits }: WhyChooseUsProps) => {
               const IconComponent = iconMap[benefit.icon] || Zap;
               return (
                 <FadeIn key={benefit.id} direction="up" delay={i * 0.1}>
-                  <div className="p-6 rounded-2xl glass-effect dark:bg-slate-800/60 dark:border-white/10 border-border hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div className="h-12 w-12 rounded-xl bg-primary/20 text-primary dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center mb-4">
+                  <div className="p-6 rounded-2xl glass-effect border-border hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div className="h-12 w-12 rounded-xl bg-primary/20 text-primary dark:bg-primary/20 dark:text-primary flex items-center justify-center mb-4">
                       <IconComponent className="h-6 w-6" />
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       {benefit.title}
                     </h3>
-                    <p className="text-muted-foreground dark:text-slate-300 text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {benefit.description}
                     </p>
                   </div>

@@ -64,7 +64,7 @@ export const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
           Full Name <span className="text-red-500">*</span>
         </label>
         <Input
@@ -78,7 +78,7 @@ export const RegisterForm = () => {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
           Email Address <span className="text-red-500">*</span>
         </label>
         <Input
@@ -93,7 +93,7 @@ export const RegisterForm = () => {
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
           Password <span className="text-red-500">*</span>
         </label>
         <Input
@@ -108,7 +108,7 @@ export const RegisterForm = () => {
       </div>
 
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-1">
           Confirm Password <span className="text-red-500">*</span>
         </label>
         <Input
@@ -132,7 +132,7 @@ export const RegisterForm = () => {
           checked={formData.terms}
           onChange={handleChange}
         />
-        <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+        <label htmlFor="terms" className="ml-2 text-sm text-muted-foreground">
           I agree to the{" "}
           <Link href="/terms" className="text-blue-600 hover:underline">
             Terms of Service
@@ -148,7 +148,7 @@ export const RegisterForm = () => {
         {isSubmitting ? "Creating account..." : "Create Account"}
       </Button>
 
-      <div className="text-center text-sm text-gray-600">
+      <div className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}
         <Link href="/login" className="text-blue-600 hover:underline">
           Sign in

@@ -28,9 +28,9 @@ export default async function UsersPage() {
 
   const roleColors: Record<string, string> = {
     admin: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
-    hr: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+    hr: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-primary",
     employee: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-    user: "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300",
+    user: "bg-surface text-foreground dark:bg-gray-900/30 dark:text-gray-300",
   };
 
   const statusColors: Record<string, string> = {
@@ -80,7 +80,7 @@ export default async function UsersPage() {
                   <tr key={user.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-primary-foreground font-bold text-sm">
                           <Users className="w-4 h-4" />
                         </div>
                         <div>

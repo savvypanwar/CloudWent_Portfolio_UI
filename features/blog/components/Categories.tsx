@@ -30,8 +30,8 @@ export const Categories = ({ activeCategory }: CategoriesProps) => {
             href={`/blog${category.slug ? `?category=${category.slug}` : ""}`}
             className={`text-sm px-4 py-2 rounded-full font-medium transition-all duration-200 ${
               isActive
-                ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-white"
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-surface text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             {category.name}

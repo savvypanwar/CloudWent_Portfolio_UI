@@ -23,13 +23,13 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(({ items, classNa
     >
       {items.map((item, index) => (
         <div key={index} className="flex items-center">
-          {index > 0 && <ChevronRight className="h-4 w-4 text-gray-400 mx-1" />}
+          {index > 0 && <ChevronRight className="h-4 w-4 text-muted-foreground mx-1" />}
           {item.href ? (
-            <a href={item.href} className="text-gray-500 hover:text-blue-600 transition-colors">
+            <a href={item.href} className="text-muted-foreground hover:text-primary transition-colors">
               {item.label}
             </a>
           ) : (
-            <span className="text-gray-900 font-medium">{item.label}</span>
+            <span className="text-foreground font-medium">{item.label}</span>
           )}
         </div>
       ))}

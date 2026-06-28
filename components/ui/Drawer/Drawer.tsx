@@ -21,7 +21,7 @@ const Drawer = forwardRef<
       <div
         ref={ref}
         className={cn(
-          "absolute top-0 h-full w-80 bg-white shadow-xl p-6",
+          "absolute top-0 h-full w-80 bg-background shadow-xl p-6",
           sideClasses[side],
           className
         )}

@@ -34,8 +34,8 @@ export const ErrorState = ({
       <div className="mb-4 rounded-full bg-red-50 p-4">
         {icon || <AlertTriangle className="h-12 w-12 text-red-500" />}
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-1">{title}</h3>
-      <p className="text-sm text-gray-500 max-w-sm mb-2">{description}</p>
+      <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
+      <p className="text-sm text-muted-foreground max-w-sm mb-2">{description}</p>
       {errorMessage && (
         <p className="text-xs text-red-500 bg-red-50 px-3 py-1.5 rounded-md mb-6 max-w-sm break-all">
           {errorMessage}

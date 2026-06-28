@@ -37,7 +37,7 @@ export const ContactForm = () => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
             Full Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -50,7 +50,7 @@ export const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
             Email Address <span className="text-red-500">*</span>
           </label>
           <Input
@@ -66,7 +66,7 @@ export const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
           Phone Number
         </label>
         <Input
@@ -80,7 +80,7 @@ export const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1">
           Subject <span className="text-red-500">*</span>
         </label>
         <Select
@@ -99,7 +99,7 @@ export const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
           Message <span className="text-red-500">*</span>
         </label>
         <Textarea

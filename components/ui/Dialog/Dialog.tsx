@@ -15,7 +15,7 @@ const Dialog = forwardRef<
       <div
         ref={ref}
         className={cn(
-          "relative max-w-lg w-full rounded-xl bg-white p-6 shadow-xl animate-in zoom-in-95 duration-200",
+          "relative max-w-lg w-full rounded-xl bg-background p-6 shadow-xl animate-in zoom-in-95 duration-200",
           className
         )}
         {...props}

@@ -11,9 +11,9 @@ export interface SocialLinksProps {
 }
 
 const variantClasses = {
-  light: "text-gray-400 hover:text-white",
-  dark: "text-gray-500 hover:text-blue-600",
-  primary: "text-white hover:text-blue-200",
+  light: "text-muted-foreground hover:text-primary-foreground",
+  dark: "text-muted-foreground hover:text-primary",
+  primary: "text-primary-foreground hover:text-blue-200",
 };
 
 export const SocialLinks = ({

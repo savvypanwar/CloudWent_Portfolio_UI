@@ -66,7 +66,7 @@ export default async function BackupsPage() {
                   <tr key={item.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center text-white">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center text-primary-foreground">
                           <Database className="w-4 h-4" />
                         </div>
                         <p className="font-medium text-foreground text-sm">{item.name}</p>

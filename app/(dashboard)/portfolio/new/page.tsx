@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
 import { Input } from "@/components/ui/Input/Input";
 import { Toast } from "@/services/toast.service";
+import { Upload, X } from "lucide-react";
 import {
   DashboardFormShell,
   dashboardInputClass,
@@ -16,6 +17,9 @@ import {
 export default function NewProjectPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     slug: "",
     title: "",
@@ -34,6 +38,54 @@ export default function NewProjectPage() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value;
+    setFormData((prev) => ({ ...prev, image: url }));
+    setImagePreview(url || null);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const toastId = Toast.loading("Uploading image...");
+
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.append("image", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadFormData,
+      });
+
+      const data = await res.json();
+      Toast.dismiss(toastId);
+
+      if (!res.ok || !data.success) {
+        Toast.error(data.error || "Failed to upload image");
+        setIsUploading(false);
+        return;
+      }
+
+      setFormData((prev) => ({ ...prev, image: data.url }));
+      setImagePreview(data.url);
+      Toast.success("Image uploaded successfully!");
+    } catch {
+      Toast.dismiss(toastId);
+      Toast.error("Upload failed. Please try again.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const clearImage = () => {
+    setFormData((prev) => ({ ...prev, image: "" }));
+    setImagePreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,8 +167,50 @@ export default function NewProjectPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Image URL</label>
-            <Input name="image" value={formData.image} onChange={handleChange} className={dashboardInputClass} />
+            <label className="block text-sm font-medium text-foreground mb-1.5">Image</label>
+            <div className="flex items-center gap-3">
+              <Input
+                name="image"
+                value={formData.image}
+                onChange={handleImageUrlChange}
+                placeholder="Image URL (or upload)"
+                className={dashboardInputClass}
+              />
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept="image/png,image/jpeg,image/jpg,image/webp"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isUploading}
+                className="flex-shrink-0"
+              >
+                <Upload className="w-4 h-4 mr-1" />
+                {isUploading ? "Uploading..." : "Upload"}
+              </Button>
+              {imagePreview && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={clearImage}
+                  className="flex-shrink-0 hover:bg-destructive/10 hover:text-destructive"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              )}
+            </div>
+            {imagePreview && (
+              <div className="mt-3 relative w-40 h-28 rounded-xl overflow-hidden border border-border">
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+              </div>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Order</label>
@@ -134,8 +228,8 @@ export default function NewProjectPage() {
         </div>
 
         <div className="flex justify-end gap-4 pt-4 border-t border-border">
-          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>Cancel</Button>
-          <Button type="submit" variant="primary" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save Project"}</Button>
+          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting || isUploading}>Cancel</Button>
+          <Button type="submit" variant="primary" disabled={isSubmitting || isUploading}>{isSubmitting ? "Saving..." : "Save Project"}</Button>
         </div>
       </form>
     </DashboardFormShell>

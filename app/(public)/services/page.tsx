@@ -20,7 +20,7 @@ export default async function ServicesPage() {
     prisma.service.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
     prisma.pricingPlan.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
     prisma.faq.findMany({ where: { category: "services" }, orderBy: { order: "asc" } }),
-    prisma.processStep.findMany({ where: { page: "home", active: true }, orderBy: { order: "asc" } }),
+    prisma.processStep.findMany({ where: { page: "services", active: true }, orderBy: { order: "asc" } }),
     prisma.technology.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
   ]);
 
@@ -30,8 +30,8 @@ export default async function ServicesPage() {
     description: s.description,
     icon: s.icon,
     features: s.features,
-    iconColor: s.color.split(" ").filter((token: string) => token.startsWith("text-") || token.startsWith("dark:text-")).join(" ") || "text-blue-600 dark:text-blue-400",
-    iconBg: s.color.split(" ").filter((token: string) => token.startsWith("bg-") || token.startsWith("dark:bg-")).join(" ") || "bg-blue-50 dark:bg-blue-900/30",
+    iconColor: s.color.split(" ").filter((token: string) => token.startsWith("text-") || token.startsWith("dark:text-")).join(" ") || "text-blue-600 dark:text-primary",
+    iconBg: s.color.split(" ").filter((token: string) => token.startsWith("bg-") || token.startsWith("dark:bg-")).join(" ") || "bg-primary/10",
   }));
 
   const mappedPlans = plans.map((p) => ({

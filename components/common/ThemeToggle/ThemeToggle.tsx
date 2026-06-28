@@ -17,7 +17,7 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
       onClick={toggleTheme}
       className={cn(
         "flex items-center justify-center rounded-lg p-2 transition-colors",
-        "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700",
+        "bg-surface hover:bg-muted dark:bg-gray-800 dark:hover:bg-gray-700",
         className
       )}
       aria-label="Toggle theme"
@@ -26,7 +26,7 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
       {isDark ? (
         <Sun className="h-5 w-5 text-yellow-500" />
       ) : (
-        <Moon className="h-5 w-5 text-gray-600" />
+        <Moon className="h-5 w-5 text-muted-foreground" />
       )}
     </button>
   );

@@ -57,7 +57,7 @@ export default async function BlogPage() {
                   <tr key={post.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-primary-foreground">
                           <FileText className="w-4 h-4" />
                         </div>
                         <div>

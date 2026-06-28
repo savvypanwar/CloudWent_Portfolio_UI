@@ -58,7 +58,7 @@ export default async function NewsletterPage() {
                   <tr key={item.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-primary-foreground">
                           <Mail className="w-4 h-4" />
                         </div>
                         <p className="font-medium text-foreground text-sm">{item.email}</p>
@@ -66,7 +66,7 @@ export default async function NewsletterPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-foreground">{item.name || "—"}</td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${item.status === "active" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" : "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300"}`}>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${item.status === "active" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" : "bg-surface text-foreground dark:bg-gray-900/30 dark:text-gray-300"}`}>
                         {item.status}
                       </span>
                     </td>

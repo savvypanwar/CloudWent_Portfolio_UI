@@ -10,10 +10,10 @@ export default async function ActivityLogsPage() {
 
   const actionColors: Record<string, string> = {
     CREATE: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-    UPDATE: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+    UPDATE: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-primary",
     DELETE: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
     LOGIN: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
-    LOGOUT: "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300",
+    LOGOUT: "bg-surface text-foreground dark:bg-gray-900/30 dark:text-gray-300",
   };
 
   return (
@@ -48,7 +48,7 @@ export default async function ActivityLogsPage() {
                 logs.map((log) => (
                   <tr key={log.id} className="hover:bg-muted/10 transition-colors">
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${actionColors[log.action.toUpperCase()] || "bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300"}`}>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${actionColors[log.action.toUpperCase()] || "bg-surface text-foreground dark:bg-gray-900/30 dark:text-gray-300"}`}>
                         {log.action}
                       </span>
                     </td>

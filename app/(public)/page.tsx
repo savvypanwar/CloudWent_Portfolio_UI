@@ -33,8 +33,8 @@ export default async function HomePage() {
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
-    iconColor: "text-white",
-    boxColor: "bg-white/10",
+    iconColor: "text-primary-foreground",
+    boxColor: "bg-background/10",
     borderColor: "border-white/20",
   }));
 

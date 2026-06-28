@@ -19,15 +19,15 @@ export const TechnologyBar = () => {
   ];
 
   return (
-    <section className="border-y border-border bg-background dark:bg-[#36394d] py-6 transition-colors">
+    <section className="border-y border-border bg-surface py-6 transition-colors">
       <div className="container mx-auto px-4">
         {/* Header Text */}
         <div className="mb-6 text-center">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground dark:text-white/80">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground dark:text-foreground/80">
             Trusted by innovative companies
           </span>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-muted-foreground dark:text-white/90">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 text-muted-foreground dark:text-foreground/90">
           {techs.map((tech, index) => {
             // Agar icon missing hai to skip karo
             if (!tech.icon) return null;

@@ -21,7 +21,7 @@ export const FAQ = ({ faqs }: FAQProps) => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="bg-card border border-border rounded-3xl shadow-card p-8 md:p-10 grid lg:grid-cols-[3fr_1fr] gap-10 items-start">
           <div>
-            <h2 className="text-3xl font-extrabold text-dark mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-extrabold text-foreground mb-6">Frequently Asked Questions</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {faqs.map((f, i) => {
                 const isOpen = open === i;

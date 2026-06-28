@@ -25,7 +25,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="h-9 w-9 rounded-md border border-gray-200 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent"
+        className="h-9 w-9 rounded-md border border-border flex items-center justify-center hover:bg-surface disabled:opacity-50 disabled:hover:bg-transparent"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
@@ -37,8 +37,8 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(({
           className={cn(
             "h-9 min-w-[2.25rem] rounded-md flex items-center justify-center text-sm transition-colors",
             currentPage === page
-              ? "bg-blue-600 text-white hover:bg-blue-700"
-              : "hover:bg-gray-50 text-gray-700"
+              ? "bg-blue-600 text-primary-foreground hover:bg-blue-700"
+              : "hover:bg-surface text-foreground"
           )}
         >
           {page}
@@ -48,7 +48,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="h-9 w-9 rounded-md border border-gray-200 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:hover:bg-transparent"
+        className="h-9 w-9 rounded-md border border-border flex items-center justify-center hover:bg-surface disabled:opacity-50 disabled:hover:bg-transparent"
       >
         <ChevronRight className="h-4 w-4" />
       </button>

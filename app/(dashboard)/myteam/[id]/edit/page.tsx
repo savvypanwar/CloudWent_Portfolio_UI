@@ -214,7 +214,7 @@ export default function EditTeamMemberPage() {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className={`w-full h-full bg-gradient-to-br ${formData.avatarColor} flex items-center justify-center text-white text-2xl font-bold`}>
+              <div className={`w-full h-full bg-gradient-to-br ${formData.avatarColor} flex items-center justify-center text-primary-foreground text-2xl font-bold`}>
                 {formData.initials || "?"}
               </div>
             )}

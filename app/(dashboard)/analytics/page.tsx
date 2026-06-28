@@ -62,7 +62,7 @@ export default async function AnalyticsPage() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
         {statCards.map((card) => (
           <div key={card.label} className="glass-effect border-border rounded-2xl p-5">
-            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-white mb-3`}>
+            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-primary-foreground mb-3`}>
               <span className="text-lg font-bold">{card.value}</span>
             </div>
             <p className="text-sm text-muted-foreground">{card.label}</p>

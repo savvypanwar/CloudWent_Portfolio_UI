@@ -26,12 +26,12 @@ export const EmptyState = ({
         className
       )}
     >
-      <div className="mb-4 rounded-full bg-gray-50 p-4">
-        {icon || <Inbox className="h-12 w-12 text-gray-400" />}
+      <div className="mb-4 rounded-full bg-surface p-4">
+        {icon || <Inbox className="h-12 w-12 text-muted-foreground" />}
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-1">{title}</h3>
+      <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
       {description && (
-        <p className="text-sm text-gray-500 max-w-sm mb-6">{description}</p>
+        <p className="text-sm text-muted-foreground max-w-sm mb-6">{description}</p>
       )}
       {action && <div>{action}</div>}
     </div>

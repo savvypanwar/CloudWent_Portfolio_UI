@@ -1,41 +1,27 @@
-let toastIdCounter = 0;
-const activeToasts = new Map<string, { dismiss: () => void }>();
+import toast from "react-hot-toast";
 
 class ToastService {
   success(message: string) {
-    console.log(`✅ ${message}`);
-    this.show(message, "success");
+    toast.success(message);
   }
 
   error(message: string) {
-    console.error(`❌ ${message}`);
-    this.show(message, "error");
+    toast.error(message);
   }
 
   info(message: string) {
-    console.log(`ℹ️ ${message}`);
-    this.show(message, "info");
+    toast(message);
   }
 
-  loading(message: string): string {
-    const id = `toast-${++toastIdCounter}`;
-    console.log(`⏳ ${message}`);
-    activeToasts.set(id, { dismiss: () => activeToasts.delete(id) });
-    return id;
+  loading(message: string) {
+    return toast.loading(message);
   }
 
   dismiss(toastId?: string) {
     if (toastId) {
-      activeToasts.get(toastId)?.dismiss();
+      toast.dismiss(toastId);
     } else {
-      activeToasts.clear();
-    }
-  }
-
-  private show(message: string, type: "success" | "error" | "info") {
-    if (typeof window !== "undefined") {
-      const event = new CustomEvent("toast", { detail: { message, type } });
-      window.dispatchEvent(event);
+      toast.dismiss();
     }
   }
 }

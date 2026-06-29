@@ -16,8 +16,8 @@ export const CTA = () => {
 
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Text */}
-          <div className="max-w-xl">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-foreground">
+          <div className="text-foreground max-w-xl">
+            <h3 className="text-3xl md:text-4xl font-extrabold">
               Ready to Build Something Amazing?
             </h3>
             <p className="mt-2 text-muted-foreground">

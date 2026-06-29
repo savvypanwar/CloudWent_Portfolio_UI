@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 import Image from "next/image";
 import heroImg from "@/assets/images/hero-cloud.png";
 
@@ -18,8 +17,10 @@ interface TestimonialsProps {
 
 export const Testimonials = ({ testimonials }: TestimonialsProps) => {
   return (
-    <section className="py-24 max-w-7xl mx-auto px-6">
-      <SectionHeader title="What Our Clients Say" className="mb-8" />
+    <section className="max-w-7xl mx-auto px-6 pb-20">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground">What Our Clients Say</h2>
+      </div>
       <div className="grid lg:grid-cols-[2fr_1fr] gap-6 items-stretch">
         <div className="relative">
           <div className="grid md:grid-cols-3 gap-4">

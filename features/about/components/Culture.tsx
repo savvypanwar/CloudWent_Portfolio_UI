@@ -2,7 +2,6 @@ import { Users, MessageSquare, TrendingUp, Heart, Smile } from "lucide-react";
 import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button/Button";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 export const Culture = () => {
   const items = [
@@ -14,11 +13,14 @@ export const Culture = () => {
   ];
 
   return (
-    <section className="py-24 max-w-7xl mx-auto px-6">
+    <section className="max-w-7xl mx-auto px-6 pb-20">
       <div className="rounded-3xl glass-effect p-10 border-border">
         <div className="grid lg:grid-cols-[1fr_3fr] gap-8 items-start">
           <div>
-            <SectionHeader title="Our Culture" description="We believe a great culture builds great products." className="mb-5" />
+            <h3 className="text-2xl font-bold text-foreground">Our Culture</h3>
+            <p className="text-muted-foreground mt-2 text-sm max-w-xs">
+              We believe a great culture builds great products.
+            </p>
             
             {/* ✅ Updated Button */}
             <Button asChild variant="outline" size="sm" className="mt-5 glass-effect border-border hover:bg-muted/50">

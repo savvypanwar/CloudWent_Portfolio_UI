@@ -7,15 +7,20 @@ import {
 } from "@/features/contact/components/";
 import { FAQ } from "@/features/contact/components";
 import { CTA } from "@/features/home/components";
-import { dummyFaqs } from "@/lib/dummy-data";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Contact Us | CloudWent",
   description: "Get in touch with CloudWent for web development, mobile apps, AI solutions, and cloud services. Let's build something amazing together.",
 };
 
-export default function ContactPage() {
-  const mappedFaqs = dummyFaqs.map((f) => ({
+export default async function ContactPage() {
+  const faqs = await prisma.faq.findMany({
+    where: { category: "contact" },
+    orderBy: { order: "asc" },
+  });
+
+  const mappedFaqs = faqs.map((f) => ({
     id: f.id,
     question: f.question,
     answer: f.answer,

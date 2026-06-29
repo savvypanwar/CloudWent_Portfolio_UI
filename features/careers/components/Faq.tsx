@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface FaqItem {
   id: string;
@@ -19,14 +18,12 @@ export const Faq = ({ faqs }: FaqProps) => {
 
   return (
     <section className="py-24 bg-background transition-colors">
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          align="center"
-          label="FAQ"
-          title="Questions, Answered"
-          className="max-w-2xl mb-12 mx-auto"
-        />
-        <div className="max-w-4xl mx-auto space-y-3">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-2xl mb-12">
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">FAQ</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">Questions, Answered</h2>
+        </div>
+        <div className="space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (

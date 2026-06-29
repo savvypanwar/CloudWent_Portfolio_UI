@@ -6,6 +6,7 @@ export const ContactCta = () => {
   return (
     <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
       <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-12 py-10 shadow-glow">
+
         {/* Decorative Cloud Shape */}
         <div className="absolute -left-4 -top-4 opacity-20">
           <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" className="text-primary/30">
@@ -17,17 +18,17 @@ export const ContactCta = () => {
           {/* Text */}
           <div className="text-foreground max-w-xl">
             <h3 className="text-3xl md:text-4xl font-extrabold">
-             Have a project in mind?
+             Ready to do your best work?
             </h3>
             <p className="mt-2 text-muted-foreground">
-              Book a free 30-minute discovery call. We'll map scope, timeline and budget — no obligation.
+              Browse open roles, or send an open application — we love meeting talented people even when there's no posting.
             </p>
           </div>
 
           {/* Button */}
           <Button asChild variant="primary" size="lg" className="shadow-md hover:scale-105 transition-transform">
             <Link href="/contact">
-              <span className="px-2">Book a Free Consultation</span> <ArrowRight className="w-4 h-4" />
+               See Open Roles <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
         </div>

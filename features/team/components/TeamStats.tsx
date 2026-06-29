@@ -17,7 +17,7 @@ export const TeamStats = ({ stats }: TeamStatsProps) => {
   ];
 
   return (
-    <section className="py-10 bg-background transition-colors">
+    <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Container */}
         <div className="relative overflow-hidden rounded-3xl bg-dark p-6 md:p-8 shadow-glow">

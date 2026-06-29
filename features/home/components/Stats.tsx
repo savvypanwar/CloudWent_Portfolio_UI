@@ -1,4 +1,5 @@
-import { Rocket, Users, ShieldCheck, Calendar } from "lucide-react";
+import { Rocket, Users, ShieldCheck, Calendar, Code, Award, Clock } from "lucide-react";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface StatItem {
   icon: string;
@@ -18,12 +19,16 @@ const iconMap: Record<string, any> = {
   users: Users,
   shield: ShieldCheck,
   calendar: Calendar,
+  code: Code,
+  award: Award,
+  clock: Clock,
 };
 
 export const Stats = ({ stats }: StatsProps) => {
   return (
-    <section className="py-10 bg-background transition-colors">
+    <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="Our Impact" title="Numbers That Speak" align="center" className="mb-12" />
         <div className="relative overflow-hidden rounded-3xl bg-dark p-6 md:p-8 shadow-glow">
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,oklch(0.6_0.2_260)_0%,transparent_50%)]" />
           <div className="relative grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-4">

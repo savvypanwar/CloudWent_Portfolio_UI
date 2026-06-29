@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface PortfolioProject {
   id: string;
@@ -25,19 +26,12 @@ export const Portfolio = ({ projects }: PortfolioProps) => {
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-          <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
-              OUR PORTFOLIO
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
-              Featured Projects
-            </h2>
-          </div>
-          <Link href="/portfolio" className="text-primary font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
-            View all projects <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+        <SectionHeader
+          label="OUR PORTFOLIO"
+          title="Featured Projects"
+          action={{ text: "View all projects", href: "/portfolio" }}
+          className="mb-12"
+        />
 
         <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {projects.map((project) => (

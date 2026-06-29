@@ -3,28 +3,20 @@ import {
   FeaturedArticle,
   BlogGrid,
   BlogSidebar,
-  BlogCta,
+  FAQ,
+  CTA
 } from "@/features/blog/components";
-import { prisma } from "@/lib/prisma/prisma";
+import { dummyBlogPosts, dummyFaqs } from "@/lib/dummy-data";
 
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
 };
 
-export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { status: "PUBLISHED" },
-    orderBy: { publishedAt: "desc" },
-    take: 6,
-  });
+export default function BlogPage() {
+  const posts = dummyBlogPosts;
 
-  const allPublishedPosts = await prisma.blogPost.findMany({
-    where: { status: "PUBLISHED" },
-    select: { category: true },
-  });
-
-  const categoryCounts = allPublishedPosts.reduce((acc, post) => {
+  const categoryCounts = posts.reduce((acc, post) => {
     acc[post.category] = (acc[post.category] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
@@ -44,20 +36,26 @@ export default async function BlogPage() {
     title: featuredPost.title,
     excerpt: featuredPost.excerpt,
     author: featuredPost.author,
-    date: featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
+    date: featuredPost.date,
     category: featuredPost.category,
-    image: featuredPost.image || "/placeholder.jpg",
+    image: featuredPost.image,
   } : null;
 
   const formattedPosts = remainingPosts.map((post) => ({
-    id: Number(post.id.slice(-4)),
+    id: Number(post.id),
     title: post.title,
     excerpt: post.excerpt,
     author: post.author,
-    date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
+    date: post.date,
     category: post.category,
-    image: post.image || "/placeholder.jpg",
+    image: post.image,
     slug: post.slug,
+  }));
+
+  const mappedFaqs = dummyFaqs.map((f) => ({
+    id: f.id,
+    question: f.question,
+    answer: f.answer,
   }));
 
   return (
@@ -96,7 +94,13 @@ export default async function BlogPage() {
           </div>
         </section>
 
-        <BlogCta />
+        <section className="py-12 bg-background transition-colors">
+          <div className="max-w-7xl mx-auto px-6">
+            <FAQ faqs={mappedFaqs} />
+          </div>
+        </section>
+
+        <CTA />
       </main>
     </div>
   );

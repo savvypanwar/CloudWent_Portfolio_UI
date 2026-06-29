@@ -8,28 +8,29 @@ import {
   Portfolio,
   Team,
   Testimonials,
+  FAQ,
   CTA,
 } from "@/features/home/components";
-import { getTeamMembers } from "@/lib/team";
-import { prisma } from "@/lib/prisma/prisma";
+import {
+  dummyStats,
+  dummyServices,
+  dummyProjects,
+  dummyTestimonials,
+  dummyProcessSteps,
+  dummyBenefits,
+  dummyTeamMembers,
+  dummyFaqs,
+} from "@/lib/dummy-data";
 
 export const metadata = {
   title: "CloudWent | Building Scalable Digital Solutions",
   description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
 };
 
-export default async function HomePage() {
-  const [teamPreview, stats, services, projects, testimonials, processSteps, benefits] = await Promise.all([
-    getTeamMembers({ limit: 5 }),
-    prisma.siteStat.findMany({ where: { section: "home" }, orderBy: { order: "asc" } }),
-    prisma.service.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.project.findMany({ where: { status: "PUBLISHED" }, orderBy: { order: "asc" }, take: 3 }),
-    prisma.testimonial.findMany({ where: { featured: true }, orderBy: { order: "asc" }, take: 3 }),
-    prisma.processStep.findMany({ where: { page: "home", active: true }, orderBy: { order: "asc" } }),
-    prisma.companyValue.findMany({ where: { active: true }, orderBy: { order: "asc" }, take: 3 }),
-  ]);
+export default function HomePage() {
+  const teamPreview = dummyTeamMembers.slice(0, 5);
 
-  const mappedStats = stats.map((stat) => ({
+  const mappedStats = dummyStats.map((stat) => ({
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
@@ -38,15 +39,17 @@ export default async function HomePage() {
     borderColor: "border-white/20",
   }));
 
-  const mappedServices = services.map((s) => ({
+  const mappedServices = dummyServices.map((s) => ({
     id: s.id,
     name: s.name,
     description: s.description,
     icon: s.icon,
-    color: s.color,
+    features: s.features,
+    iconColor: "text-white",
+    iconBg: s.color,
   }));
 
-  const mappedProjects = projects.map((p) => ({
+  const mappedProjects = dummyProjects.map((p) => ({
     id: p.id,
     slug: p.slug,
     title: p.title,
@@ -57,7 +60,7 @@ export default async function HomePage() {
     stack: p.stack,
   }));
 
-  const mappedTestimonials = testimonials.map((t) => ({
+  const mappedTestimonials = dummyTestimonials.map((t) => ({
     id: t.id,
     content: t.content,
     name: t.name,
@@ -65,7 +68,7 @@ export default async function HomePage() {
     rating: t.rating,
   }));
 
-  const mappedProcessSteps = processSteps.map((s) => ({
+  const mappedProcessSteps = dummyProcessSteps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,
@@ -73,11 +76,17 @@ export default async function HomePage() {
     icon: s.icon,
   }));
 
-  const mappedBenefits = benefits.map((b) => ({
+  const mappedBenefits = dummyBenefits.map((b) => ({
     id: b.id,
     title: b.title,
     description: b.description,
     icon: b.icon,
+  }));
+
+  const mappedFaqs = dummyFaqs.map((f) => ({
+    id: f.id,
+    question: f.question,
+    answer: f.answer,
   }));
 
   return (
@@ -92,6 +101,7 @@ export default async function HomePage() {
         <Portfolio projects={mappedProjects} />
         <Team members={teamPreview} />
         <Testimonials testimonials={mappedTestimonials} />
+        <FAQ faqs={mappedFaqs} />
         <CTA />
       </main>
     </div>

@@ -1,5 +1,4 @@
 import { Star } from "lucide-react";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface TestimonialItem {
   id: string;
@@ -20,7 +19,9 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => {
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader label="WHAT OUR CLIENTS SAY" className="mb-10" />
+        <p className="text-xs font-bold tracking-[0.2em] text-primary mb-10">
+          WHAT OUR CLIENTS SAY
+        </p>
 
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((item) => (

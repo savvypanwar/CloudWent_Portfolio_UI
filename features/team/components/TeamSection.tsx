@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Crown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface TeamSectionProps {
   label: string;
@@ -22,26 +23,15 @@ interface TeamSectionProps {
 
 export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: TeamSectionProps) => {
   return (
-    <section className="py-16 bg-background transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-background transition-colors">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-              <Crown className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">{label}</h2>
-              <p className="text-sm text-muted-foreground">{subtitle}</p>
-            </div>
-          </div>
-          <Link
-            href={viewAllLink}
-            className="hidden lg:inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors"
-          >
-            View all <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+        <SectionHeader
+          title={label}
+          description={subtitle}
+          action={viewAllLink ? { text: "View all", href: viewAllLink } : undefined}
+          className="mb-10"
+        />
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

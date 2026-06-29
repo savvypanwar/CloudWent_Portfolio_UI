@@ -9,7 +9,7 @@ export const MissionVision = () => {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 pb-20">
+    <section className="py-24 max-w-7xl mx-auto px-6">
       <div className="rounded-3xl glass-effect p-10 md:p-12 border-border">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10">
           <div className="space-y-8">

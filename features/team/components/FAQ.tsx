@@ -14,7 +14,7 @@ interface FaqProps {
   faqs: FaqItem[];
 }
 
-export const Faq = ({ faqs }: FaqProps) => {
+export const FAQ = ({ faqs }: FaqProps) => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (

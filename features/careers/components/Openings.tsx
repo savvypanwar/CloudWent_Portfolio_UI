@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface JobOpening {
   id: string;
@@ -30,10 +31,7 @@ export const Openings = ({ jobs }: OpeningsProps) => {
     <section id="openings" className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-          <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">OPEN ROLES</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">Find Your Next<br />Adventure</h2>
-          </div>
+          <SectionHeader label="OPEN ROLES" title={<>Find Your Next<br />Adventure</>} />
           <Button asChild variant="outline" size="sm" className="glass-effect border-border hover:bg-muted/50">
             <Link href="/contact">
               Don't see your role? Get in touch <ArrowRight className="w-4 h-4" />

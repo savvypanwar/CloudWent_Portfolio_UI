@@ -1,5 +1,5 @@
-import { Check, ArrowRight, Code2, GraduationCap, Cloud, Smartphone, Sparkles, CloudCog } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight, Check, Code2, GraduationCap, Cloud, Smartphone, Sparkles, CloudCog } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
@@ -22,17 +22,17 @@ interface ServiceItem {
   iconBg: string;
 }
 
-interface ServicesProps {
+interface ServicesGridProps {
   services: ServiceItem[];
 }
 
-export const Services = ({ services }: ServicesProps) => {
+export const Services = ({ services }: ServicesGridProps) => {
   return (
     <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <SectionHeader
-            label="OUR SERVICES"
+            label="CAPABILITIES"
             title={
               <>
                 End-to-end Solutions<br />For Every Need
@@ -40,8 +40,8 @@ export const Services = ({ services }: ServicesProps) => {
             }
           />
           <Button asChild variant="outline" size="sm" className="glass-effect border-border hover:bg-muted/50">
-            <Link href="/services">
-              View all services <ArrowRight className="w-4 h-4" />
+            <Link href="/contact">
+              Talk to us <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
         </div>

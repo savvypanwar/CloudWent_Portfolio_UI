@@ -1,4 +1,5 @@
 import { Search, MessageSquare, ClipboardCheck, Handshake, ShieldCheck } from "lucide-react";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 const iconMap: Record<string, any> = {
   search: Search,
@@ -23,10 +24,11 @@ export const Process = ({ steps }: ProcessProps) => {
   return (
     <section className="py-24 border-y border-border bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <div>
-          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">HIRING PROCESS</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-16">Simple, Respectful<br />Of Your Time</h2>
-        </div>
+        <SectionHeader
+          label="HIRING PROCESS"
+          title={<>Simple, Respectful<br />Of Your Time</>}
+          className="mb-16"
+        />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
           <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-px border-t-2 border-dashed border-border" />
           {steps.map((s, i) => {

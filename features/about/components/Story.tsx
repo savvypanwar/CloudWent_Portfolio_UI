@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Cloud, Users, Rocket, Medal, Flag, Zap, Globe } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 export const Story = () => {
   const steps = [
@@ -13,17 +14,15 @@ export const Story = () => {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 pb-20">
+    <section className="py-24 max-w-7xl mx-auto px-6">
       <div className="grid lg:grid-cols-[1fr_2fr] gap-12">
         {/* Left side */}
         <div>
-          <span className="text-primary font-semibold tracking-wider text-sm">OUR STORY</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-foreground">
-            From An Idea To A Digital Transformation Partner
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            CloudWent was founded with a simple idea — to help businesses unlock their full potential through technology. What started as a small team of passionate developers has grown into a full-service digital solutions company trusted by businesses worldwide.
-          </p>
+          <SectionHeader
+            label="OUR STORY"
+            title="From An Idea To A Digital Transformation Partner"
+            description="CloudWent was founded with a simple idea — to help businesses unlock their full potential through technology. What started as a small team of passionate developers has grown into a full-service digital solutions company trusted by businesses worldwide."
+          />
 
           <Button asChild variant="outline" size="md" className="mt-6 glass-effect border-border hover:bg-muted/50">
             <Link href="/about/story">

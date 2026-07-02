@@ -8,10 +8,8 @@ import {
   Portfolio,
   Team,
   Testimonials,
-  FAQ,
   CTA,
 } from "@/features/home/components";
-import { getTeamMembers } from "@/lib/team";
 import {
   dummyStats,
   dummyServices,
@@ -19,6 +17,7 @@ import {
   dummyTestimonials,
   dummyProcessSteps,
   dummyBenefits,
+  dummyTeamMembers,
   dummyFaqs,
 } from "@/lib/dummy-data";
 
@@ -27,10 +26,10 @@ export const metadata = {
   description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
 };
 
-export default async function HomePage() {
-  const teamPreview = await getTeamMembers({ limit: 5 });
+export default function HomePage() {
+  const teamPreview = dummyTeamMembers.slice(0, 5);
 
-  const mappedStats = dummyStats.map((stat) => ({
+  const mappedStats = stats.map((stat) => ({
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
@@ -39,17 +38,15 @@ export default async function HomePage() {
     borderColor: "border-white/20",
   }));
 
-  const mappedServices = dummyServices.map((s) => ({
+  const mappedServices = services.map((s) => ({
     id: s.id,
     name: s.name,
     description: s.description,
     icon: s.icon,
-    features: s.features,
-    iconColor: "text-white",
-    iconBg: s.color,
+    color: s.color,
   }));
 
-  const mappedProjects = dummyProjects.map((p) => ({
+  const mappedProjects = projects.map((p) => ({
     id: p.id,
     slug: p.slug,
     title: p.title,
@@ -60,7 +57,7 @@ export default async function HomePage() {
     stack: p.stack,
   }));
 
-  const mappedTestimonials = dummyTestimonials.map((t) => ({
+  const mappedTestimonials = testimonials.map((t) => ({
     id: t.id,
     content: t.content,
     name: t.name,
@@ -68,7 +65,7 @@ export default async function HomePage() {
     rating: t.rating,
   }));
 
-  const mappedProcessSteps = dummyProcessSteps.map((s) => ({
+  const mappedProcessSteps = processSteps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,
@@ -76,17 +73,11 @@ export default async function HomePage() {
     icon: s.icon,
   }));
 
-  const mappedBenefits = dummyBenefits.map((b) => ({
+  const mappedBenefits = benefits.map((b) => ({
     id: b.id,
     title: b.title,
     description: b.description,
     icon: b.icon,
-  }));
-
-  const mappedFaqs = dummyFaqs.map((f) => ({
-    id: f.id,
-    question: f.question,
-    answer: f.answer,
   }));
 
   return (
@@ -101,7 +92,6 @@ export default async function HomePage() {
         <Portfolio projects={mappedProjects} />
         <Team members={teamPreview} />
         <Testimonials testimonials={mappedTestimonials} />
-        <FAQ faqs={mappedFaqs} />
         <CTA />
       </main>
     </div>

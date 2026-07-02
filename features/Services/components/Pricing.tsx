@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface PricingPlan {
   id: string;
@@ -22,16 +21,17 @@ export const Pricing = ({ plans }: PricingProps) => {
   return (
     <section id="pricing" className="py-24 border-y border-border bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          label="PRICING"
-          title={
-            <>
-              Straightforward Plans.<br />No Surprises.
-            </>
-          }
-          description="Fixed-scope packages to start, retainers to scale."
-          className="mb-14"
-        />
+        <div className="max-w-2xl mb-14">
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
+            PRICING
+          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
+            Straightforward Plans.<br />No Surprises.
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Fixed-scope packages to start, retainers to scale.
+          </p>
+        </div>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {plans.map((p) => (

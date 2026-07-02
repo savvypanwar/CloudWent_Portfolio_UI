@@ -1,5 +1,3 @@
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
-
 interface ValueItem {
   id: string;
   title: string;
@@ -13,12 +11,10 @@ export const Values = ({ values }: ValuesProps) => {
   return (
     <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          align="center"
-          label="HOW WE WORK"
-          title="Values We Hire For"
-          className="max-w-2xl mx-auto"
-        />
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">HOW WE WORK</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Values We Hire For</h2>
+        </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {values.map((v) => (
             <span

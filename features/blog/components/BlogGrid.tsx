@@ -27,7 +27,7 @@ export const BlogGrid = ({ posts }: BlogGridProps) => {
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
-              className="group glass-effect border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300 card-hover cursor-pointer"
+              className="group glass-effect border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300"
             >
               <div className="aspect-video overflow-hidden bg-muted/20">
                 {/* ✅ Directly pass post.image, Next.js handles both string and object */}

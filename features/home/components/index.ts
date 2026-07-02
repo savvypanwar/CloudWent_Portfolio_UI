@@ -7,5 +7,4 @@ export * from "./Process";
 export * from "./Portfolio";
 export * from "./Team";
 export * from "./Testimonials";
-export * from "./FAQ";
 export * from "./CTA";

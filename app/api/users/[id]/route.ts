@@ -8,9 +8,28 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const item = await (prisma as any).user.findUnique({ where: { id } });
-    if (!item) return NextResponse.json({ error: "Not found" }, { status: 404 });
-    return NextResponse.json(item);
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        status: true,
+        phone: true,
+        avatar: true,
+        lastLoginAt: true,
+        lastSeenAt: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(user);
   } catch (error) {
     return handleApiError(error);
   }
@@ -23,8 +42,18 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await req.json();
-    const item = await (prisma as any).user.update({ where: { id }, data: body });
-    return NextResponse.json(item);
+    const { name, email, role, status, phone, avatar } = body;
+
+    const data: any = {};
+    if (name !== undefined) data.name = name;
+    if (email !== undefined) data.email = email;
+    if (role !== undefined) data.role = role;
+    if (status !== undefined) data.status = status;
+    if (phone !== undefined) data.phone = phone;
+    if (avatar !== undefined) data.avatar = avatar;
+
+    const user = await prisma.user.update({ where: { id }, data });
+    return NextResponse.json(user);
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,7 +65,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    await (prisma as any).user.delete({ where: { id } });
+    await prisma.user.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error) {
     return handleApiError(error);

@@ -3,11 +3,9 @@ import {
   TeamHero,
   TeamSection,
   TeamStats,
-  FAQ,
   CTA,
 } from "@/features/team/components/";
-import { getTeamMembers } from "@/lib/team";
-import { dummyStats, dummyFaqs } from "@/lib/dummy-data";
+import { dummyStats, dummyTeamMembers, dummyFaqs } from "@/lib/dummy-data";
 
 const teamSections = [
   { key: "leadership", label: "Leadership", subtitle: "The visionaries guiding our mission" },
@@ -21,19 +19,13 @@ export const metadata = {
     "Meet the experts behind CloudWent. Passionate professionals building scalable digital solutions for ambitious businesses.",
 };
 
-export default async function TeamPage() {
-  const teamMembers = await getTeamMembers();
+export default function TeamPage() {
+  const teamMembers = dummyTeamMembers;
   const stats = dummyStats;
 
   const mappedStats = stats.map((s) => ({
     value: s.value,
     label: s.label,
-  }));
-
-  const mappedFaqs = dummyFaqs.map((f) => ({
-    id: f.id,
-    question: f.question,
-    answer: f.answer,
   }));
 
   return (
@@ -61,10 +53,6 @@ export default async function TeamPage() {
               })}
             </div>
           </div>
-        </Section>
-
-        <Section variant="default" className="py-12 bg-background">
-          <FAQ faqs={mappedFaqs} />
         </Section>
 
         <Section variant="default" className="py-12 bg-background">

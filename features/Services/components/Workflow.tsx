@@ -1,4 +1,3 @@
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 import { Search, ClipboardList, Palette, Hammer, FlaskConical, Send } from "lucide-react";
 
 const iconMap: Record<string, any> = {
@@ -35,15 +34,14 @@ export const Workflow = ({ steps }: WorkflowProps) => {
   return (
     <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          label="HOW WE WORK"
-          title={
-            <>
-              A Proven Process<br />For Successful Delivery
-            </>
-          }
-          className="mb-16"
-        />
+        <div>
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
+            HOW WE WORK
+          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-16">
+            A Proven Process<br />For Successful Delivery
+          </h2>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 relative">
           <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-px border-t-2 border-dashed border-border" />
           {steps.map((s, i) => {

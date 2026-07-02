@@ -90,14 +90,28 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
               { icon: Users, label: "Users", href: "/users" },
               { icon: Briefcase, label: "Applications", href: "/applications" },
               { icon: UserCog, label: "Team Members", href: "/myteam" },
+              { icon: Server, label: "Services", href: "/allservices" },
+              { icon: DollarSign, label: "Pricing Plans", href: "/pricing" },
+              { icon: Route, label: "Process Steps", href: "/process-steps" },
+              { icon: HelpCircle, label: "FAQs", href: "/faqs" },
+              { icon: Layers, label: "Technologies", href: "/technologies" },
+              { icon: FolderKanban, label: "Projects", href: "/portfolio" },
+              { icon: FileText, label: "Blog Posts", href: "/addblog" },
               { icon: Briefcase, label: "Careers", href: "/careersapplications" },
+              { icon: MessageSquare, label: "Testimonials", href: "/testimonials" },
               { icon: Calendar, label: "Contact Inquiries", href: "/leads" },
+              { icon: Activity, label: "Newsletter", href: "/newsletter" },
             ],
           },
           {
             section: "Settings",
             items: [
-              { icon: Settings, label: "Profile", href: "/profile" },
+              { icon: Settings, label: "Website Settings", href: "/website-settings" },
+              { icon: Lock, label: "SEO Settings", href: "/seo-settings" },
+              { icon: BarChart3, label: "Analytics", href: "/analytics" },
+              { icon: ShieldCheck, label: "Roles & Permissions", href: "/roles-permissions" },
+              { icon: Activity, label: "Activity Logs", href: "/activity-logs" },
+              { icon: CreditCard, label: "Backups", href: "/backups" },
             ],
           },
         ]
@@ -132,6 +146,8 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
             section: "Workspace",
             items: [
               { icon: UserCog, label: "Profile", href: "/profile" },
+              { icon: FolderKanban, label: "My Projects", href: "/portfolio" },
+              { icon: MessageSquare, label: "Announcements", href: "/blog" },
             ],
           },
         ];

@@ -3,20 +3,28 @@ import {
   FeaturedArticle,
   BlogGrid,
   BlogSidebar,
-  FAQ,
-  CTA
+  BlogCta,
 } from "@/features/blog/components";
-import { dummyBlogPosts, dummyFaqs } from "@/lib/dummy-data";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
 };
 
-export default function BlogPage() {
-  const posts = dummyBlogPosts;
+export default async function BlogPage() {
+  const posts = await prisma.blogPost.findMany({
+    where: { status: "PUBLISHED" },
+    orderBy: { publishedAt: "desc" },
+    take: 6,
+  });
 
-  const categoryCounts = posts.reduce((acc, post) => {
+  const allPublishedPosts = await prisma.blogPost.findMany({
+    where: { status: "PUBLISHED" },
+    select: { category: true },
+  });
+
+  const categoryCounts = allPublishedPosts.reduce((acc, post) => {
     acc[post.category] = (acc[post.category] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
@@ -36,26 +44,20 @@ export default function BlogPage() {
     title: featuredPost.title,
     excerpt: featuredPost.excerpt,
     author: featuredPost.author,
-    date: featuredPost.date,
+    date: featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
     category: featuredPost.category,
-    image: featuredPost.image,
+    image: featuredPost.image || "/placeholder.jpg",
   } : null;
 
   const formattedPosts = remainingPosts.map((post) => ({
-    id: Number(post.id),
+    id: Number(post.id.slice(-4)),
     title: post.title,
     excerpt: post.excerpt,
     author: post.author,
-    date: post.date,
+    date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
     category: post.category,
-    image: post.image,
+    image: post.image || "/placeholder.jpg",
     slug: post.slug,
-  }));
-
-  const mappedFaqs = dummyFaqs.map((f) => ({
-    id: f.id,
-    question: f.question,
-    answer: f.answer,
   }));
 
   return (
@@ -94,13 +96,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <section className="py-12 bg-background transition-colors">
-          <div className="max-w-7xl mx-auto px-6">
-            <FAQ faqs={mappedFaqs} />
-          </div>
-        </section>
-
-        <CTA />
+        <BlogCta />
       </main>
     </div>
   );

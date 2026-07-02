@@ -1,17 +1,12 @@
 "use client";
 
-import { Zap, Award, Users, Target, Shield, Star, Sparkles } from "lucide-react";
+import { Zap, Award, Users } from "lucide-react";
 import { FadeIn, SlideUp, StaggerContainer } from "@/components/animations";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 const iconMap: Record<string, any> = {
   zap: Zap,
   award: Award,
   users: Users,
-  target: Target,
-  shield: Shield,
-  star: Star,
-  sparkles: Sparkles,
 };
 
 interface BenefitItem {
@@ -33,11 +28,16 @@ export const WhyChooseUs = ({ benefits }: WhyChooseUsProps) => {
       
       <div className="max-w-7xl mx-auto px-6 relative">
         <SlideUp>
-          <SectionHeader
-            label="Why Choose Us"
-            title={<>Built for Performance<br />and Scale</>}
-            className="mb-12"
-          />
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div>
+              <span className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
+                Why Choose Us
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
+                Built for Performance<br />and Scale
+              </h2>
+            </div>
+          </div>
         </SlideUp>
 
         <StaggerContainer>

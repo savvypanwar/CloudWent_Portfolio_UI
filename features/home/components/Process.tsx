@@ -1,5 +1,4 @@
 import { Search, FileText, PenTool, Code, CheckCircle, Rocket } from "lucide-react";
-import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 const iconMap: Record<string, any> = {
   search: Search,
@@ -36,10 +35,12 @@ export const Process = ({ steps }: ProcessProps) => {
     <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
-          <SectionHeader
-            label="OUR PROCESS"
-            title={<>A Proven Process<br />For Successful Delivery</>}
-          />
+          <p className="text-xs font-bold tracking-[0.2em] text-primary mb-3">
+            OUR PROCESS
+          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
+            A Proven Process<br />For Successful Delivery
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8 relative">

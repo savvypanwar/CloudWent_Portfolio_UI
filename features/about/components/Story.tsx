@@ -42,7 +42,7 @@ export const Story = () => {
                 <div className="mx-auto w-16 h-16 rounded-full glass-effect border-border grid place-items-center text-primary">
                   <s.icon className="w-7 h-7" />
                 </div>
-                <div className="font-bold mt-4 text-foreground">{s.year}</div>
+                <div className="font-bold mt-4 text-foreground group-hover:text-primary transition-colors duration-300">{s.year}</div>
                 <div className="font-semibold text-sm mt-1 text-foreground">{s.title}</div>
                 <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{s.text}</p>
               </div>

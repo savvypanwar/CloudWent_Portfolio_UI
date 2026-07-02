@@ -4,7 +4,7 @@ import {
   Technologies,
   Workflow,
   Pricing,
-  FAQ,
+  Faq,
   ContactCta,
 } from "@/features/Services/components";
 import {
@@ -69,7 +69,7 @@ export default function ServicesPage() {
         <Technologies technologies={mappedTechnologies} />
         <Workflow steps={mappedWorkflowSteps} />
         <Pricing plans={mappedPlans} />
-        <FAQ faqs={mappedFaqs} />
+        <Faq faqs={mappedFaqs} />
         <ContactCta />
       </main>
     </div>

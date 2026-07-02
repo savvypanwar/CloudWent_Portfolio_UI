@@ -38,7 +38,7 @@ export const FeaturedArticle = ({
           </div>
           <div className="p-6 lg:p-8 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-300">
                 Featured
               </span>
               <span className="text-xs text-muted-foreground">{category}</span>

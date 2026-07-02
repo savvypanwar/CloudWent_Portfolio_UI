@@ -11,7 +11,7 @@ import {
   dummyJobOpenings,
   dummyPerks,
   dummyCompanyValues,
-  dummyProcessSteps,
+  dummyCareerProcessSteps,
   dummyCareerFaqs,
 } from "@/lib/dummy-data";
 
@@ -42,7 +42,7 @@ export default function CareersPage() {
     title: v.title,
   }));
 
-  const mappedSteps = dummyProcessSteps.map((s) => ({
+  const mappedSteps = dummyCareerProcessSteps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,

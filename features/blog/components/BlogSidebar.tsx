@@ -23,7 +23,7 @@ export const BlogSidebar = ({ categories, recentPosts }: BlogSidebarProps) => {
     <div className="space-y-8 ">
       {/* Search */}
       <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-foreground mb-4">Search</h3>
+        <h3 className="text-sm font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">Search</h3>
         <div className="relative">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -36,7 +36,7 @@ export const BlogSidebar = ({ categories, recentPosts }: BlogSidebarProps) => {
 
       {/* Categories */}
       <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-foreground mb-4">Categories</h3>
+        <h3 className="text-sm font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">Categories</h3>
         <div className="space-y-2">
           {categories.map((cat) => (
             <Link
@@ -55,7 +55,7 @@ export const BlogSidebar = ({ categories, recentPosts }: BlogSidebarProps) => {
 
       {/* Recent Posts */}
       <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-foreground mb-4">Recent Posts</h3>
+        <h3 className="text-sm font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">Recent Posts</h3>
         <div className="space-y-3">
           {recentPosts.map((post) => (
             <Link

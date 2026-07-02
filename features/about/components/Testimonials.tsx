@@ -51,12 +51,12 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => {
         </div>
 
         <div className="rounded-2xl glass-effect border-border p-7 relative overflow-hidden">
-          <h3 className="text-2xl font-bold text-foreground leading-tight">Let's Build Something Amazing Together</h3>
+          <h3 className="text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-300">Let's Build Something Amazing Together</h3>
           <p className="text-muted-foreground text-sm mt-3">
             Have a project in mind? We'd love to hear from you and explore how we can help.
           </p>
           
-          <Button asChild variant="primary" size="md" className="mt-6 shadow-md hover:opacity-90 transition">
+          <Button asChild variant="primary" size="md" className="mt-6 shadow-md hover:opacity-90 transition hover:shadow-lg hover:scale-105 transition-all duration-300">
             <Link href="/contact">
               Start a Project <ArrowRight className="w-4 h-4" />
             </Link>

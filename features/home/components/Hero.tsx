@@ -1,22 +1,25 @@
-import Image from "next/image";
+import Lottie from "lottie-react";
 import Link from "next/link";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+import LottiePlayer from "@/components/common/LottiePlayer";
+import homeAnimation from "@/assets/lottie/Web Development.json";
 // Import your downloaded PNG icons
 import nextjsIcon from "@/assets/icons/nextjs.svg";
 import nestjsIcon from "@/assets/icons/nestjs.svg";
 import awsIcon from "@/assets/icons/aws-svgrepo-com.svg";
-import aiIcon from "@/assets/icons/reactjs.svg";
+import aiIcon from "@/assets/icons/TailwindCSS.svg";
 import dockerIcon from "@/assets/icons/Docker.svg";
+import reactIcon from "@/assets/icons/reactjs.svg";
 
 export const Hero = () => {
   const stack = [
     { name: "Next.js", icon: nextjsIcon, alt: "Next.js", position: "top-4 left-2" },
     { name: "NestJS", icon: nestjsIcon, alt: "NestJS", position: "top-32 left-0" },
     { name: "AWS", icon: awsIcon, alt: "AWS", position: "top-4 right-2" },
-    { name: "React.js", icon: aiIcon, alt: "AI", position: "top-32 right-0" },
+    { name: "React.js", icon: reactIcon, alt: "React.js", position: "top-32 right-0" },
     { name: "Docker", icon: dockerIcon, alt: "Docker", position: "top-64 right-8" },
+    { name: "AI", icon: aiIcon, alt: "AI", position: "top-64 left-8" },
   ];
 
   return (
@@ -25,7 +28,7 @@ export const Hero = () => {
       <div className="absolute inset-0 -z-10 bg-background dark:hidden" />
       {/* Dark Mode Gradient */}
       <div className="absolute inset-0 -z-10 hidden dark:block bg-foreground" />
-      
+
       <div className="max-w-7xl mx-auto px-6 pb-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side */}
         <div>
@@ -33,17 +36,17 @@ export const Hero = () => {
           <div className="inline-flex items-center gap-2 glass-effect rounded-full px-4 py-1.5 text-xs font-semibold text-muted-foreground">
             <Sparkles className="w-3.5 h-3.5 text-primary" /> We Build Digital Excellence
           </div>
-          
+
           <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-foreground">
             Building Scalable<br />Digital Solutions<br />
             <span className="text-primary">For Ambitious</span><br />
             <span className="text-primary">Businesses</span>
           </h1>
-          
+
           <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed">
             CloudWent empowers businesses to transform ideas into powerful digital products with modern technologies, AI, and cloud solutions.
           </p>
-          
+
           <div className="mt-8 flex flex-wrap gap-3">
             {/* Start Your Project Button */}
             <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
@@ -59,7 +62,7 @@ export const Hero = () => {
               </Link>
             </Button>
           </div>
-          
+
           <div className="mt-8 flex items-center gap-5">
             {/* Avatars */}
             <div className="flex -space-x-3">
@@ -81,29 +84,10 @@ export const Hero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="relative">
-          <Image
-            src={heroImg}
-            alt="CloudWent platform"
-            width={1024}
-            height={1024}
-            priority
-            className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
-          />
-          
-          <div className="absolute inset-0 pointer-events-none">
-            {stack.map((s, i) => (
-              <div 
-                key={s.name} 
-                className={`absolute ${s.position} glass-effect rounded-2xl px-3 py-2 flex items-center gap-2 animate-float`} 
-                style={{ animationDelay: `${i * 0.4}s` }}
-              >
-                <img src={s.icon.src} alt={s.alt} className="w-9 h-9 object-contain" />
-                <span className="text-xs font-semibold pr-1 text-foreground">{s.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LottiePlayer
+          animationData={homeAnimation}
+          className="w-full h-full"
+        />
       </div>
     </section>
   );

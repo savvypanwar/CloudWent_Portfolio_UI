@@ -23,7 +23,7 @@ export const TechnologyBar = () => {
       <div className="container mx-auto px-4">
         {/* Header Text */}
         <div className="mb-6 text-center">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground dark:text-foreground/80">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground dark:text-foreground/80 group-hover:text-primary transition-colors duration-300">
             Trusted by innovative companies
           </span>
         </div>

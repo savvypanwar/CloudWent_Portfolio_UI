@@ -15,10 +15,10 @@ export const MissionVision = () => {
           <div className="space-y-8">
             <div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 grid place-items-center rounded-lg bg-primary/10 text-primary">
+                <div className="w-10 h-10 grid place-items-center rounded-lg bg-primary/10 text-primary group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                   <Target className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-xl text-foreground">
+                <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors duration-300">
                   Our Mission <span className="inline-block w-6 h-0.5 bg-primary align-middle ml-2" />
                 </h3>
               </div>
@@ -28,10 +28,10 @@ export const MissionVision = () => {
             </div>
             <div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 grid place-items-center rounded-lg bg-primary/10 text-primary">
+                <div className="w-10 h-10 grid place-items-center rounded-lg bg-primary/10 text-primary group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                   <Lightbulb className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-xl text-foreground">
+                <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors duration-300">
                   Our Vision <span className="inline-block w-6 h-0.5 bg-primary align-middle ml-2" />
                 </h3>
               </div>
@@ -52,7 +52,7 @@ export const MissionVision = () => {
                 <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary grid place-items-center mb-6">
                   <s.icon className="w-5 h-5" />
                 </div>
-                <div className="text-3xl font-bold text-foreground">{s.value}</div>
+                <div className="text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{s.value}</div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
               </div>
             ))}

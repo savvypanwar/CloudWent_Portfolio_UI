@@ -11,6 +11,7 @@ import {
   FAQ,
   CTA,
 } from "@/features/home/components";
+import { getTeamMembers } from "@/lib/team";
 import {
   dummyStats,
   dummyServices,
@@ -18,7 +19,6 @@ import {
   dummyTestimonials,
   dummyProcessSteps,
   dummyBenefits,
-  dummyTeamMembers,
   dummyFaqs,
 } from "@/lib/dummy-data";
 
@@ -27,8 +27,8 @@ export const metadata = {
   description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
 };
 
-export default function HomePage() {
-  const teamPreview = dummyTeamMembers.slice(0, 5);
+export default async function HomePage() {
+  const teamPreview = await getTeamMembers({ limit: 5 });
 
   const mappedStats = dummyStats.map((stat) => ({
     icon: stat.icon,

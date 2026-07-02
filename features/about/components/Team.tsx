@@ -15,7 +15,7 @@ export const Team = ({ members }: TeamProps) => {
       <div className="grid lg:grid-cols-[1fr_2.5fr] gap-10 items-start">
         <div>
           <span className="text-primary font-semibold tracking-wider text-sm">OUR TEAM</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-foreground group-hover:text-primary transition-colors duration-300">
             The People Behind Our Success
           </h2>
           <p className="mt-4 text-muted-foreground">

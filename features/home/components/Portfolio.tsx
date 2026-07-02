@@ -37,7 +37,7 @@ export const Portfolio = ({ projects }: PortfolioProps) => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group glass-effect border-border rounded-2xl overflow-hidden hover:border-primary/40 transition"
+              className="group glass-effect border-border rounded-2xl overflow-hidden card-hover hover:border-primary/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               <div className="aspect-[4/3] overflow-hidden bg-black/30">
                 {project.image ? (
@@ -46,20 +46,20 @@ export const Portfolio = ({ projects }: PortfolioProps) => {
                     alt={project.title}
                     width={600}
                     height={450}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500 hover:brightness-110"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
+                  <div className="w-full h-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition duration-500">
                     {project.title.charAt(0)}
                   </div>
                 )}
               </div>
 
               <div className="p-6">
-                <span className="inline-block text-[10px] font-bold tracking-wider px-2.5 py-1 rounded bg-primary text-white mb-3">
+                <span className="inline-block text-[10px] font-bold tracking-wider px-2.5 py-1 rounded bg-primary text-white mb-3 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
                   {project.category.toUpperCase()}
                 </span>
-                <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
+                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{project.title}</h3>
                 <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
                   {project.description}
                 </p>

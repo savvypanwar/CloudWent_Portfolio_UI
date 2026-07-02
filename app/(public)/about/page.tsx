@@ -8,15 +8,16 @@ import {
   FAQ,
   CTA,
 } from "@/features/about/components";
-import { dummyTestimonials, dummyTeamMembers, dummyFaqs } from "@/lib/dummy-data";
+import { getTeamMembers } from "@/lib/team";
+import { dummyTestimonials, dummyFaqs } from "@/lib/dummy-data";
 
 export const metadata = {
   title: "About | CloudWent",
   description: "Meet CloudWent — builders of scalable digital products that drive real impact.",
 };
 
-export default function AboutPage() {
-  const teamPreview = dummyTeamMembers.slice(0, 5);
+export default async function AboutPage() {
+  const teamPreview = await getTeamMembers({ limit: 5 });
 
   const mappedTestimonials = dummyTestimonials.map((t) => ({
     id: t.id,

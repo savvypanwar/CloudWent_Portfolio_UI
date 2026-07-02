@@ -39,7 +39,7 @@ export const Process = ({ steps }: ProcessProps) => {
                   <IconComponent className="w-8 h-8" />
                 </div>
                 <div className="text-xs font-bold text-muted-foreground mt-3">0{i + 1}</div>
-                <h3 className="font-bold text-lg mt-1 text-foreground">{s.title}</h3>
+                <h3 className="font-bold text-lg mt-1 text-foreground group-hover:text-primary transition-colors duration-300">{s.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{s.description}</p>
               </div>
             );

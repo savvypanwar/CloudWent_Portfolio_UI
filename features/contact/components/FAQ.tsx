@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Minus, Plus, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface FaqItem {
   id: string;
@@ -9,44 +10,43 @@ interface FaqItem {
   answer: string;
 }
 
-interface FAQProps {
+interface FaqProps {
   faqs: FaqItem[];
 }
 
-export const FAQ = ({ faqs }: FAQProps) => {
+export const FAQ = ({ faqs }: FaqProps) => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="pb-20">
+    <section className="py-24 bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-card border border-border rounded-3xl shadow-card p-8 md:p-10 grid lg:grid-cols-[3fr_1fr] gap-10 items-start">
-          <div>
-            <h2 className="text-3xl font-extrabold text-foreground mb-6">Frequently Asked Questions</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {faqs.map((f, i) => {
-                const isOpen = open === i;
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="text-left bg-surface border border-border rounded-xl px-4 py-3.5 hover:border-primary/40 transition"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-sm font-semibold">{f.question}</span>
-                      {isOpen ? <Minus className="w-4 h-4 text-primary shrink-0" /> : <Plus className="w-4 h-4 text-muted-foreground shrink-0" />}
-                    </div>
-                    {isOpen && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{f.answer}</p>}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          <div className="hidden lg:grid place-items-center">
-            <div className="w-40 h-40 rounded-3xl bg-gradient-primary grid place-items-center shadow-glow">
-              <HelpCircle className="w-20 h-20 text-white/90" />
-            </div>
-          </div>
+        <SectionHeader
+          align="center"
+          label="FAQ"
+          title="Contact & Support"
+          className="max-w-2xl mb-12 mx-auto"
+        />
+        <div className="max-w-4xl mx-auto space-y-3">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.id} className="glass-effect border-border rounded-2xl overflow-hidden transition-colors card-hover cursor-pointer">
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-primary/10 hover:text-primary transition-colors transition-all duration-300"
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-bold text-foreground group-hover:text-primary transition-colors duration-300">{f.question}</span>
+                  <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-6 text-muted-foreground leading-relaxed">{f.answer}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

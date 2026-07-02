@@ -6,7 +6,8 @@ import {
   FAQ,
   CTA,
 } from "@/features/team/components/";
-import { dummyStats, dummyTeamMembers, dummyFaqs } from "@/lib/dummy-data";
+import { getTeamMembers } from "@/lib/team";
+import { dummyStats, dummyFaqs } from "@/lib/dummy-data";
 
 const teamSections = [
   { key: "leadership", label: "Leadership", subtitle: "The visionaries guiding our mission" },
@@ -20,8 +21,8 @@ export const metadata = {
     "Meet the experts behind CloudWent. Passionate professionals building scalable digital solutions for ambitious businesses.",
 };
 
-export default function TeamPage() {
-  const teamMembers = dummyTeamMembers;
+export default async function TeamPage() {
+  const teamMembers = await getTeamMembers();
   const stats = dummyStats;
 
   const mappedStats = stats.map((s) => ({

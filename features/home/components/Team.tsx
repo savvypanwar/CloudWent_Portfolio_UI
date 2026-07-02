@@ -36,7 +36,7 @@ export const Team = ({ members }: TeamProps) => {
               <Link
                 key={member.slug}
                 href={`/team/${member.slug}`}
-                className="glass-effect border-border rounded-2xl p-4 text-center hover:shadow-lg transition block"
+                className="group glass-effect border-border rounded-2xl p-4 text-center card-hover hover:shadow-lg hover:-translate-y-1 transition-all duration-300 block"
               >
                 <div className="w-full aspect-square rounded-xl overflow-hidden mb-3">
                   {member.image ? (
@@ -45,7 +45,7 @@ export const Team = ({ members }: TeamProps) => {
                       alt={member.name}
                       width={200}
                       height={200}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${member.color} grid place-items-center text-3xl font-bold text-white/90`}>
@@ -54,7 +54,7 @@ export const Team = ({ members }: TeamProps) => {
                   )}
                 </div>
 
-                <h3 className="font-bold text-sm text-foreground">
+                <h3 className="font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-300">
                   {member.name}
                 </h3>
                 <p className="text-xs text-muted-foreground mt-0.5">

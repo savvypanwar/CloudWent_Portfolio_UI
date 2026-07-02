@@ -52,12 +52,12 @@ export const Services = ({ services }: ServicesGridProps) => {
             return (
               <div
                 key={s.id}
-                className="group glass-effect rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+                className="group glass-effect rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all card-hover cursor-pointer"
               >
                 <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.iconBg} ${s.iconColor} mb-4`}>
                   <IconComponent className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg mb-1.5 text-foreground">{s.name}</h3>
+                <h3 className="font-bold text-lg mb-1.5 text-foreground group-hover:text-primary transition-colors duration-300">{s.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
                 <ul className="mt-4 space-y-2">
                   {s.features.map((f) => (

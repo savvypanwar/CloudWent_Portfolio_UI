@@ -14,7 +14,7 @@ interface FaqProps {
   faqs: FaqItem[];
 }
 
-export const FAQ = ({ faqs }: FaqProps) => {
+export const Faq = ({ faqs }: FaqProps) => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -25,7 +25,7 @@ export const FAQ = ({ faqs }: FaqProps) => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader
           label="FAQ"
-          title="Questions, Answered"
+          title="Common Questions About Our Services"
           align="center"
           className="mb-12"
         />
@@ -40,10 +40,10 @@ export const FAQ = ({ faqs }: FaqProps) => {
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-muted/50 transition-colors"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-primary/10 hover:text-primary transition-colors transition-all duration-300"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-bold text-foreground">{f.question}</span>
+                  <span className="font-bold text-foreground group-hover:text-primary transition-colors duration-300">{f.question}</span>
                   <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>

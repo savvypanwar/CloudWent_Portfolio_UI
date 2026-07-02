@@ -49,7 +49,7 @@ export const Pricing = ({ plans }: PricingProps) => {
                   Most Popular
                 </span>
               )}
-              <h3 className="font-bold text-lg text-foreground">{p.name}</h3>
+              <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">{p.name}</h3>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="text-4xl font-extrabold text-foreground">{p.price}</span>
                 <span className="text-sm text-muted-foreground">{p.sub || ""}</span>

@@ -47,20 +47,23 @@ export const Services = ({ services }: ServicesProps) => {
           {services.map((s) => {
             const IconComponent = iconMap[s.icon] || Code2;
             return (
-              <div 
-                key={s.id} 
+              <div
+                key={s.id}
                 className="group glass-effect rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
               >
-                <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.color} mb-4`}>
+                <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.iconBg} ${s.iconColor} mb-4`}>
                   <IconComponent className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg mb-1.5 text-foreground">
-                  {s.name}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {s.description}
-                </p>
-                <ArrowRight className="w-5 h-5 text-primary mt-5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                <h3 className="font-bold text-lg mb-1.5 text-foreground">{s.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+                <ul className="mt-4 space-y-2">
+                  {s.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
+                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           })}

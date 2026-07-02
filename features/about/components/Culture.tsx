@@ -33,7 +33,7 @@ export const Culture = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
             {items.map((it, i) => (
               <div key={it.title}>
-                <div className="w-11 h-11 grid place-items-center rounded-full bg-primary/10 text-primary mb-3">
+                <div className="w-11 h-11 grid place-items-center rounded-full bg-primary/10 text-primary mb-3 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                   <it.icon className="w-5 h-5" />
                 </div>
                 <div className="font-semibold text-sm text-foreground">{it.title}</div>

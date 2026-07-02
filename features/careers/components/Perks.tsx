@@ -35,12 +35,12 @@ export const Perks = ({ perks }: PerksProps) => {
             return (
               <div
                 key={p.id}
-                className="glass-effect border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+                className="glass-effect border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all card-hover cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-xl grid place-items-center bg-primary/10 text-primary mb-4">
+                <div className="w-12 h-12 rounded-xl grid place-items-center bg-primary/10 text-primary mb-4 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                   <IconComponent className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg mb-1.5 text-foreground">{p.title}</h3>
+                <h3 className="font-bold text-lg mb-1.5 text-foreground group-hover:text-primary transition-colors duration-300">{p.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
               </div>
             );

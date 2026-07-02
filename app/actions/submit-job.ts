@@ -30,7 +30,7 @@ export async function submitJobApplication(formData: FormData) {
   }
 
   try {
-    await prisma.jobApplication.create({
+    await prisma.application.create({
       data: {
         ...parsed.data,
         status: "pending",

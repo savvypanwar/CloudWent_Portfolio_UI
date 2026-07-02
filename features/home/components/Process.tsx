@@ -49,12 +49,12 @@ export const Process = ({ steps }: ProcessProps) => {
           {steps.map((step, i) => {
             const IconComponent = iconMap[step.icon] || Search;
             return (
-              <div key={step.id} className="relative text-center group">
+              <div key={step.id} className="relative text-center group card-hover border border-transparent hover:border-primary/30 rounded-2xl p-4 transition-all duration-300">
                 <div className="mx-auto w-20 h-20 rounded-full grid place-items-center glass-effect border-border shadow-sm group-hover:shadow-md transition">
-                  <IconComponent className={`w-8 h-8 ${colorPalette[i % colorPalette.length]}`} />
+                  <IconComponent className={`w-8 h-8 ${colorPalette[i % colorPalette.length]} group-hover:scale-110 transition-transform duration-300`} />
                 </div>
                 <div className="text-xs font-bold text-muted-foreground mt-3">{step.step}</div>
-                <h3 className="font-bold text-lg mt-1 text-foreground">{step.title}</h3>
+                <h3 className="font-bold text-lg mt-1 text-foreground group-hover:text-primary transition-colors duration-300">{step.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{step.description}</p>
               </div>
             );

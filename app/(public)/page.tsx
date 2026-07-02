@@ -10,24 +10,24 @@ import {
   Testimonials,
   CTA,
 } from "@/features/home/components";
-import { getTeamMembers } from "@/lib/team";
-import { prisma } from "@/lib/prisma/prisma";
+import {
+  dummyStats,
+  dummyServices,
+  dummyProjects,
+  dummyTestimonials,
+  dummyProcessSteps,
+  dummyBenefits,
+  dummyTeamMembers,
+  dummyFaqs,
+} from "@/lib/dummy-data";
 
 export const metadata = {
   title: "CloudWent | Building Scalable Digital Solutions",
   description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
 };
 
-export default async function HomePage() {
-  const [teamPreview, stats, services, projects, testimonials, processSteps, benefits] = await Promise.all([
-    getTeamMembers({ limit: 5 }),
-    prisma.siteStat.findMany({ where: { section: "home" }, orderBy: { order: "asc" } }),
-    prisma.service.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.project.findMany({ where: { status: "PUBLISHED" }, orderBy: { order: "asc" }, take: 3 }),
-    prisma.testimonial.findMany({ where: { featured: true }, orderBy: { order: "asc" }, take: 3 }),
-    prisma.processStep.findMany({ where: { page: "home", active: true }, orderBy: { order: "asc" } }),
-    prisma.companyValue.findMany({ where: { active: true }, orderBy: { order: "asc" }, take: 3 }),
-  ]);
+export default function HomePage() {
+  const teamPreview = dummyTeamMembers.slice(0, 5);
 
   const mappedStats = stats.map((stat) => ({
     icon: stat.icon,

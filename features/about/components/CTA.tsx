@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
-export const ContactCta = () => {
+export const CTA = () => {
   return (
-    <section className="max-w-7xl mx-auto px-6 pb-16">
+    <section id="contact" className="py-24 max-w-7xl mx-auto px-6">
       <div className="relative overflow-hidden rounded-3xl glass-effect border-border px-8 md:px-12 py-10 shadow-glow">
         {/* Decorative Cloud Shape */}
         <div className="absolute -left-4 -top-4 opacity-20">
@@ -12,22 +12,22 @@ export const ContactCta = () => {
             <path d="M17.5 19a3.5 3.5 0 1 0 0-7h-1.5A5.5 5.5 0 0 0 5 12.5a5.5 5.5 0 0 0 5.5 5.5h7z" />
           </svg>
         </div>
-
+        
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Text */}
           <div className="text-foreground max-w-xl">
             <h3 className="text-3xl md:text-4xl font-extrabold">
-             Have a project in mind?
+              Ready To Start Your Digital Journey?
             </h3>
             <p className="mt-2 text-muted-foreground">
-              Book a free 30-minute discovery call. We'll map scope, timeline and budget — no obligation.
+              Let's create something impactful and innovative together.
             </p>
           </div>
 
           {/* Button */}
           <Button asChild variant="primary" size="lg" className="shadow-md hover:scale-105 transition-transform hover:shadow-lg hover:scale-105 transition-all duration-300">
             <Link href="/contact">
-              Book a Free Consultation <ArrowRight className="w-4 h-4" />
+              Let's Talk <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
         </div>

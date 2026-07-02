@@ -92,6 +92,7 @@
   --shadow-card: 0 1px 2px oklch(0.2 0.05 260 / 0.04), 0 4px 24px oklch(0.2 0.05 260 / 0.06);
   --shadow-glow: 0 20px 60px -20px oklch(0.58 0.21 258 / 0.45);
   --shadow-elegant: 0 10px 40px -10px oklch(0.2 0.05 260 / 0.08);
+  --shadow-card-hover: 0 20px 40px -12px oklch(0.58 0.21 258 / 0.25);
 }
 
 /* ==========================================
@@ -122,6 +123,7 @@
   --ring: oklch(0.78 0.16 230);
   --dark: oklch(0.16 0.04 260);
   --dark-foreground: oklch(0.98 0 0);
+  --shadow-card-hover: 0 20px 40px -12px oklch(0.78 0.16 230 / 0.20);
 }
 
 /* ==========================================
@@ -258,12 +260,24 @@
 }
 
 /* ==========================================
-   HOVER EFFECTS
+   CARD HOVER EFFECTS
    ========================================== */
-.hover-lift {
+.card-hover {
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: oklch(0.58 0.21 258 / 0.3);
+}
+.dark .card-hover:hover {
+  border-color: oklch(0.78 0.16 230 / 0.3);
+}
+
+.icon-glow {
   transition: transform .3s ease, box-shadow .3s ease;
 }
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-elegant);
+.icon-glow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px oklch(0.58 0.21 258 / 0.4);
 }

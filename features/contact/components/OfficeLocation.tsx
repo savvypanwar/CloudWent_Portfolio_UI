@@ -1,19 +1,18 @@
 import Link from "next/link";
-import { MapPin, Briefcase, ArrowRight } from "lucide-react";
+import { MapPin, Briefcase, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
 export const OfficeLocation = () => {
   const pins = [
-    
-    { city: "Bhopal, MP", label: "Development Center", top: "42%", left: "68%", color: "bg-amber-500" }, 
+    { city: "Bhopal, MP", label: "Development Center", top: "45%", left: "70%", color: "bg-amber-500" },
   ];
 
   return (
     <section className="relative overflow-hidden pb-20 transition-colors">
-      {/* Light Mode Gradient (Bilkul Hero jaisa) */}
+      {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
       
-      {/* Dark Mode Gradient (Bilkul Hero jaisa) */}
+      {/* Dark Mode Gradient */}
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -30,29 +29,39 @@ export const OfficeLocation = () => {
               Our team is distributed around the world, allowing us to work closely with clients across different time zones.
             </p>
 
-            {/* ✅ Updated Button */}
-            <Button asChild variant="outline" size="md" className="mt-6 glass-effect border-border hover:bg-muted/50">
-              <Link href="#">
-                <Briefcase className="w-4 h-4 text-primary"/> <span className="p-2">View Open Positions </span>   <ArrowRight className="w-4 h-4" />
+            <Button asChild variant="outline" size="md" className="mt-6 glass-effect border-border hover:bg-muted/50 card-hover">
+              <Link href="/careers">
+                <Briefcase className="w-4 h-4 text-primary"/> <span className="p-2">View Open Positions</span> <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
           </div>
 
           {/* Right Map */}
-          <div className="relative aspect-[16/9] rounded-2xl bg-[radial-gradient(circle,oklch(0.92_0.02_255)_1px,transparent_1px)] dark:bg-[radial-gradient(circle,oklch(0.15_0.02_255)_1px,transparent_1px)] [background-size:14px_14px]">
+          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border shadow-glow">
+            {/* Embedded Map */}
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=77.25%2C23.15%2C77.55%2C23.35&layer=mapnik&marker=23.25%2C77.40"
+              width="100%"
+              height="100%"
+              className="absolute inset-0 w-full h-full border-0"
+              style={{ filter: "grayscale(1) contrast(1.1)" }}
+              loading="lazy"
+              title="Office Location Map"
+            />
+            
+            {/* Dark mode overlay - invert colors for dark theme */}
+            <div className="absolute inset-0 pointer-events-none dark:invert dark:opacity-90 opacity-0" />
+
+            {/* Pin Overlay */}
             {pins.map((p) => (
               <div
                 key={p.city}
-                className="absolute -translate-x-1/2 -translate-y-full"
+                className="absolute -translate-x-1/2 -translate-y-full z-10"
                 style={{ top: p.top, left: p.left }}
               >
                 {/* Pin Card */}
-                <div className="glass-effect border-border rounded-xl shadow-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap mb-1">
-                  <MapPin
-                    className={`w-4 h-4 ${
-                      p.color === "bg-amber-500" ? "text-amber-500" : "text-primary"
-                    }`}
-                  />
+                <div className="glass-effect border-border rounded-xl shadow-lg px-3 py-2 flex items-center gap-2 whitespace-nowrap mb-1 card-hover">
+                  <MapPin className={`w-4 h-4 ${p.color === "bg-amber-500" ? "text-amber-500" : "text-primary"}`} />
                   <div>
                     <div className="text-xs font-bold leading-tight text-foreground">
                       {p.city}
@@ -62,12 +71,25 @@ export const OfficeLocation = () => {
                     </div>
                   </div>
                 </div>
-                {/* Pin Dot */}
-                <div
-                  className={`w-3 h-3 rounded-full ${p.color} mx-auto ring-4 ring-primary/15`}
-                />
+                {/* Pin Dot with pulse animation */}
+                <div className="relative mx-auto w-3 h-3">
+                  <div className={`absolute inset-0 rounded-full ${p.color} animate-ping opacity-75`} />
+                  <div className={`relative w-3 h-3 rounded-full ${p.color} ring-4 ring-primary/15`} />
+                </div>
               </div>
             ))}
+
+            {/* Map attribution link */}
+            <div className="absolute bottom-2 right-2 z-10">
+              <a
+                href="https://www.openstreetmap.org/?mlat=23.25&mlon=77.40#map=12/23.25/77.40"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-muted-foreground hover:text-primary flex items-center gap-1 bg-background/80 px-2 py-1 rounded-md backdrop-blur-sm transition-colors"
+              >
+                <ExternalLink className="w-3 h-3" /> OpenStreetMap
+              </a>
+            </div>
           </div>
         </div>
       </div>

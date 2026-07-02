@@ -7,7 +7,13 @@ import {
   Faq,
   ContactCta,
 } from "@/features/careers/components";
-import { prisma } from "@/lib/prisma/prisma";
+import {
+  dummyJobOpenings,
+  dummyPerks,
+  dummyCompanyValues,
+  dummyProcessSteps,
+  dummyCareerFaqs,
+} from "@/lib/dummy-data";
 
 export const metadata = {
   title: "Careers | CloudWent",
@@ -44,7 +50,7 @@ export default async function CareersPage() {
     title: v.title,
   }));
 
-  const mappedSteps = steps.map((s) => ({
+  const mappedSteps = dummyProcessSteps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,

@@ -32,10 +32,10 @@ export const Stats = ({ stats }: StatsProps) => {
               return (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+                  className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start card-hover border border-transparent hover:border-white/10 rounded-xl p-2 transition-all duration-300 group"
                 >
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor}`}
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.boxColor} border ${stat.borderColor} group-hover:scale-110 transition-transform duration-300`}
                   >
                     <IconComponent className={`h-5 w-5 ${stat.iconColor}`} />
                   </div>

@@ -48,7 +48,7 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
           {members.map(({ slug, name, role, image, initials, color, linkedin, twitter, github }) => (
             <article
               key={name}
-              className="group glass-effect border-border rounded-2xl p-6 hover:shadow-md hover:border-primary/30 transition-all text-center"
+              className="group glass-effect border-border rounded-2xl p-6 hover:shadow-md hover:border-primary/30 transition-all text-center card-hover cursor-pointer"
             >
               <Link href={`/team/${slug}`} className="block">
                 {/* Photo */}

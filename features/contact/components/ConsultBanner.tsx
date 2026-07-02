@@ -29,7 +29,7 @@ export const ConsultBanner = () => {
 
         <Link
           href="#form"
-          className="relative inline-flex items-center gap-2 bg-card text-blue-600 dark:text-primary px-6 py-3.5 rounded-xl font-semibold hover:scale-[1.02] transition shadow-md dark:shadow-background/50"
+          className="relative inline-flex items-center gap-2 bg-card text-blue-600 dark:text-primary px-6 py-3.5 rounded-xl font-semibold hover:scale-[1.02] transition shadow-md dark:shadow-background/50 hover:shadow-lg hover:scale-105 transition-all duration-300"
         >
           Book a Consultation <ArrowRight className="w-4 h-4" />
         </Link>

@@ -46,11 +46,11 @@ export const WhyChooseUs = ({ benefits }: WhyChooseUsProps) => {
               const IconComponent = iconMap[benefit.icon] || Zap;
               return (
                 <FadeIn key={benefit.id} direction="up" delay={i * 0.1}>
-                  <div className="p-6 rounded-2xl glass-effect border-border hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div className="h-12 w-12 rounded-xl bg-primary/20 text-primary dark:bg-primary/20 dark:text-primary flex items-center justify-center mb-4">
+                  <div className="p-6 rounded-2xl glass-effect border-border card-hover hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                    <div className="h-12 w-12 rounded-xl bg-primary/20 text-primary dark:bg-primary/20 dark:text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="h-6 w-6" />
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                       {benefit.title}
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">

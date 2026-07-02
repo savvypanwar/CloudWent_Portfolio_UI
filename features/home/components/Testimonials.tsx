@@ -27,7 +27,7 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="glass-effect border-border rounded-2xl p-6 transition"
+              className="glass-effect border-border rounded-2xl p-6 transition card-hover cursor-pointer"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
@@ -42,7 +42,7 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => {
               <div className="flex items-center gap-3 mt-6 pt-5 border-t border-border">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-300 to-purple-500" />
                 <div>
-                  <div className="font-bold text-sm text-foreground">
+                  <div className="font-bold text-sm text-foreground group-hover:text-primary transition-colors duration-300">
                     {item.name}
                   </div>
                   <div className="text-xs text-muted-foreground">

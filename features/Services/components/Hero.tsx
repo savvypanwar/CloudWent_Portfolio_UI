@@ -1,8 +1,12 @@
+
+
 import Link from "next/link";
 import { ArrowRight, Sparkles, Star, Code2, Brain, Smartphone, CloudCog, Play } from "lucide-react";
-import Image from "next/image";
+import Lottie from "lottie-react";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+import LottiePlayer from "@/components/common/LottiePlayer";
+import serviceAnimation from "@/assets/lottie/code dark.json";
+
 
 export const Hero = () => {
   // ✅ Right side floating badges with Icons
@@ -17,10 +21,10 @@ export const Hero = () => {
     <section className="relative overflow-hidden py-10">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
-      
+
       {/* Dark Mode Gradient */}
       <div className="absolute inset-0 -z-10 hidden dark:block bg-background" />
-      
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side */}
@@ -29,37 +33,37 @@ export const Hero = () => {
             <div className="inline-flex items-center gap-2 glass-effect rounded-full px-4 py-1.5 text-xs font-semibold text-muted-foreground">
               <Sparkles className="w-3.5 h-3.5 text-primary" /> What we do
             </div>
-            
+
             <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-foreground">
               Services That Ship<br />
               <span className="text-gradient-hero">Real Outcomes</span><br />
               For Your Business
             </h1>
-            
+
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed">
               From a single landing page to a multi-product platform — we design, build and scale software that earns its place in your business.
             </p>
-            
+
             <div className="mt-8 flex flex-wrap gap-3">
 
 
               <div className="mt-8 flex flex-wrap gap-3">
-            {/* Start Your Project Button */}
-            <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
-              <Link href="/contact">
-                <span className="px-2">Start A Project</span>  <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
+                {/* Start Your Project Button */}
+                <Button asChild variant="primary" size="lg" className="shadow-md hover:opacity-90 transition">
+                  <Link href="/contact">
+                    <span className="px-2">Start A Project</span>  <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
 
-            {/* View Our Work Button */}
-            <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
-              <Link href="#pricing">
-                <span className="px-2">View Pricing</span> <Play className="w-4 h-4 fill-current" />
-              </Link>
-            </Button>
-          </div>
+                {/* View Our Work Button */}
+                <Button asChild variant="outline" size="lg" className="glass-effect border-border hover:bg-muted/50">
+                  <Link href="#pricing">
+                    <span className="px-2">View Pricing</span> <Play className="w-4 h-4 fill-current" />
+                  </Link>
+                </Button>
+              </div>
             </div>
-            
+
             <div className="mt-8 flex items-center gap-5">
               <div className="flex items-center gap-1.5">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
@@ -70,31 +74,10 @@ export const Hero = () => {
           </div>
 
           {/* ✅ Right Side - Floating Badges with Icons */}
-          <div className="relative">
-            <Image
-              src={heroImg}
-              alt="CloudWent services platform"
-              width={1024}
-              height={1024}
-              priority
-              className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
-            />
-            
-            <div className="absolute inset-0 pointer-events-none">
-              {serviceBadges.map((badge, i) => (
-                <div
-                  key={badge.name}
-                  className={`absolute ${badge.position} glass-effect rounded-2xl px-3 py-2 flex items-center gap-2 animate-float`}
-                  style={{ animationDelay: `${i * 0.4}s` }}
-                >
-                  {/* ✅ Icon */}
-                  <badge.icon className="w-5 h-5 text-primary" />
-                  {/* Text */}
-                  <span className="text-xs font-semibold text-foreground">{badge.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LottiePlayer
+            animationData={serviceAnimation}
+            className="w-full h-full"
+          />
         </div>
       </div>
     </section>

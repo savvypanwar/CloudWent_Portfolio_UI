@@ -23,7 +23,7 @@ export const FAQ = ({ faqs }: FaqProps) => {
         <SectionHeader
           align="center"
           label="FAQ"
-          title="Contact & Support"
+          title="Team & Careers"
           className="max-w-2xl mb-12 mx-auto"
         />
         <div className="max-w-4xl mx-auto space-y-3">

@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+import LottiePlayer from "@/components/common/LottiePlayer";
+import serviceAnimation from "@/assets/lottie/web-content-design.json";
 
 export const CareerHero = () => {
   const roles = [
@@ -13,7 +14,7 @@ export const CareerHero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden ">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
       {/* Dark Mode Gradient */}
@@ -81,33 +82,10 @@ export const CareerHero = () => {
           </div>
 
           {/* Right Column - Globe + Floating Badges */}
-          <div className="relative">
-            <Image
-              src={heroImg}
-              alt="Careers"
-              width={1024}
-              height={1024}
-              priority
-              className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
-            />
-            
-            <div className="absolute inset-0 pointer-events-none">
-              {roles.map((role, i) => (
-                <div
-                  key={role.label}
-                  className={`absolute ${role.pos} glass-effect rounded-2xl px-3 py-2 flex items-center gap-2 animate-float`}
-                  style={{ animationDelay: `${i * 0.4}s` }}
-                >
-                  <div className={`w-9 h-9 rounded-xl grid place-items-center bg-gradient-to-br ${role.color} text-white text-xs font-bold`}>
-                    {role.label[0]}
-                  </div>
-                  <span className="text-xs font-semibold pr-1 text-foreground">
-                    {role.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LottiePlayer
+                      animationData={serviceAnimation}
+                      className="w-full h-full"
+                    />
         </div>
       </div>
     </section>

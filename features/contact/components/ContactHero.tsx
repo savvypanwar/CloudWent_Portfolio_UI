@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, Star, Sparkles, Zap, Target } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+import LottiePlayer from "@/components/common/LottiePlayer";
+import serviceAnimation from "@/assets/lottie/security-research.json";
 
 export const ContactHero = () => {
   const badges = [
@@ -12,7 +13,7 @@ export const ContactHero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden ">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
       {/* Dark Mode Gradient */}
@@ -76,34 +77,10 @@ export const ContactHero = () => {
           </div>
 
           {/* Right Column - Image + Floating Badges */}
-          <div className="relative">
-            <Image
-              src={heroImg}
-              alt="Contact CloudWent"
-              width={1024}
-              height={1024}
-              priority
-              className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
-            />
-            
-            <div className="absolute inset-0 pointer-events-none">
-              {badges.map((b, i) => (
-                <div
-                  key={b.title}
-                  className={`absolute ${b.pos} glass-effect rounded-2xl px-3 py-2.5 flex items-center gap-2.5 animate-float`}
-                  style={{ animationDelay: `${i * 0.5}s` }}
-                >
-                  <span className="w-9 h-9 rounded-xl grid place-items-center bg-primary/10 text-primary">
-                    <b.icon className="w-4.5 h-4.5" />
-                  </span>
-                  <div>
-                    <div className="text-xs font-bold leading-tight text-foreground">{b.title}</div>
-                    <div className="text-[10px] text-muted-foreground">{b.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+           <LottiePlayer
+                      animationData={serviceAnimation}
+                      className="w-full h-full"
+                    />
         </div>
       </div>
     </section>

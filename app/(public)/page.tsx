@@ -29,7 +29,7 @@ export const metadata = {
 export default function HomePage() {
   const teamPreview = dummyTeamMembers.slice(0, 5);
 
-  const mappedStats = stats.map((stat) => ({
+  const mappedStats = dummyStats.map((stat) => ({
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
@@ -38,15 +38,17 @@ export default function HomePage() {
     borderColor: "border-white/20",
   }));
 
-  const mappedServices = services.map((s) => ({
+  const mappedServices = dummyServices.map((s) => ({
     id: s.id,
     name: s.name,
     description: s.description,
     icon: s.icon,
-    color: s.color,
+    features: s.features,
+    iconColor: "text-white",
+    iconBg: s.color,
   }));
 
-  const mappedProjects = projects.map((p) => ({
+  const mappedProjects = dummyProjects.map((p) => ({
     id: p.id,
     slug: p.slug,
     title: p.title,
@@ -57,7 +59,7 @@ export default function HomePage() {
     stack: p.stack,
   }));
 
-  const mappedTestimonials = testimonials.map((t) => ({
+  const mappedTestimonials = dummyTestimonials.map((t) => ({
     id: t.id,
     content: t.content,
     name: t.name,
@@ -65,7 +67,7 @@ export default function HomePage() {
     rating: t.rating,
   }));
 
-  const mappedProcessSteps = processSteps.map((s) => ({
+  const mappedProcessSteps = dummyProcessSteps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,
@@ -73,7 +75,7 @@ export default function HomePage() {
     icon: s.icon,
   }));
 
-  const mappedBenefits = benefits.map((b) => ({
+  const mappedBenefits = dummyBenefits.map((b) => ({
     id: b.id,
     title: b.title,
     description: b.description,

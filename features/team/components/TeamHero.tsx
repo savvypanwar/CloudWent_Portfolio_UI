@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-import serviceAnimation from "@/assets/lottie/Welcome.json";
+// import serviceAnimation from "@/assets/lottie/Welcome.json";
 
 export const TeamHero = () => {
   // Team members as floating bubbles
@@ -82,10 +82,10 @@ export const TeamHero = () => {
           </div>
 
           {/* Right Side - Image + Floating Bubbles */}
-          <LottiePlayer
+          {/* <LottiePlayer
             animationData={serviceAnimation}
             className="w-full h-full"
-          />
+          /> */}
         </div>
       </div>
     </section>

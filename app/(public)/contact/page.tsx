@@ -7,18 +7,15 @@ import {
 } from "@/features/contact/components/";
 import { FAQ } from "@/features/contact/components";
 import { CTA } from "@/features/home/components";
-import { prisma } from "@/lib/prisma/prisma";
+import { dummyFaqs } from "@/lib/dummy-data";
 
 export const metadata = {
   title: "Contact Us | CloudWent",
   description: "Get in touch with CloudWent for web development, mobile apps, AI solutions, and cloud services. Let's build something amazing together.",
 };
 
-export default async function ContactPage() {
-  const faqs = await prisma.faq.findMany({
-    where: { category: "contact" },
-    orderBy: { order: "asc" },
-  });
+export default function ContactPage() {
+  const faqs = dummyFaqs;
 
   const mappedFaqs = faqs.map((f) => ({
     id: f.id,

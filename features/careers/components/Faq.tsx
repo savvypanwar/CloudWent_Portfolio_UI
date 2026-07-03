@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { SectionHeader } from "@/components/layout/SectionHeader/SectionHeader";
 
 interface FaqItem {
   id: string;

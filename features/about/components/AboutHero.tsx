@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+
+import LottiePlayer from "@/components/common/LottiePlayer";
+import serviceAnimation from "@/assets/lottie/Home.json";
 
 export const AboutHero = () => {
   // Our values as floating badges (like tech icons)
@@ -75,29 +77,10 @@ export const AboutHero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="relative">
-          <Image
-            src={heroImg}
-            alt="CloudWent"
-            width={1024}
-            height={1024}
-            priority
-            className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
+        <LottiePlayer
+            animationData={serviceAnimation}
+            className="w-full h-full"
           />
-          
-          <div className="absolute inset-0 pointer-events-none">
-            {values.map((v, i) => (
-              <div 
-                key={v.label} 
-                className={`absolute ${v.position} glass-effect rounded-2xl px-3 py-2 flex items-center gap-2 animate-float`} 
-                style={{ animationDelay: `${i * 0.4}s` }}
-              >
-                <span className="text-2xl">{v.icon}</span>
-                <span className="text-xs font-semibold pr-1 text-foreground">{v.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

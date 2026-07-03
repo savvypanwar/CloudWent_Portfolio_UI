@@ -5,26 +5,17 @@ import {
   BlogSidebar,
   BlogCta,
 } from "@/features/blog/components";
-import { prisma } from "@/lib/prisma/prisma";
+import { dummyBlogPosts } from "@/lib/dummy-data";
 
 export const metadata = {
   title: "Blog | CloudWent",
   description: "Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation.",
 };
 
-export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { status: "PUBLISHED" },
-    orderBy: { publishedAt: "desc" },
-    take: 6,
-  });
+export default function BlogPage() {
+  const posts = dummyBlogPosts;
 
-  const allPublishedPosts = await prisma.blogPost.findMany({
-    where: { status: "PUBLISHED" },
-    select: { category: true },
-  });
-
-  const categoryCounts = allPublishedPosts.reduce((acc, post) => {
+  const categoryCounts = posts.reduce((acc, post) => {
     acc[post.category] = (acc[post.category] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
@@ -39,22 +30,24 @@ export default async function BlogPage() {
   const featuredPost = posts[0];
   const remainingPosts = posts.slice(1);
 
-  const formattedFeatured = featuredPost ? {
-    slug: featuredPost.slug,
-    title: featuredPost.title,
-    excerpt: featuredPost.excerpt,
-    author: featuredPost.author,
-    date: featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
-    category: featuredPost.category,
-    image: featuredPost.image || "/placeholder.jpg",
-  } : null;
+  const formattedFeatured = featuredPost
+    ? {
+        slug: featuredPost.slug,
+        title: featuredPost.title,
+        excerpt: featuredPost.excerpt,
+        author: featuredPost.author,
+        date: featuredPost.date,
+        category: featuredPost.category,
+        image: featuredPost.image || "/placeholder.jpg",
+      }
+    : null;
 
   const formattedPosts = remainingPosts.map((post) => ({
-    id: Number(post.id.slice(-4)),
+    id: post.id,
     title: post.title,
     excerpt: post.excerpt,
     author: post.author,
-    date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "",
+    date: post.date,
     category: post.category,
     image: post.image || "/placeholder.jpg",
     slug: post.slug,

@@ -1,3 +1,10 @@
+import blogImage1 from "@/assets/images/blog/19362653.jpg";
+import blogImage2 from "@/assets/images/blog/20944170.jpg";
+import blogImage3 from "@/assets/images/blog/5785419.jpg";
+import blogImage4 from "@/assets/images/blog/6505016.jpg";
+import blogImage5 from "@/assets/images/blog/7046558.jpg";
+import blogImage6 from "@/assets/images/blog/971.jpg";
+
 export const dummyStats = [
   { icon: "users", value: "50+", label: "Happy Clients" },
   { icon: "code", value: "120+", label: "Projects Delivered" },
@@ -70,7 +77,7 @@ export const dummyProjects = [
     description: "A full-featured e-commerce solution with payment integration, inventory management, and real-time analytics.",
     category: "Web",
     tags: ["React", "Node.js", "Stripe"],
-    image: "/projects/ecommerce.jpg",
+    image: "/images/portfolio-lms.jpg",
     stack: ["React", "Node.js", "PostgreSQL"],
   },
   {
@@ -189,63 +196,63 @@ export const dummyTechnologies = [
 
 export const dummyBlogPosts = [
   {
-    id: "1",
+    id: 1,
     slug: "future-of-web-development",
     title: "The Future of Web Development in 2025",
     excerpt: "Explore emerging trends and technologies shaping the next generation of web applications.",
     author: "Alex Morgan",
     category: "Technology",
-    image: "/blog/web-dev.jpg",
+    image: blogImage1,
     date: "January 15, 2025",
   },
   {
-    id: "2",
+    id: 2,
     slug: "ai-in-business",
     title: "How AI is Transforming Business Operations",
     excerpt: "Real-world applications of AI that are revolutionizing how companies operate and grow.",
     author: "Riley Kim",
     category: "AI",
-    image: "/blog/ai-business.jpg",
-    date: "January 10, 2025",
+    image: blogImage2,
+    date: "January 10, 2025"
   },
   {
-    id: "3",
+    id: 3,
     slug: "scaling-saas-products",
     title: "Scaling SaaS Products: Best Practices",
     excerpt: "Learn proven strategies for scaling your SaaS product from startup to enterprise.",
     author: "Jordan Lee",
     category: "SaaS",
-    image: "/blog/saas.jpg",
+    image: blogImage3,
     date: "January 5, 2025",
   },
   {
-    id: "4",
+    id: 4,
     slug: "design-systems",
     title: "Building Scalable Design Systems",
     excerpt: "A comprehensive guide to creating and maintaining design systems that scale.",
     author: "Taylor Wright",
     category: "Design",
-    image: "/blog/design.jpg",
+    image: blogImage4,
     date: "December 28, 2024",
   },
   {
-    id: "5",
+    id: 5,
     slug: "cloud-architecture",
     title: "Modern Cloud Architecture Patterns",
     excerpt: "Key patterns and practices for building resilient cloud-native applications.",
     author: "Casey Patel",
     category: "Cloud",
-    image: "/blog/cloud.jpg",
+    image: blogImage5,
     date: "December 20, 2024",
   },
   {
-    id: "6",
+    id: 6,
     slug: "mobile-development-trends",
     title: "Mobile Development Trends to Watch",
     excerpt: "Stay ahead of the curve with these emerging mobile development trends.",
     author: "Alex Morgan",
     category: "Mobile",
-    image: "/blog/mobile.jpg",
+    image: blogImage6,
     date: "December 15, 2024",
   },
 ];
@@ -332,3 +339,4 @@ export const dummyCareerFaqs = [
   { id: "3", question: "What benefits do you offer?", answer: "We offer health insurance, stock options, flexible hours, learning budget, and annual team retreats." },
   { id: "4", question: "How do I apply?", answer: "Click on any job listing to view the full description and submit your application directly." },
 ];
+export { dummyTeamMembers } from "./dummy-team-members";

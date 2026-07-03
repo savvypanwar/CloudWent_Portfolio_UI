@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-import homeAnimation from "@/assets/lottie/Web Development.json";
+import homeAnimation from "@/assets/lottie/Coding Develio.json";
 // Import your downloaded PNG icons
 import nextjsIcon from "@/assets/icons/nextjs.svg";
 import nestjsIcon from "@/assets/icons/nestjs.svg";
@@ -23,7 +23,7 @@ export const Hero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-10">
+    <section className="relative overflow-hidden ">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-background dark:hidden" />
       {/* Dark Mode Gradient */}

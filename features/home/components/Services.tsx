@@ -1,4 +1,4 @@
-import { Code2, GraduationCap, Cloud, Smartphone, Sparkles, CloudCog, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Code2, GraduationCap, Cloud, Smartphone, Sparkles, CloudCog } from "lucide-react";
 import Link from "next/link";
 
 const iconMap: Record<string, any> = {
@@ -15,7 +15,9 @@ interface ServiceItem {
   name: string;
   description: string;
   icon: string;
-  color: string;
+  features: string[];
+  iconColor: string;
+  iconBg: string;
 }
 
 interface ServicesProps {
@@ -49,17 +51,17 @@ export const Services = ({ services }: ServicesProps) => {
             return (
               <div
                 key={s.id}
-                className="group glass-effect rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all"
+                className="group glass-effect rounded-2xl p-6 border border-transparent hover:border-primary/30 hover:shadow-[0_0_30px_rgba(var(--primary),0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               >
-                <div className={`w-12 h-12 rounded-xl grid place-items-center ${s.iconBg} ${s.iconColor} mb-4`}>
+                <div className={`w-12 h-12 rounded-xl grid place-items-center mb-4 ${s.iconBg} ${s.iconColor} shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300`}>
                   <IconComponent className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg mb-1.5 text-foreground">{s.name}</h3>
+                <h3 className="font-bold text-lg mb-1.5 text-foreground group-hover:text-primary transition-colors duration-300">{s.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
                 <ul className="mt-4 space-y-2">
                   {s.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
                       <span>{f}</span>
                     </li>
                   ))}

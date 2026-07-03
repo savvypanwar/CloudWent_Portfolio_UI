@@ -17,7 +17,7 @@ export const metadata = {
 export default function AboutPage() {
   const teamPreview = dummyTeamMembers.slice(0, 5);
 
-  const mappedTestimonials = testimonials.map((t) => ({
+  const mappedTestimonials = dummyTestimonials.map((t) => ({
     id: t.id,
     content: t.content,
     name: t.name,

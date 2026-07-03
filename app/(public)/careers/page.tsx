@@ -11,7 +11,7 @@ import {
   dummyJobOpenings,
   dummyPerks,
   dummyCompanyValues,
-  dummyProcessSteps,
+  dummyCareerProcessSteps,
   dummyCareerFaqs,
 } from "@/lib/dummy-data";
 
@@ -20,14 +20,12 @@ export const metadata = {
   description: "Join CloudWent. Build scalable web, SaaS, LMS and AI products with a remote-first team that ships.",
 };
 
-export default async function CareersPage() {
-  const [jobs, perks, values, steps, faqs] = await Promise.all([
-    prisma.jobOpening.findMany({ where: { status: "PUBLISHED" }, orderBy: { createdAt: "desc" } }),
-    prisma.perk.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.companyValue.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.processStep.findMany({ where: { page: "careers", active: true }, orderBy: { order: "asc" } }),
-    prisma.faq.findMany({ where: { category: "careers" }, orderBy: { order: "asc" } }),
-  ]);
+export default function CareersPage() {
+  const jobs = dummyJobOpenings;
+  const perks = dummyPerks;
+  const values = dummyCompanyValues;
+  const steps = dummyCareerProcessSteps;
+  const faqs = dummyCareerFaqs;
 
   const mappedJobs = jobs.map((j) => ({
     id: j.id,
@@ -50,7 +48,7 @@ export default async function CareersPage() {
     title: v.title,
   }));
 
-  const mappedSteps = dummyProcessSteps.map((s) => ({
+  const mappedSteps = steps.map((s) => ({
     id: s.id,
     step: s.step,
     title: s.title,

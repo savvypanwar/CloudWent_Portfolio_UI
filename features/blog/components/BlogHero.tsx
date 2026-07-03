@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button/Button";
-import heroImg from "@/assets/images/hero-cloud.png";
+import LottiePlayer from "@/components/common/LottiePlayer";
+import serviceAnimation from "@/assets/lottie/Modern digital advertise.json";
 
 export const BlogHero = () => {
   const categories = [
@@ -13,12 +14,12 @@ export const BlogHero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+   <section className="relative overflow-hidden py-10">
       {/* Light Mode Gradient */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
-      {/* Dark Mode Gradient */}
-      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 -z-10 bg--background dark:hidden" />
       
+      {/* ✅ Dark Mode Gradient (Bilkul Hero jaisa) */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg--foreground" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side */}
@@ -28,7 +29,8 @@ export const BlogHero = () => {
             </div>
             <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] text-foreground">
               Insights & Stories<br />
-              <span className="text-primary">From Our Team</span>
+              <span className="text-primary">From Our </span><br />
+              Team
             </h1>
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
               Stay updated with the latest insights, tutorials, and trends in web development, AI, cloud computing, and digital innovation from our team of experts.
@@ -54,31 +56,10 @@ export const BlogHero = () => {
             </div>
           </div>
 
-          {/* Right Side - Image + Floating Categories */}
-          <div className="relative">
-            <Image
-              src={heroImg}
-              alt="CloudWent Blog"
-              width={1024}
-              height={1024}
-              priority
-              className="w-full max-w-xl mx-auto animate-float-slow drop-shadow-2xl"
-            />
-            <div className="absolute inset-0 pointer-events-none">
-              {categories.map((cat, i) => (
-                <div
-                  key={cat.label}
-                  className={`absolute ${cat.position} glass-effect rounded-2xl px-3 py-2 flex items-center gap-2 animate-float`}
-                  style={{ animationDelay: `${i * 0.4}s` }}
-                >
-                  <div className={`w-9 h-9 rounded-xl grid place-items-center bg-gradient-to-br ${cat.color} text-white text-xs font-bold`}>
-                    {cat.label[0]}
-                  </div>
-                  <span className="text-xs font-semibold pr-1 text-foreground">{cat.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LottiePlayer
+            animationData={serviceAnimation}
+            className="w-full h-full"
+          />
         </div>
       </div>
     </section>

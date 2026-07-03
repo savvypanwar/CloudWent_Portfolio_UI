@@ -8,21 +8,25 @@ import {
   Faq,
   ContactCta,
 } from "@/features/Services/components";
-import { prisma } from "@/lib/prisma/prisma";
+import {
+  dummyServices,
+  dummyPricingPlans,
+  dummyFaqs,
+  dummyProcessSteps,
+  dummyTechnologies,
+} from "@/lib/dummy-data";
 
 export const metadata = {
   title: "Services | CloudWent",
   description: "End-to-end product engineering: web, mobile, SaaS, LMS, cloud and AI. Pick a plan or scope a custom build with CloudWent.",
 };
 
-export default async function ServicesPage() {
-  const [services, plans, faqs, workflowSteps, technologies] = await Promise.all([
-    prisma.service.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.pricingPlan.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.faq.findMany({ where: { category: "services" }, orderBy: { order: "asc" } }),
-    prisma.processStep.findMany({ where: { page: "services", active: true }, orderBy: { order: "asc" } }),
-    prisma.technology.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-  ]);
+export default function ServicesPage() {
+  const services = dummyServices;
+  const plans = dummyPricingPlans;
+  const faqs = dummyFaqs;
+  const workflowSteps = dummyProcessSteps;
+  const technologies = dummyTechnologies;
 
   const mappedServices = services.map((s) => ({
     id: s.id,

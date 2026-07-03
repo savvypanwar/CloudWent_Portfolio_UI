@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Star, Code2, Brain, Smartphone, CloudCog, Play } 
 import Lottie from "lottie-react";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-import serviceAnimation from "@/assets/lottie/Services.json";
+import serviceAnimation from "@/assets/lottie/web-design-layout.json";
 
 
 export const Hero = () => {

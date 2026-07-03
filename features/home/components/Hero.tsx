@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-import homeAnimation from "@/assets/lottie/Coding Develio.json";
+import homeAnimation from "@/assets/lottie/website-design.json";
 // Import your downloaded PNG icons
 import nextjsIcon from "@/assets/icons/nextjs.svg";
 import nestjsIcon from "@/assets/icons/nestjs.svg";

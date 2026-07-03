@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-// import serviceAnimation from "@/assets/lottie/Welcome.json";
+import serviceAnimation from "@/assets/lottie/designer-building-website.json";
 
 export const TeamHero = () => {
   // Team members as floating bubbles
@@ -15,7 +15,7 @@ export const TeamHero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden ">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,oklch(0.92_0.06_250)_0%,transparent_60%)] dark:hidden" />
       {/* Dark Mode Gradient */}
@@ -82,10 +82,10 @@ export const TeamHero = () => {
           </div>
 
           {/* Right Side - Image + Floating Bubbles */}
-          {/* <LottiePlayer
+          <LottiePlayer
             animationData={serviceAnimation}
             className="w-full h-full"
-          /> */}
+          />
         </div>
       </div>
     </section>

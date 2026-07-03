@@ -4,7 +4,7 @@ import { ArrowRight, Play, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
 import LottiePlayer from "@/components/common/LottiePlayer";
-import serviceAnimation from "@/assets/lottie/Home.json";
+import serviceAnimation from "@/assets/lottie/web-design-data.json";
 
 export const AboutHero = () => {
   // Our values as floating badges (like tech icons)

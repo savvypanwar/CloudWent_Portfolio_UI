@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles, Star } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button/Button";
 import LottiePlayer from "@/components/common/LottiePlayer";
-import serviceAnimation from "@/assets/lottie/Modern digital advertise.json";
+import serviceAnimation from "@/assets/lottie/website-maintenance.json";
 
 export const BlogHero = () => {
   const categories = [

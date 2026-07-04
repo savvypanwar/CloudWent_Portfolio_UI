@@ -17,23 +17,32 @@ import {
   dummyTestimonials,
   dummyProcessSteps,
   dummyBenefits,
-  dummyTeamMembers,
   dummyFaqs,
 } from "@/lib/dummy-data";
+import { getTeamMembers } from "@/lib/team";
+
+async function getTeamPreview() {
+  try {
+    const members = await getTeamMembers();
+    return members.slice(0, 5);
+  } catch {
+    return [];
+  }
+}
 
 export const metadata = {
   title: "CloudWent | Building Scalable Digital Solutions",
   description: "We build scalable web applications, LMS platforms, SaaS products, and AI solutions for ambitious businesses.",
 };
 
-export default function HomePage() {
-  const teamPreview = dummyTeamMembers.slice(0, 5);
+export default async function HomePage() {
+  const teamPreview = await getTeamPreview();
 
   const mappedStats = dummyStats.map((stat) => ({
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
-    iconColor: "text-primary-foreground",
+    iconColor: "text-primary-background",
     boxColor: "bg-background/10",
     borderColor: "border-white/20",
   }));

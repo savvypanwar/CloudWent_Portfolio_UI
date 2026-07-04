@@ -1,6 +1,4 @@
-import { dummyStats, dummyTeamMembers } from "@/lib/dummy-data";
-
-export const teamMembers = dummyTeamMembers;
+import { dummyStats } from "@/lib/dummy-data";
 
 export const teamSections = [
   { key: "leadership", label: "Leadership", subtitle: "The visionaries guiding our mission" },

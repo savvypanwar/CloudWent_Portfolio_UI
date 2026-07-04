@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Pencil, Trash2, MessageSquare } from "lucide-react";
+import { Eye, Pencil, Trash2, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button/Button";
@@ -27,7 +27,7 @@ export default async function LeadsPage() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Contact Inquiries</h1>
+          <h1 className="text-2xl font-bold text-foreground">Contact</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Manage contact form submissions and leads.
           </p>
@@ -50,7 +50,7 @@ export default async function LeadsPage() {
               {leads.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-10 text-center text-muted-foreground">
-                    No contact inquiries found.
+                    No messages found.
                   </td>
                 </tr>
               ) : (
@@ -77,6 +77,11 @@ export default async function LeadsPage() {
                       {new Date(lead.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
+                      <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
+                        <Link href={`/leads/${lead.id}`}>
+                          <Eye className="w-3.5 h-3.5 text-muted-foreground" />
+                        </Link>
+                      </Button>
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
                         <Link href={`/leads/${lead.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />

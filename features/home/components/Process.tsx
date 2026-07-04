@@ -1,4 +1,8 @@
-import { Search, FileText, PenTool, Code, CheckCircle, Rocket } from "lucide-react";
+import {
+  Search, ClipboardList, Palette, Hammer, FlaskConical, Send,
+  Lightbulb, Compass, Layers, Wrench, ShieldCheck, Rocket,
+  FileText, PenTool, Code, CheckCircle
+} from "lucide-react";
 
 const iconMap: Record<string, any> = {
   search: Search,
@@ -7,6 +11,16 @@ const iconMap: Record<string, any> = {
   code: Code,
   "check-circle": CheckCircle,
   rocket: Rocket,
+  "clipboard-list": ClipboardList,
+  palette: Palette,
+  hammer: Hammer,
+  "flask-conical": FlaskConical,
+  send: Send,
+  lightbulb: Lightbulb,
+  compass: Compass,
+  layers: Layers,
+  wrench: Wrench,
+  "shield-check": ShieldCheck,
 };
 
 interface ProcessStep {

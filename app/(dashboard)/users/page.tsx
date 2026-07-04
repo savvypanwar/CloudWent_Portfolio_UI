@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Plus, Pencil, Trash2, Users } from "lucide-react";
+import { Plus, Eye, Pencil, Trash2, Users } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button/Button";
@@ -103,6 +103,11 @@ export default async function UsersPage() {
                       {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : "Never"}
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
+                      <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
+                        <Link href={`/users/${user.id}`}>
+                          <Eye className="w-3.5 h-3.5 text-muted-foreground" />
+                        </Link>
+                      </Button>
                       <Button variant="outline" size="icon" className="h-8 w-8 border-border hover:bg-muted/50" asChild>
                         <Link href={`/users/${user.id}/edit`}>
                           <Pencil className="w-3.5 h-3.5 text-muted-foreground" />

@@ -5,6 +5,10 @@ import blogImage4 from "@/assets/images/blog/6505016.jpg";
 import blogImage5 from "@/assets/images/blog/7046558.jpg";
 import blogImage6 from "@/assets/images/blog/971.jpg";
 
+import projectImage1 from "@/assets/images/portfolio-lms.jpg";
+import projectImage2 from "@/assets/images/portfolio-health.jpg";
+import projectImage3 from "@/assets/images/portfolio-finance.jpg";
+
 export const dummyStats = [
   { icon: "users", value: "50+", label: "Happy Clients" },
   { icon: "code", value: "120+", label: "Projects Delivered" },
@@ -77,7 +81,7 @@ export const dummyProjects = [
     description: "A full-featured e-commerce solution with payment integration, inventory management, and real-time analytics.",
     category: "Web",
     tags: ["React", "Node.js", "Stripe"],
-    image: "/images/portfolio-lms.jpg",
+    image: projectImage1,
     stack: ["React", "Node.js", "PostgreSQL"],
   },
   {
@@ -87,7 +91,7 @@ export const dummyProjects = [
     description: "Telemedicine platform connecting patients with doctors via video calls and secure messaging.",
     category: "Mobile",
     tags: ["React Native", "Firebase", "WebRTC"],
-    image: "/projects/healthcare.jpg",
+    image: projectImage2,
     stack: ["React Native", "Firebase", "WebRTC"],
   },
   {
@@ -97,7 +101,7 @@ export const dummyProjects = [
     description: "Real-time financial analytics dashboard with data visualization and reporting.",
     category: "SaaS",
     tags: ["Next.js", "D3.js", "Python"],
-    image: "/projects/fintech.jpg",
+    image: projectImage3,
     stack: ["Next.js", "D3.js", "Python"],
   },
 ];
@@ -145,7 +149,7 @@ export const dummyPricingPlans = [
   {
     id: "1",
     name: "Starter",
-    price: "$2,999",
+    price: "₹10,999",
     sub: "/project",
     description: "Perfect for small projects and MVPs.",
     features: ["Custom Design", "Up to 5 Pages", "Mobile Responsive", "SEO Setup", "2 Revisions"],
@@ -155,7 +159,7 @@ export const dummyPricingPlans = [
   {
     id: "2",
     name: "Professional",
-    price: "$7,999",
+    price: "₹29,999",
     sub: "/project",
     description: "Ideal for growing businesses with advanced needs.",
     features: ["Everything in Starter", "Up to 15 Pages", "CMS Integration", "Analytics Setup", "5 Revisions", "Priority Support"],
@@ -203,7 +207,7 @@ export const dummyBlogPosts = [
     author: "Alex Morgan",
     category: "Technology",
     image: blogImage1,
-    date: "January 15, 2025",
+    date: "July 5, 2025",
   },
   {
     id: 2,
@@ -213,7 +217,7 @@ export const dummyBlogPosts = [
     author: "Riley Kim",
     category: "AI",
     image: blogImage2,
-    date: "January 10, 2025"
+    date: "July 1, 2025"
   },
   {
     id: 3,
@@ -223,7 +227,7 @@ export const dummyBlogPosts = [
     author: "Jordan Lee",
     category: "SaaS",
     image: blogImage3,
-    date: "January 5, 2025",
+    date: "June 5, 2025",
   },
   {
     id: 4,
@@ -233,7 +237,7 @@ export const dummyBlogPosts = [
     author: "Taylor Wright",
     category: "Design",
     image: blogImage4,
-    date: "December 28, 2024",
+    date: "June 2, 2026",
   },
   {
     id: 5,
@@ -243,7 +247,7 @@ export const dummyBlogPosts = [
     author: "Casey Patel",
     category: "Cloud",
     image: blogImage5,
-    date: "December 20, 2024",
+    date: "May 20, 2026",
   },
   {
     id: 6,
@@ -253,58 +257,7 @@ export const dummyBlogPosts = [
     author: "Alex Morgan",
     category: "Mobile",
     image: blogImage6,
-    date: "December 15, 2024",
-  },
-];
-
-export const dummyJobOpenings = [
-  {
-    id: "1",
-    slug: "senior-frontend-developer",
-    title: "Senior Frontend Developer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$120K - $160K",
-    description: "We're looking for an experienced frontend developer to join our growing team.",
-    requirements: ["5+ years React experience", "TypeScript proficiency", "Next.js experience"],
-    benefits: ["Health insurance", "Stock options", "Flexible hours"],
-  },
-  {
-    id: "2",
-    slug: "ai-engineer",
-    title: "AI Engineer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$140K - $180K",
-    description: "Join our AI team to build cutting-edge machine learning solutions.",
-    requirements: ["Python expertise", "ML frameworks experience", "NLP or Computer Vision"],
-    benefits: ["Health insurance", "Stock options", "Conference budget"],
-  },
-  {
-    id: "3",
-    slug: "ux-designer",
-    title: "UX Designer",
-    department: "Design",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$100K - $140K",
-    description: "Create beautiful and intuitive user experiences for our products.",
-    requirements: ["Portfolio demonstrating UX work", "Figma expertise", "User research experience"],
-    benefits: ["Health insurance", "Design tool budget", "Flexible hours"],
-  },
-  {
-    id: "4",
-    slug: "devops-engineer",
-    title: "DevOps Engineer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$130K - $170K",
-    description: "Build and maintain our cloud infrastructure and CI/CD pipelines.",
-    requirements: ["AWS/Azure experience", "Docker & Kubernetes", "Terraform experience"],
-    benefits: ["Health insurance", "Stock options", "Certification budget"],
+    date: "May 15, 2026",
   },
 ];
 
@@ -339,4 +292,3 @@ export const dummyCareerFaqs = [
   { id: "3", question: "What benefits do you offer?", answer: "We offer health insurance, stock options, flexible hours, learning budget, and annual team retreats." },
   { id: "4", question: "How do I apply?", answer: "Click on any job listing to view the full description and submit your application directly." },
 ];
-export { dummyTeamMembers } from "./dummy-team-members";

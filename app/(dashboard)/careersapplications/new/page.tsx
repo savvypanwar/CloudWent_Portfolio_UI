@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/Button/Button";
-import { Input } from "@/components/ui/Input/Input";
-import { Toast } from "@/services/toast.service";
+
 import {
   DashboardFormShell,
   dashboardInputClass,
@@ -12,6 +10,16 @@ import {
   dashboardTextareaClass,
   parseCommaList,
 } from "@/components/dashboard/DashboardFormShell";
+import { Button } from "@/components/ui/Button/Button";
+import { Input } from "@/components/ui/Input/Input";
+import { Toast } from "@/services/toast.service";
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 
 export default function NewJobPage() {
   const router = useRouter();
@@ -28,6 +36,8 @@ export default function NewJobPage() {
     benefits: "",
     status: "DRAFT",
   });
+
+  const generatedSlug = useMemo(() => slugify(formData.title), [formData.title]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -47,6 +57,8 @@ export default function NewJobPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          slug: formData.slug || generatedSlug,
+          salary: formData.salary || null,
           requirements: parseCommaList(formData.requirements),
           benefits: parseCommaList(formData.benefits),
         }),
@@ -72,54 +84,76 @@ export default function NewJobPage() {
   };
 
   return (
-    <DashboardFormShell backHref="/careersapplications" title="Add Job Opening">
+    <DashboardFormShell
+      backHref="/careersapplications"
+      backLabel="Back to Jobs"
+      title="Add Job Opening"
+    >
       <form onSubmit={handleSubmit} className="glass-effect border-border rounded-3xl p-8 md:p-10 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Title <span className="text-destructive">*</span></label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Title <span className="text-destructive">*</span>
+            </label>
             <Input name="title" value={formData.title} onChange={handleChange} required className={dashboardInputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Slug <span className="text-destructive">*</span></label>
-            <Input name="slug" value={formData.slug} onChange={handleChange} required className={dashboardInputClass} />
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Slug <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="slug"
+              value={formData.slug || generatedSlug}
+              onChange={handleChange}
+              required
+              className={dashboardInputClass}
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Department <span className="text-destructive">*</span></label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Department <span className="text-destructive">*</span>
+            </label>
             <Input name="department" value={formData.department} onChange={handleChange} required className={dashboardInputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Location <span className="text-destructive">*</span></label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Location <span className="text-destructive">*</span>
+            </label>
             <Input name="location" value={formData.location} onChange={handleChange} required className={dashboardInputClass} />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Type <span className="text-destructive">*</span></label>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Type <span className="text-destructive">*</span>
+            </label>
             <Input name="type" value={formData.type} onChange={handleChange} required className={dashboardInputClass} />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">Salary</label>
-            <Input name="salary" value={formData.salary} onChange={handleChange} className={dashboardInputClass} />
+            <Input name="salary" value={formData.salary} onChange={handleChange} placeholder="Optional" className={dashboardInputClass} />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">Description <span className="text-destructive">*</span></label>
+          <label className="block text-sm font-medium text-foreground mb-1.5">
+            Description <span className="text-destructive">*</span>
+          </label>
           <textarea name="description" rows={4} value={formData.description} onChange={handleChange} required className={dashboardTextareaClass} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Requirements (comma-separated)</label>
-            <Input name="requirements" value={formData.requirements} onChange={handleChange} className={dashboardInputClass} />
+            <label className="block text-sm font-medium text-foreground mb-1.5">Requirements</label>
+            <Input name="requirements" value={formData.requirements} onChange={handleChange} placeholder="Comma-separated" className={dashboardInputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">Benefits (comma-separated)</label>
-            <Input name="benefits" value={formData.benefits} onChange={handleChange} className={dashboardInputClass} />
+            <label className="block text-sm font-medium text-foreground mb-1.5">Benefits</label>
+            <Input name="benefits" value={formData.benefits} onChange={handleChange} placeholder="Comma-separated" className={dashboardInputClass} />
           </div>
         </div>
 
@@ -133,8 +167,12 @@ export default function NewJobPage() {
         </div>
 
         <div className="flex justify-end gap-4 pt-4 border-t border-border">
-          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>Cancel</Button>
-          <Button type="submit" variant="primary" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save Job Opening"}</Button>
+          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>
+            Cancel
+          </Button>
+          <Button type="submit" variant="primary" disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : "Save Job Opening"}
+          </Button>
         </div>
       </form>
     </DashboardFormShell>

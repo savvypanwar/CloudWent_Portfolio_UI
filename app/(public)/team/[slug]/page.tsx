@@ -12,12 +12,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Linkedin, Twitter, Github, Youtube, Instagram, Facebook } from "@/components/common/SocialIcons";
+import { getTeamMemberByIdentifier, getTeamMembers } from "@/lib/team";
 
-import { getTeamMemberByIdentifier, getTeamMembers, getTeamSlugs } from "@/lib/team";
+async function getTeamMemberBySlug(slug: string) {
+  return await getTeamMemberByIdentifier(slug);
+}
 
-export async function generateStaticParams() {
-  const slugs = await getTeamSlugs();
-  return slugs.map((slug) => ({ slug }));
+async function getAllTeamMembers() {
+  return await getTeamMembers();
 }
 
 const skillIcons: Record<string, string> = {
@@ -47,12 +49,12 @@ export default async function TeamMemberPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const member = await getTeamMemberByIdentifier(slug);
+  const member = await getTeamMemberBySlug(slug);
   if (!member) notFound();
 
-  const allMembers = await getTeamMembers();
+  const allMembers = await getAllTeamMembers();
   const teamMates = allMembers
-    .filter((m) => m.team === member.team && m.slug !== member.slug)
+    .filter((m: any) => m.team === member.team && m.slug !== member.slug)
     .slice(0, 4);
 
   const bioParagraphs = (member.bio ?? "").split("\n\n").filter(Boolean);
@@ -63,7 +65,7 @@ export default async function TeamMemberPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="space-y-5">
-              <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+              <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                 <div className="w-28 h-28 rounded-2xl mx-auto mb-5 overflow-hidden shadow-lg">
                   {member.image ? (
                     <Image
@@ -127,7 +129,7 @@ export default async function TeamMemberPage({
                         href={href}
                         target={href?.startsWith("mailto:") ? undefined : "_blank"}
                         rel="noreferrer"
-                        className="w-8 h-8 bg-surface hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-primary-foreground text-muted-foreground dark:text-muted-foreground rounded-lg flex items-center justify-center transition-all"
+                        className="w-8 h-8 bg-surface hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-primary-foreground text-muted-foreground dark:text-muted-foreground rounded-lg flex items-center justify-center transition-all hover:scale-110"
                       >
                         <Icon className="w-4 h-4" />
                       </a>
@@ -135,16 +137,16 @@ export default async function TeamMemberPage({
                 </div>
               </div>
 
-              {member.expertise.length > 0 ? (
-                <div className="bg-card rounded-2xl p-5 border border-border shadow-sm transition-colors">
+              {member.expertise?.length > 0 ? (
+                <div className="bg-card rounded-2xl p-5 border border-border shadow-sm transition-colors card-hover">
                   <h3 className="text-sm font-bold text-foreground mb-4">
                     Expertise
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {member.expertise.map((tag) => (
+                    {member.expertise.map((tag: string) => (
                       <span
                         key={tag}
-                        className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                        className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full hover:bg-primary/20 hover:shadow-sm transition-all"
                       >
                         {tag}
                       </span>
@@ -154,12 +156,12 @@ export default async function TeamMemberPage({
               ) : null}
 
               {teamMates.length > 0 ? (
-                <div className="bg-card rounded-2xl p-5 border border-border shadow-sm transition-colors">
+                <div className="bg-card rounded-2xl p-5 border border-border shadow-sm transition-colors card-hover">
                   <h3 className="text-sm font-bold text-foreground mb-4">
                     Same Team
                   </h3>
                   <div className="space-y-3">
-                    {teamMates.map((m) => (
+                    {teamMates.map((m: any) => (
                       <Link
                         key={m.slug}
                         href={`/team/${m.slug}`}
@@ -200,12 +202,12 @@ export default async function TeamMemberPage({
 
             <div className="lg:col-span-2 space-y-6">
               {member.bio ? (
-                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                   <h2 className="text-base font-bold text-foreground mb-4">
                     About {member.name.split(" ")[0]}
                   </h2>
                   <div className="space-y-3">
-                    {bioParagraphs.map((para, index) => (
+                    {bioParagraphs.map((para: string, index: number) => (
                       <p
                         key={index}
                         className="text-sm text-muted-foreground leading-relaxed"
@@ -217,16 +219,16 @@ export default async function TeamMemberPage({
                 </div>
               ) : null}
 
-              {member.skills.length > 0 ? (
-                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+              {member.skills?.length > 0 ? (
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                   <h2 className="text-base font-bold text-foreground mb-5">
                     Skills & Technologies
                   </h2>
                   <div className="flex flex-wrap gap-3">
-                    {member.skills.map((skill) => (
+                    {member.skills.map((skill: string) => (
                       <div
                         key={skill}
-                        className="flex flex-col items-center gap-1.5 bg-surface hover:bg-primary/10 rounded-xl p-3 transition-colors cursor-default min-w-[60px]"
+                        className="flex flex-col items-center gap-1.5 bg-surface hover:bg-primary/10 rounded-xl p-3 transition-all hover:shadow-md cursor-default min-w-[60px] hover:-translate-y-0.5"
                       >
                         <div className="w-10 h-10 bg-card rounded-lg flex items-center justify-center shadow-sm text-lg">
                           {skillIcons[skill] || "◆"}
@@ -240,10 +242,10 @@ export default async function TeamMemberPage({
                 </div>
               ) : null}
 
-              {(member.experience_timeline.length > 0 || member.education.length > 0) && (
+              {(member.experience_timeline?.length > 0 || member.education?.length > 0) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {member.experience_timeline.length > 0 ? (
-                    <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+                  {member.experience_timeline?.length > 0 ? (
+                    <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                       <div className="flex items-center gap-2 mb-5">
                         <Briefcase className="w-4 h-4 text-blue-600 dark:text-primary" />
                         <h2 className="text-base font-bold text-foreground">
@@ -251,7 +253,7 @@ export default async function TeamMemberPage({
                         </h2>
                       </div>
                       <div className="space-y-5">
-                        {member.experience_timeline.map(({ period, title, company, desc }) => (
+                        {member.experience_timeline.map(({ period, title, company, desc }: any) => (
                           <div
                             key={period}
                             className="relative pl-4 border-l-2 border-blue-100 dark:border-blue-800"
@@ -275,8 +277,8 @@ export default async function TeamMemberPage({
                     </div>
                   ) : null}
 
-                  {member.education.length > 0 ? (
-                    <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+                  {member.education?.length > 0 ? (
+                    <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                       <div className="flex items-center gap-2 mb-5">
                         <GraduationCap className="w-4 h-4 text-blue-600 dark:text-primary" />
                         <h2 className="text-base font-bold text-foreground">
@@ -284,7 +286,7 @@ export default async function TeamMemberPage({
                         </h2>
                       </div>
                       <div className="space-y-5">
-                        {member.education.map(({ degree, school, years }) => (
+                        {member.education.map(({ degree, school, years }: any) => (
                           <div
                             key={degree}
                             className="relative pl-4 border-l-2 border-indigo-100 dark:border-indigo-800"
@@ -307,18 +309,18 @@ export default async function TeamMemberPage({
                 </div>
               )}
 
-              {member.projects.length > 0 ? (
-                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+              {member.projects?.length > 0 ? (
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                   <div className="flex items-center justify-between mb-5">
                     <h2 className="text-base font-bold text-foreground">
                       Featured Projects
                     </h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {member.projects.map(({ name, type, desc, tags, badge }) => (
+                    {member.projects.map(({ name, type, desc, tags, badge }: any) => (
                       <div
                         key={name}
-                        className="border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow group"
+                        className="border border-border rounded-xl overflow-hidden hover:shadow-md transition-all group card-hover cursor-pointer"
                       >
                         <div className="h-24 bg-gradient-to-br from-blue-600 to-indigo-800 relative flex items-end p-3">
                           <span className="text-primary-foreground text-xs font-semibold">
@@ -339,7 +341,7 @@ export default async function TeamMemberPage({
                             {desc}
                           </p>
                           <div className="flex flex-wrap gap-1">
-                            {tags.map((tag) => (
+                            {tags.map((tag: string) => (
                               <span
                                 key={tag}
                                 className="px-2 py-0.5 bg-surface text-muted-foreground text-[10px] rounded-full"
@@ -355,16 +357,16 @@ export default async function TeamMemberPage({
                 </div>
               ) : null}
 
-              {member.certifications.length > 0 ? (
-                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors">
+              {member.certifications?.length > 0 ? (
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm transition-colors card-hover">
                   <h2 className="text-base font-bold text-foreground mb-5">
                     Certifications
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {member.certifications.map((cert) => (
+                    {member.certifications.map((cert: string) => (
                       <div
                         key={cert}
-                        className="flex items-center gap-3 bg-surface rounded-xl p-3"
+                        className="flex items-center gap-3 bg-surface rounded-xl p-3 hover:bg-primary/5 transition-colors"
                       >
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-800 flex items-center justify-center flex-shrink-0 shadow-sm">
                           <span className="text-primary-foreground text-xs font-bold">✓</span>
@@ -379,7 +381,7 @@ export default async function TeamMemberPage({
               ) : null}
 
               {member.email ? (
-                <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 dark:from-blue-700 dark:to-indigo-900 p-8 relative overflow-hidden">
+                <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 dark:from-blue-700 dark:to-indigo-900 p-8 relative overflow-hidden card-hover">
                   <div className="absolute right-0 top-0 w-40 h-40 bg-background/10 rounded-full -translate-y-1/4 translate-x-1/4 blur-2xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-bold text-primary-foreground mb-2">
@@ -391,7 +393,7 @@ export default async function TeamMemberPage({
                     </p>
                     <a
                       href={`mailto:${member.email}`}
-                      className="inline-flex items-center gap-2 bg-background text-primary font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-primary/10 transition-colors shadow-md"
+                      className="inline-flex items-center gap-2 bg-background text-primary font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-primary/10 transition-colors shadow-md hover:shadow-lg hover:-translate-y-0.5"
                     >
                       Schedule a Meeting <ArrowRight className="w-4 h-4" />
                     </a>

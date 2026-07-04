@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Eye, Pencil, Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/Button/Button";
@@ -35,11 +35,18 @@ export default async function TeamPage() {
             Manage your team members, update roles, and bios.
           </p>
         </div>
-        <Button asChild variant="primary" size="sm" className="glass-effect shadow-md">
-          <Link href="/myteam/new">
-            <Plus className="w-4 h-4 mr-2" /> Add New Member
-          </Link>
-        </Button>
+          <div className="flex items-center gap-3">
+            <Button asChild variant="outline" size="sm" className="glass-effect border-border hover:bg-muted/50">
+              <Link href="/team" target="_blank">
+                View Public Page
+              </Link>
+            </Button>
+            <Button asChild variant="primary" size="sm" className="glass-effect shadow-md">
+              <Link href="/myteam/new">
+                <Plus className="w-4 h-4 mr-2" /> Add New Member
+              </Link>
+            </Button>
+          </div>
       </div>
 
       <div className="glass-effect border-border rounded-2xl overflow-hidden">
@@ -105,6 +112,16 @@ export default async function TeamPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 border-border hover:bg-muted/50"
+                        asChild
+                      >
+                        <Link href={`/myteam/${member.id}`}>
+                          <Eye className="w-3.5 h-3.5 text-muted-foreground" />
+                        </Link>
+                      </Button>
                       <Button
                         variant="outline"
                         size="icon"

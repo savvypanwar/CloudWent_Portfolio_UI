@@ -24,8 +24,9 @@ const contactSchema = z.object({
 export const ContactForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const parsed = contactSchema.safeParse(Object.fromEntries(fd.entries()));
@@ -36,8 +37,31 @@ export const ContactForm = () => {
       return;
     }
     setErrors({});
-    setSubmitted(true);
-    e.currentTarget.reset();
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          subject: parsed.data.service,
+          message: parsed.data.message,
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        e.currentTarget.reset();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrors({ general: data.error || "Failed to send message. Please try again." });
+      }
+    } catch {
+      setErrors({ general: "Network error. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   // Input classes with dark mode support
@@ -96,9 +120,12 @@ export const ContactForm = () => {
                 <textarea name="message" rows={5} placeholder="Tell us about your project..." className={inputCls} maxLength={1000} />
                 {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
               </div>
-              <button type="submit" className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-gradient-cta text-primary-foreground px-6 py-3.5 rounded-xl font-semibold shadow-glow hover:opacity-95 transition">
-                Send Message <ArrowRight className="w-4 h-4" />
+              <button type="submit" disabled={isSubmitting} className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-gradient-cta text-primary-foreground px-6 py-3.5 rounded-xl font-semibold shadow-glow hover:opacity-95 transition disabled:opacity-60 disabled:cursor-not-allowed">
+                {isSubmitting ? "Sending..." : "Send Message"} <ArrowRight className="w-4 h-4" />
                 </button>
+              {errors.general && (
+                <p className="sm:col-span-2 text-xs text-destructive text-center">{errors.general}</p>
+              )}
               <p className="sm:col-span-2 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
                 <Lock className="w-3 h-3" /> We respect your privacy. Your information is safe with us.
               </p>

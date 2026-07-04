@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/Button/Button";
 
 export const Story = () => {
   const steps = [
-    { icon: Cloud, year: "2020", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions for modern businesses." },
-    { icon: Users, year: "2021", title: "Team Growth", text: "Grew our team to 10+ experts and expanded our service offerings across cloud & web." },
-    { icon: Zap, year: "2023", title: "First Major Clients", text: "Partnered with enterprise clients and delivered high-impact digital transformations." },
-    { icon: Globe, year: "2024", title: "Global Reach", text: "Expanded operations to serve clients across North America, Europe, and Asia." },
-    { icon: Rocket, year: "2025", title: "AI & Innovation", text: "Launched AI-powered solutions and next-gen cloud-native platforms." },
-    { icon: Medal, year: "2026", title: "50+ Projects", text: "Surpassed 50 successful project deliveries with 99.9% uptime reliability." },
+    { icon: Cloud, year: "2026", title: "Founded", text: "CloudWent was founded with a vision to deliver scalable digital solutions for modern businesses." },
+    { icon: Users, year: "2026", title: "Team Growth", text: "Grew our team to 10+ experts and expanded our service offerings across cloud & web." },
+    { icon: Zap, year: "2026", title: "First Major Clients", text: "Partnered with enterprise clients and delivered high-impact digital transformations." },
+    { icon: Globe, year: "in progress", title: "Global Reach", text: "Expanded operations to serve clients across North America, Europe, and Asia." },
+    { icon: Rocket, year: "in progress", title: "AI & Innovation", text: "Launched AI-powered solutions and next-gen cloud-native platforms." },
+    { icon: Medal, year: "in progress", title: "50+ Projects", text: "Surpassed 50 successful project deliveries with 99.9% uptime reliability." },
   ];
 
   return (

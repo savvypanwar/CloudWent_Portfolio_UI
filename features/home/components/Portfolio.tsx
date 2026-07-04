@@ -10,7 +10,7 @@ interface PortfolioProject {
   description: string;
   category: string;
   tags: string[];
-  image?: string | null;
+  image?: string | import("next/image").StaticImageData | null;
   stack: string[];
 }
 

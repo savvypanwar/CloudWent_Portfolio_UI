@@ -1,7 +1,7 @@
 import type { TeamMember as PrismaTeamMember, Prisma } from "@prisma/client";
 
 import { prisma } from "@/lib/prisma/prisma";
-import { teamMembers as fallbackMembers, teamSections, stats } from "@/lib/team-data";
+import { teamSections, stats } from "@/lib/team-data";
 
 import type {
   TeamEducationItem,
@@ -16,35 +16,6 @@ export { teamSections, stats };
 
 function parseJsonArray<T>(value: unknown, fallback: T[] = []): T[] {
   return Array.isArray(value) ? (value as T[]) : fallback;
-}
-
-function mapStaticMember(
-  member: (typeof fallbackMembers)[number],
-  index: number
-): TeamMemberProfile {
-  return {
-    id: member.slug,
-    slug: member.slug,
-    name: member.name,
-    role: member.role,
-    initials: member.initials,
-    team: member.team,
-    avatarColor: member.color,
-    color: member.color,
-    bio: member.bio,
-    location: member.location,
-    experience: member.experience,
-    email: member.email,
-    linkedin: member.linkedin,
-    order: index,
-    image: (member as { image?: string }).image,
-    expertise: member.expertise,
-    skills: member.skills,
-    experience_timeline: member.experience_timeline,
-    education: member.education,
-    projects: member.projects,
-    certifications: member.certifications,
-  };
 }
 
 export function mapTeamMember(member: PrismaTeamMember): TeamMemberProfile {
@@ -75,22 +46,6 @@ export function mapTeamMember(member: PrismaTeamMember): TeamMemberProfile {
     projects: parseJsonArray<TeamProjectItem>(member.projects),
     certifications: member.certifications,
   };
-}
-
-function getFallbackMembers(options?: TeamQueryOptions): TeamMemberProfile[] {
-  let members = fallbackMembers.map(mapStaticMember);
-
-  if (options?.team) {
-    members = members.filter((member) => member.team === options.team);
-  }
-
-  members.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
-
-  if (options?.limit) {
-    members = members.slice(0, options.limit);
-  }
-
-  return members;
 }
 
 export function isObjectId(value: string): boolean {
@@ -137,14 +92,11 @@ export async function getTeamMembers(
       take: options?.limit,
     });
 
-    if (members.length > 0) {
-      return members.map(mapTeamMember);
-    }
+    return members.map(mapTeamMember);
   } catch (error) {
     console.error("Failed to fetch team members from database:", error);
+    return [];
   }
-
-  return getFallbackMembers(options);
 }
 
 export async function getManagedTeamMembers(): Promise<TeamMemberProfile[]> {
@@ -175,11 +127,7 @@ export async function getTeamMemberByIdentifier(
     console.error("Failed to fetch team member from database:", error);
   }
 
-  return (
-    getFallbackMembers().find(
-      (member) => member.slug === identifier || member.id === identifier
-    ) ?? null
-  );
+  return null;
 }
 
 export async function getTeamSlugs(): Promise<string[]> {

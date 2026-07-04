@@ -8,20 +8,25 @@ import {
   ContactCta,
 } from "@/features/careers/components";
 import {
-  dummyJobOpenings,
   dummyPerks,
   dummyCompanyValues,
   dummyCareerProcessSteps,
   dummyCareerFaqs,
 } from "@/lib/dummy-data";
+import { prisma } from "@/lib/prisma/prisma";
 
 export const metadata = {
   title: "Careers | CloudWent",
   description: "Join CloudWent. Build scalable web, SaaS, LMS and AI products with a remote-first team that ships.",
 };
 
-export default function CareersPage() {
-  const jobs = dummyJobOpenings;
+export const dynamic = "force-dynamic";
+
+export default async function CareersPage() {
+  const jobs = await prisma.jobOpening.findMany({
+    where: { status: "PUBLISHED" },
+    orderBy: { createdAt: "desc" },
+  });
   const perks = dummyPerks;
   const values = dummyCompanyValues;
   const steps = dummyCareerProcessSteps;

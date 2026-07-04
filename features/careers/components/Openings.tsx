@@ -40,29 +40,35 @@ export const Openings = ({ jobs }: OpeningsProps) => {
             </Link>
           </Button>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {jobs.map((o, i) => (
-            <div
-              key={o.id}
-              className="group glass-effect border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all card-hover cursor-pointer"
-            >
-              <div className={`w-12 h-12 rounded-xl grid place-items-center ${o.color || defaultColors[i % defaultColors.length]} mb-4`}>
-                <span className="text-lg font-bold">{o.title.charAt(0)}</span>
+        {jobs.length === 0 ? (
+          <div className="glass-effect border-border rounded-2xl p-8 text-center text-muted-foreground">
+            No open roles right now. Check back soon or get in touch with us.
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {jobs.map((o, i) => (
+              <div
+                key={o.id}
+                className="group glass-effect border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all card-hover cursor-pointer"
+              >
+                <div className={`w-12 h-12 rounded-xl grid place-items-center ${o.color || defaultColors[i % defaultColors.length]} mb-4`}>
+                  <span className="text-lg font-bold">{o.title.charAt(0)}</span>
+                </div>
+                <div className="text-xs font-bold text-muted-foreground">{o.department}</div>
+                <h3 className="font-bold text-lg mt-1 mb-3 text-foreground group-hover:text-primary transition-colors duration-300">{o.title}</h3>
+                <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                  <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-primary" /> {o.location}</span>
+                  <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" /> {o.type}</span>
+                </div>
+                <Button asChild variant="primary" size="sm" className="mt-5 shadow-md hover:opacity-90 transition hover:shadow-lg hover:scale-105 transition-all duration-300">
+                  <Link href={`/careers/apply?role=${encodeURIComponent(o.title)}`}>
+                    Apply now <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
               </div>
-              <div className="text-xs font-bold text-muted-foreground">{o.department}</div>
-              <h3 className="font-bold text-lg mt-1 mb-3 text-foreground group-hover:text-primary transition-colors duration-300">{o.title}</h3>
-              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-primary" /> {o.location}</span>
-                <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" /> {o.type}</span>
-              </div>
-              <Button asChild variant="primary" size="sm" className="mt-5 shadow-md hover:opacity-90 transition hover:shadow-lg hover:scale-105 transition-all duration-300">
-                <Link href={`/careers/apply?role=${encodeURIComponent(o.title)}`}>
-                  Apply now <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export const Hero = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden ">
+    <section className="relative overflow-hidden py-10 ">
       {/* Light Mode Gradient */}
       <div className="absolute inset-0 -z-10 bg-background dark:hidden" />
       {/* Dark Mode Gradient */}
@@ -63,24 +63,7 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <div className="mt-8 flex items-center gap-5">
-            {/* Avatars */}
-            <div className="flex -space-x-3">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className={`w-11 h-11 rounded-full border-2 border-background bg-gradient-to-br ${
-                  ["from-blue-400 to-blue-600","from-purple-400 to-purple-600","from-pink-400 to-rose-500","from-amber-400 to-orange-500"][i-1]
-                }`} />
-              ))}
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-                <span className="text-sm font-bold ml-1 text-foreground">5.0</span>
-                <span className="text-sm text-muted-foreground">(50+ Reviews)</span>
-              </div>
-              <p className="text-xs text-muted-foreground mt-0.5">Trusted by 50+ companies worldwide</p>
-            </div>
-          </div>
+         
         </div>
 
         {/* Right Side */}

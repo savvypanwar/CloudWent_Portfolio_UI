@@ -64,13 +64,8 @@ export const Hero = () => {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-5">
-              <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-                <span className="text-sm font-bold ml-1 text-foreground">5.0</span>
-                <span className="text-sm text-muted-foreground">Trusted by 50+ teams</span>
-              </div>
-            </div>
+            
+            
           </div>
 
           {/* ✅ Right Side - Floating Badges with Icons */}

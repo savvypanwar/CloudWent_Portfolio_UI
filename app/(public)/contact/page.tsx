@@ -28,7 +28,7 @@ export default function ContactPage() {
       <main className="flex-grow">
         <ContactHero />
         
-        <Section variant="default" className="py-12 bg-background">
+        <Section variant="default" className="px-4 py-12 bg-background sm:px-6 lg:px-8">
           <div className="mt-8 max-w-7xl mx-auto">
             <ContactForm />
           </div>

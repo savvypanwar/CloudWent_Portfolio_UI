@@ -35,6 +35,7 @@ export function mapTeamMember(member: PrismaTeamMember): TeamMemberProfile {
     linkedin: member.linkedin ?? undefined,
     twitter: member.twitter ?? undefined,
     github: member.github ?? undefined,
+    instagram: member.instagram ?? undefined,
     order: member.order,
     image: member.image ?? undefined,
     expertise: member.expertise,

@@ -19,7 +19,7 @@ const sizeClasses = {
 
 export const Container = ({ children, className, size = "lg" }: ContainerProps) => {
   return (
-    <div className={cn("mx-auto px-6 lg:px-8", sizeClasses[size], className)}>
+    <div className={cn("mx-auto px-4 sm:px-6 lg:px-8", sizeClasses[size], className)}>
       {children}
     </div>
   );

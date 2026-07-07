@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { logout } from "@/app/actions/auth";
@@ -31,6 +32,8 @@ import {
   Route,
   HelpCircle,
   DollarSign,
+  Menu,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 
@@ -58,6 +61,7 @@ const getInitials = (name?: string | null) => {
 };
 
 export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProps) => {
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const initials = getInitials(name);
@@ -146,18 +150,39 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
         ];
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-background border-r border-border z-50 overflow-y-auto hidden lg:block [&::-webkit-scrollbar]:hidden">
+    <>
+      {/* Hamburger Menu Button - Mobile Only */}
+      <div className="fixed top-4 left-4 z-50 md:hidden">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          className="border-border/20 bg-black/50 backdrop-blur-md hover:bg-black/70"
+        >
+          {isMobileOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
+        </Button>
+      </div>
+
+      {/* Sidebar */}
+      <aside className={`fixed left-0 top-0 h-full w-64 z-50 overflow-y-auto [&::-webkit-scrollbar]:hidden md:backdrop-blur-0 backdrop-blur-md md:border-r md:border-border md:bg-background bg-black/85 border-r border-border/20 transition-transform duration-300 ${
+        isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      }`}>
       {/* Logo */}
       {/* Logo – original component, centered */}
-<div className="border-b border-border h-16 flex items-center justify-center p-12">
+<div className="border-b md:border-border border-border/20 h-16 flex items-center justify-center p-12">
   <Logo />
 </div>
 
       {/* Navigation */}
-      <nav className="p-4 space-y-6">
+      <nav className="p-3 md:p-4 space-y-6">
         {menuItems.map((group) => (
           <div key={group.section}>
-            <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <div className="px-2 md:px-3 py-2 text-xs font-semibold text-muted-foreground/80 md:text-muted-foreground uppercase tracking-wider">
               {group.section}
             </div>
             <div className="space-y-1 mt-2">
@@ -167,14 +192,15 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
                   <Link
                     key={item.label}
                     href={item.href}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                    onClick={() => setIsMobileOpen(false)}
+                    className={`flex items-center gap-3 px-2 md:px-3 py-2 md:py-2.5 rounded-lg transition-colors text-sm md:text-base ${
                       isActive
                         ? "bg-primary/10 text-primary font-medium"
-                        : "text-muted-foreground hover:bg-surface hover:text-foreground"
+                        : "text-muted-foreground/80 md:text-muted-foreground hover:bg-surface hover:text-foreground"
                     }`}
                   >
-                    <item.icon className="w-4 h-4" />
-                    {item.label}
+                    <item.icon className="w-4 h-4 flex-shrink-0" />
+                    <span className="truncate">{item.label}</span>
                   </Link>
                 );
               })}
@@ -184,36 +210,38 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
       </nav>
 
       {/* Theme Toggle + User Profile + Logout */}
-      <div className="p-4 border-t border-border mt-auto space-y-3">
+      <div className="p-3 md:p-4 border-t md:border-border border-border/20 mt-auto space-y-3">
         {/* Theme Toggle */}
         <Button
           type="button"
           variant="outline"
           size="sm"
           onClick={toggleTheme}
-          className="w-full glass-effect border-border hover:bg-surface transition-colors flex items-center justify-center gap-2"
+          className="w-full glass-effect border-border/20 md:border-border hover:bg-surface transition-colors flex items-center justify-center gap-2 text-xs md:text-sm"
         >
           {resolvedTheme === "dark" ? (
             <>
-              <Sun className="w-4 h-4 text-amber-500" /> Light Mode
+              <Sun className="w-4 h-4 text-amber-500" /> 
+              <span className="hidden sm:inline">Light Mode</span>
             </>
           ) : (
             <>
-              <Moon className="w-4 h-4 text-primary" /> Dark Mode
+              <Moon className="w-4 h-4 text-primary" /> 
+              <span className="hidden sm:inline">Dark Mode</span>
             </>
           )}
         </Button>
 
         {/* User Profile */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center text-primary-foreground font-bold">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center text-primary-foreground font-bold text-sm">
             {initials}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-foreground">{name}</p>
-            <p className="text-xs text-muted-foreground">{roleLabels[role]}</p>
+          <div className="flex-1 min-w-0 hidden sm:block">
+            <p className="text-sm font-semibold text-foreground truncate">{name}</p>
+            <p className="text-xs text-muted-foreground/80 md:text-muted-foreground">{roleLabels[role]}</p>
           </div>
-          <ChevronDown className="w-4 h-4 text-muted-foreground" />
+          <ChevronDown className="w-4 h-4 text-muted-foreground/80 md:text-muted-foreground hidden sm:block" />
         </div>
         
         {/* Logout Button */}
@@ -222,13 +250,22 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
             type="submit"
             variant="outline"
             size="sm"
-            className="w-full glass-effect border-border hover:bg-destructive/10 hover:text-destructive transition-colors flex items-center justify-center gap-2"
+            className="w-full glass-effect border-border/20 md:border-border hover:bg-destructive/10 hover:text-destructive transition-colors flex items-center justify-center gap-2 text-xs md:text-sm"
           >
             <LogOut className="w-4 h-4" />
-            Logout
+            <span className="hidden sm:inline">Logout</span>
           </Button>
         </form>
       </div>
-    </aside>
+      </aside>
+
+      {/* Mobile Overlay - Click to Close */}
+      {isMobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 md:hidden z-40"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+    </>
   );
 };

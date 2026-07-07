@@ -24,14 +24,21 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, subject, message } = body;
+    const { name, email, company, phone, service, budget, subject, message } = body;
+
+    const details = [
+      message,
+      company ? `Company: ${company}` : "",
+      phone ? `Phone: ${phone}` : "",
+      budget ? `Budget: ${budget}` : "",
+    ].filter(Boolean).join("\n");
 
     const contact = await prisma.contact.create({
       data: {
         name,
         email,
-        subject,
-        message,
+        subject: service || subject || "General Inquiry",
+        message: details || "No additional details provided.",
       },
     });
 

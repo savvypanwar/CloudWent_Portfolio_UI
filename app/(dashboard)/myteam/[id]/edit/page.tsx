@@ -44,6 +44,7 @@ export default function EditTeamMemberPage() {
     linkedin: "",
     twitter: "",
     github: "",
+    instagram: "",
     team: teamOptions[0],
     order: 0,
     image: "",
@@ -69,6 +70,7 @@ export default function EditTeamMemberPage() {
           linkedin: data.linkedin ?? "",
           twitter: data.twitter ?? "",
           github: data.github ?? "",
+          instagram: data.instagram ?? "",
           team: data.team ?? teamOptions[0],
           order: data.order ?? 0,
           image: data.image ?? "",
@@ -413,7 +415,7 @@ export default function EditTeamMemberPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">
               LinkedIn URL
@@ -446,6 +448,18 @@ export default function EditTeamMemberPage() {
               type="url"
               name="github"
               value={formData.github}
+              onChange={handleChange}
+              className="border-border bg-surface"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Instagram URL
+            </label>
+            <Input
+              type="url"
+              name="instagram"
+              value={formData.instagram}
               onChange={handleChange}
               className="border-border bg-surface"
             />

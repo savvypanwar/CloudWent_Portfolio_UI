@@ -12,7 +12,10 @@ export interface ContactMessage {
 export interface ContactFormData {
   name: string;
   email: string;
+  company?: string;
   phone?: string;
+  service?: string;
+  budget?: string;
   subject: string;
   message: string;
 }

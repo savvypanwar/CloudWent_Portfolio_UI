@@ -42,6 +42,7 @@ export default function AddTeamMemberPage() {
     team: teamOptions[0],
     order: 0,
     image: "",
+    instagram: "",
   });
 
   const handleChange = (
@@ -412,7 +413,22 @@ export default function AddTeamMemberPage() {
               placeholder="https://github.com/johndoe"
               className="border-border bg-surface"
             />
+            
           </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">
+              Instagram URL
+            </label>
+            <Input
+              type="url"
+              name="instagram"
+              value={formData.instagram}
+              onChange={handleChange}
+              placeholder="https://github.com/johndoe"
+              className="border-border bg-surface"
+            />
+          </div>
+              
         </div>
 
         <div className="flex justify-end gap-4 pt-4 border-t border-border">

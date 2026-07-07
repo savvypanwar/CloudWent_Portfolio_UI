@@ -8,6 +8,10 @@ const contactSchema = z.object({
   email: z.string().email("Invalid email address"),
   subject: z.string().min(1, "Subject is required"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  company: z.string().optional().or(z.literal("")),
+  phone: z.string().optional().or(z.literal("")),
+  service: z.string().optional().or(z.literal("")),
+  budget: z.string().optional().or(z.literal("")),
 });
 
 export async function submitContact(formData: FormData) {
@@ -22,8 +26,20 @@ export async function submitContact(formData: FormData) {
   }
 
   try {
+    const details = [
+      parsed.data.message,
+      parsed.data.company ? `Company: ${parsed.data.company}` : "",
+      parsed.data.phone ? `Phone: ${parsed.data.phone}` : "",
+      parsed.data.budget ? `Budget: ${parsed.data.budget}` : "",
+    ].filter(Boolean).join("\n");
+
     await prisma.contact.create({
-      data: parsed.data,
+      data: {
+        name: parsed.data.name,
+        email: parsed.data.email,
+        subject: parsed.data.service || parsed.data.subject,
+        message: details || "No additional details provided.",
+      },
     });
 
     return { success: true, message: "Message sent successfully!" };

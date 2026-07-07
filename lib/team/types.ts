@@ -35,6 +35,7 @@ export interface TeamMemberProfile {
   linkedin?: string;
   twitter?: string;
   github?: string;
+  instagram?: string;
   order: number;
   image?: string;
   expertise: string[];
@@ -69,6 +70,7 @@ export interface TeamMemberInput {
   linkedin?: string;
   twitter?: string;
   github?: string;
+  instagram?: string;
   team: string;
   order?: number;
   image?: string;

@@ -25,29 +25,29 @@ export const EmployeeDashboard = async () => {
   ];
 
   return (
-    <div className="p-6 lg:p-8">
-      <section className="mb-8 rounded-2xl bg-background border border-border p-6">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <section className="mb-6 sm:mb-8 rounded-2xl bg-background border border-border p-4 sm:p-6">
+        <div className="flex flex-col gap-3 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/40 px-3 py-1 text-xs font-semibold text-blue-700 dark:text-primary">
               <UserCog className="h-3.5 w-3.5" />
               Employee Workspace
             </div>
-            <h1 className="mt-4 text-2xl lg:text-3xl font-bold text-gray-950 dark:text-primary-foreground">
+            <h1 className="mt-3 sm:mt-4 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-950 dark:text-primary-foreground">
               Employee Dashboard
             </h1>
-            <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+            <p className="mt-2 max-w-3xl text-xs sm:text-sm text-muted-foreground">
               Your personal work hub — tasks, projects, and announcements.
             </p>
           </div>
-          <div className="rounded-xl border border-border px-4 py-3">
+          <div className="rounded-xl border border-border px-3 sm:px-4 py-2 sm:py-3 w-full sm:w-auto">
             <p className="text-xs text-muted-foreground">Signed in as</p>
-            <p className="text-sm font-semibold text-gray-950 dark:text-primary-foreground">Employee</p>
+            <p className="text-xs sm:text-sm font-semibold text-gray-950 dark:text-primary-foreground">Employee</p>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         {stats.map((stat) => (
           <DashboardStatCard
             key={stat.label}
@@ -60,55 +60,55 @@ export const EmployeeDashboard = async () => {
         ))}
       </section>
 
-      <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="xl:col-span-2 rounded-2xl bg-background border border-border p-6">
-          <div className="flex items-center justify-between gap-3 mb-5">
+      <section className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+        <div className="xl:col-span-2 rounded-2xl bg-background border border-border p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5">
             <div>
-              <h2 className="text-lg font-semibold text-gray-950 dark:text-primary-foreground">Quick Actions</h2>
-              <p className="text-sm text-muted-foreground">Manage your profile and projects.</p>
+              <h2 className="text-base sm:text-lg font-semibold text-gray-950 dark:text-primary-foreground">Quick Actions</h2>
+              <p className="text-xs sm:text-sm text-muted-foreground">Manage your profile and projects.</p>
             </div>
-            <BarChart3 className="h-5 w-5 text-muted-foreground" />
+            <BarChart3 className="h-5 w-5 text-muted-foreground flex-shrink-0" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/profile" className="rounded-xl border border-border p-4 hover:border-blue-400 hover:shadow-sm transition-all">
-              <div className="mb-4 inline-flex rounded-lg bg-surface p-3 text-primary">
-                <UserCog className="h-5 w-5" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+            <Link href="/profile" className="rounded-xl border border-border p-3 sm:p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+              <div className="mb-3 sm:mb-4 inline-flex rounded-lg bg-surface p-2 sm:p-3 text-primary">
+                <UserCog className="h-4 sm:h-5 w-4 sm:w-5" />
               </div>
-              <h3 className="text-sm font-semibold text-gray-950 dark:text-primary-foreground">Open Profile</h3>
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-950 dark:text-primary-foreground">Open Profile</h3>
               <p className="mt-1 text-xs text-muted-foreground">Update your personal information</p>
             </Link>
-            <Link href="/portfolio" className="rounded-xl border border-border p-4 hover:border-blue-400 hover:shadow-sm transition-all">
-              <div className="mb-4 inline-flex rounded-lg bg-surface p-3 text-primary">
-                <FolderKanban className="h-5 w-5" />
+            <Link href="/portfolio" className="rounded-xl border border-border p-3 sm:p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+              <div className="mb-3 sm:mb-4 inline-flex rounded-lg bg-surface p-2 sm:p-3 text-primary">
+                <FolderKanban className="h-4 sm:h-5 w-4 sm:w-5" />
               </div>
-              <h3 className="text-sm font-semibold text-gray-950 dark:text-primary-foreground">My Projects</h3>
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-950 dark:text-primary-foreground">My Projects</h3>
               <p className="mt-1 text-xs text-muted-foreground">View assigned project work</p>
             </Link>
-            <Link href="/blog" className="rounded-xl border border-border p-4 hover:border-blue-400 hover:shadow-sm transition-all">
-              <div className="mb-4 inline-flex rounded-lg bg-surface p-3 text-primary">
-                <MessageSquare className="h-5 w-5" />
+            <Link href="/blog" className="rounded-xl border border-border p-3 sm:p-4 hover:border-blue-400 hover:shadow-sm transition-all">
+              <div className="mb-3 sm:mb-4 inline-flex rounded-lg bg-surface p-2 sm:p-3 text-primary">
+                <MessageSquare className="h-4 sm:h-5 w-4 sm:w-5" />
               </div>
-              <h3 className="text-sm font-semibold text-gray-950 dark:text-primary-foreground">Announcements</h3>
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-950 dark:text-primary-foreground">Announcements</h3>
               <p className="mt-1 text-xs text-muted-foreground">Read company updates</p>
             </Link>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-background border border-border p-6">
-          <h2 className="text-lg font-semibold text-gray-950 dark:text-primary-foreground">Employee Priorities</h2>
-          <div className="mt-5 space-y-3">
+        <div className="rounded-2xl bg-background border border-border p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-950 dark:text-primary-foreground">Employee Priorities</h2>
+          <div className="mt-4 sm:mt-5 space-y-2 sm:space-y-3">
             {[
               { label: "Complete weekly update", meta: "Team sync", status: "Today" },
               { label: "Review project handoff notes", meta: "Client portal", status: "Open" },
               { label: "Finish profile skills section", meta: "Directory", status: "Soon" },
             ].map((item) => (
-              <div key={item.label} className="rounded-xl bg-surface p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-medium text-gray-950 dark:text-primary-foreground">{item.label}</p>
+              <div key={item.label} className="rounded-xl bg-surface p-3 sm:p-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-2 sm:gap-3">
+                  <div className="min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-gray-950 dark:text-primary-foreground truncate">{item.label}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{item.meta}</p>
                   </div>
-                  <span className="rounded-full bg-background px-2.5 py-1 text-xs font-medium text-blue-700 dark:text-primary">
+                  <span className="rounded-full bg-background px-2.5 py-1 text-xs font-medium text-blue-700 dark:text-primary flex-shrink-0">
                     {item.status}
                   </span>
                 </div>

@@ -12,6 +12,7 @@ interface PortfolioProject {
   tags: string[];
   image?: string | import("next/image").StaticImageData | null;
   stack: string[];
+  link?: string;
 }
 
 interface PortfolioProps {
@@ -76,6 +77,19 @@ export const Portfolio = ({ projects }: PortfolioProps) => {
                     </span>
                   ))}
                 </div>
+
+                {project.link ? (
+                  <Button asChild variant="outline" size="sm" className="mt-5 w-full border-primary/20 text-primary hover:bg-primary/10">
+                    <Link
+                      href={project.link}
+                      target={project.link.startsWith("http") ? "_blank" : undefined}
+                      rel={project.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      View Project
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                ) : null}
               </div>
             </div>
           ))}

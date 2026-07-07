@@ -16,6 +16,7 @@ interface TeamSectionProps {
     linkedin?: string;
     twitter?: string;
     github?: string;
+    instagram?: string;
   }[];
   viewAllLink?: string;
 }
@@ -45,7 +46,7 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {members.map(({ slug, name, role, image, initials, color, linkedin, twitter, github }) => (
+          {members.map(({ slug, name, role, image, initials, color, linkedin, twitter, github, instagram }) => (
             <article
               key={name}
               className="group glass-effect border-border rounded-2xl p-6 hover:shadow-md hover:border-primary/30 transition-all text-center card-hover cursor-pointer"
@@ -110,10 +111,21 @@ export const TeamSection = ({ label, subtitle, members, viewAllLink = "#" }: Tea
                     <Github className="w-4 h-4" />
                   </a>
                 ) : null}
-                {!linkedin && !twitter && !github ? (
+                {instagram ? (
+                  <a
+                    href={instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${name} on Instagram`}
+                    className="w-8 h-8 bg-muted/20 hover:bg-primary hover:text-white text-muted-foreground rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                ) : null}
+                {!linkedin && !twitter && !github && !instagram ? (
                   <div className="h-8" aria-hidden="true" />
                 ) : null}
-                  </div>
+              </div>
             </article>
           ))}
         </div>

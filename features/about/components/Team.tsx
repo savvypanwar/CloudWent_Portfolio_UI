@@ -64,6 +64,9 @@ export const Team = ({ members }: TeamProps) => {
                   {member.github ? (
                     <Github className="w-4 h-4 hover:text-primary cursor-pointer" />
                   ) : null}
+                  {member.instagram ? (
+                    <Instagram className="w-4 h-4 hover:text-primary cursor-pointer" />
+                  ) : null}
                 </div>
               </div>
             </Link>

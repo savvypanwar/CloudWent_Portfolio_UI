@@ -120,6 +120,7 @@ export default async function TeamMemberPage({
                     { href: member.linkedin, Icon: Linkedin },
                     { href: member.twitter, Icon: Twitter },
                     { href: member.github, Icon: Github },
+                    { href: member.instagram, Icon: Instagram },
                     { href: member.email ? `mailto:${member.email}` : undefined, Icon: Mail },
                   ]
                     .filter((item) => item.href)

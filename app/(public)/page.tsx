@@ -42,7 +42,7 @@ export default async function HomePage() {
     icon: stat.icon,
     value: stat.value,
     label: stat.label,
-    iconColor: "text-primary-background",
+    iconColor: "text-primary-color",
     boxColor: "bg-background/10",
     borderColor: "border-white/20",
   }));
@@ -66,6 +66,7 @@ export default async function HomePage() {
     tags: p.tags,
     image: p.image,
     stack: p.stack,
+    link: p.link,
   }));
 
   const mappedTestimonials = dummyTestimonials.map((t) => ({

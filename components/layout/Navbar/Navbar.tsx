@@ -34,17 +34,17 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md transition-colors">
-      <div className="max-w-7xl mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 lg:border-border bg-black/50 dark:bg-black/60 lg:bg-background/80 lg:dark:bg-background/80 backdrop-blur-xl lg:backdrop-blur-md transition-colors">
+      <div className="max-w-7xl mx-auto flex h-16 sm:h-20 items-center justify-between px-3 sm:px-4 lg:px-8">
         <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+        <nav className="hidden lg:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-medium text-muted-foreground">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className={`flex items-center gap-1 hover:text-primary transition-colors ${
+              className={`flex items-center gap-1 hover:text-primary transition-colors whitespace-nowrap ${
                 isActive(link.href) ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -54,16 +54,16 @@ export const Navbar = () => {
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3 lg:gap-4">
           <button
             onClick={toggleTheme}
-            className="rounded-lg p-2 bg-surface hover:bg-muted transition-colors"
+            className="rounded-lg p-2 bg-surface/50 hover:bg-muted transition-colors backdrop-blur-sm"
             aria-label="Toggle theme"
           >
             {resolvedTheme === "dark" ? (
-              <Sun className="h-5 w-5 text-yellow-500" />
+              <Sun className="h-4 lg:h-5 w-4 lg:w-5 text-yellow-500" />
             ) : (
-              <Moon className="h-5 w-5 text-muted-foreground" />
+              <Moon className="h-4 lg:h-5 w-4 lg:w-5 text-muted-foreground" />
             )}
           </button>
 
@@ -77,10 +77,10 @@ export const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden text-muted-foreground hover:text-primary transition-colors"
+          className="lg:hidden text-white dark:text-white hover:text-primary transition-colors p-1"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
         </button>
       </div>
 

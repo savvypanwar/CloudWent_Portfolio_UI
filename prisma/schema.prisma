@@ -130,6 +130,7 @@ model TeamMember {
   linkedin           String?
   twitter            String?
   github             String?
+  instagram          String?
   team               String
   order              Int      @default(0)
   expertise          String[] @default([])

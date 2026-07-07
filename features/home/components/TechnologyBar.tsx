@@ -5,11 +5,13 @@ import {
   AWSIcon,
   DockerIconSrc,
   VercelIcon,
+  ReactIconSrc,
 } from "@/assets/icons";
 import { IconWrapper } from "@/assets/icons/IconWrapper";
 
 export const TechnologyBar = () => {
   const techs = [
+    { name: "React", icon: <IconWrapper src={ReactIconSrc} alt="React" className="h-6 w-auto object-contain" /> },
     { name: "NEXT.", icon: <IconWrapper src={NextJs1Icon} alt="Next.js" className="h-12 w-auto object-contain" /> },
     { name: "Tailwindcss", icon: <IconWrapper src={TailwindCSSIcon} alt="Tailwind CSS" className="h-10 w-auto object-contain" /> },
     { name: "TypeScript", icon: <IconWrapper src={TypescriptIcon} alt="TypeScript" className="h-6 w-auto object-contain" /> },

@@ -147,10 +147,24 @@ export default async function TeamMemberDetailsPage({
               </a>
             </Button>
           )}
+          {member.twitter && (
+            <Button asChild variant="outline" size="sm">
+              <a href={member.twitter} target="_blank" rel="noreferrer">
+                <ExternalLink className="w-4 h-4 mr-2" /> Twitter
+              </a>
+            </Button>
+          )}
           {member.github && (
             <Button asChild variant="outline" size="sm">
               <a href={member.github} target="_blank" rel="noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" /> GitHub
+              </a>
+            </Button>
+          )}
+          {member.instagram && (
+            <Button asChild variant="outline" size="sm">
+              <a href={member.instagram} target="_blank" rel="noreferrer">
+                <ExternalLink className="w-4 h-4 mr-2" /> Instagram
               </a>
             </Button>
           )}

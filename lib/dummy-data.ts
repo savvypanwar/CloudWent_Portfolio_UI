@@ -5,15 +5,15 @@ import blogImage4 from "@/assets/images/blog/6505016.jpg";
 import blogImage5 from "@/assets/images/blog/7046558.jpg";
 import blogImage6 from "@/assets/images/blog/971.jpg";
 
-import projectImage1 from "@/assets/images/portfolio-lms.jpg";
-import projectImage2 from "@/assets/images/portfolio-health.jpg";
+import projectImage1 from "@/assets/images/e-c.png";
+import projectImage2 from "@/assets/images/portfolio-lms.jpg";
 import projectImage3 from "@/assets/images/portfolio-finance.jpg";
 
 export const dummyStats = [
-  { icon: "users", value: "50+", label: "Happy Clients" },
-  { icon: "code", value: "120+", label: "Projects Delivered" },
-  { icon: "award", value: "15+", label: "Industry Awards" },
-  { icon: "clock", value: "5+", label: "Years Experience" },
+  { icon: "users", value: "5+", label: "Happy Clients" },
+  { icon: "code", value: "7+", label: "Projects Delivered" },
+  { icon: "award", value: "5+", label: "Industry Awards" },
+  { icon: "clock", value: "1+", label: "Years Experience" },
 ];
 
 export const dummyServices = [
@@ -82,17 +82,19 @@ export const dummyProjects = [
     category: "Web",
     tags: ["React", "Node.js", "Stripe"],
     image: projectImage1,
-    stack: ["React", "Node.js", "PostgreSQL"],
+    stack: ["Next.js", "Nest.js", "PostgreSQL"],
+    link: "#",
   },
   {
     id: "2",
-    slug: "healthcare-app",
-    title: "Healthcare App",
-    description: "Telemedicine platform connecting patients with doctors via video calls and secure messaging.",
-    category: "Mobile",
-    tags: ["React Native", "Firebase", "WebRTC"],
+    slug: "LMS-platform",
+    title: "LMS Platform",
+    description: "A modern Learning Management System (LMS) designed to simplify online education. ",
+    category: "web",
+    tags: ["Next.js", "PostgreSQL", "AWS"],
     image: projectImage2,
-    stack: ["React Native", "Firebase", "WebRTC"],
+    stack: ["Next.js", "PostgreSQL", "AWS S3"],
+    link: "#",
   },
   {
     id: "3",
@@ -103,6 +105,7 @@ export const dummyProjects = [
     tags: ["Next.js", "D3.js", "Python"],
     image: projectImage3,
     stack: ["Next.js", "D3.js", "Python"],
+    link: "#",
   },
 ];
 

@@ -18,6 +18,7 @@ const contactSchema = z.object({
   company: z.string().trim().max(120).optional().or(z.literal("")),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
   service: z.string().min(1, "Please select a service"),
+  budget: z.string().trim().max(50).optional().or(z.literal("")),
   message: z.string().trim().min(10, "Tell us a bit more (10+ chars)").max(1000),
 });
 
@@ -46,6 +47,10 @@ export const ContactForm = () => {
         body: JSON.stringify({
           name: parsed.data.name,
           email: parsed.data.email,
+          company: parsed.data.company,
+          phone: parsed.data.phone,
+          service: parsed.data.service,
+          budget: parsed.data.budget,
           subject: parsed.data.service,
           message: parsed.data.message,
         }),
@@ -66,12 +71,13 @@ export const ContactForm = () => {
 
   // Input classes with dark mode support
   const inputCls = "w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition";
+  const labelCls = "block text-sm font-medium text-foreground mb-1.5";
 
   const others = [
-    { icon: Mail, color: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-primary", title: "Email Us", desc: "Drop us an email anytime.", action: "hello@cloudwent.com" },
-    { icon: Phone, color: "bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400", title: "Call Us", desc: "Mon – Fri, 9AM – 6PM (EST)", action: "+1 (630) 123-4567" },
+    { icon: Mail, color: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-primary", title: "Email Us", desc: "Drop us an email anytime.", action: "info.cloudwent@gmail.com" },
+    { icon: Phone, color: "bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400", title: "Call Us", desc: "Mon – Fri, 9AM – 6PM (EST)", action: "+91 7489828908" },
     { icon: MessageSquare, color: "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400", title: "Live Chat", desc: "Chat with our team instantly.", action: "Start Live Chat →" },
-    { icon: Building2, color: "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400", title: "Office", desc: "1520 Market St, Suite 1000\nSan Francisco, CA 94102, USA" },
+    { icon: Building2, color: "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400", title: "Office", desc: "BHOPAL, Madhya Pradesh (India)" },
   ];
 
   return (
@@ -82,7 +88,7 @@ export const ContactForm = () => {
 
       {/* ✅ Dark Mode Gradient */}
       <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top_right,oklch(0.15_0.05_250)_0%,transparent_60%)]" />
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto">
         
         <div className="bg-card border border-border rounded-3xl shadow-card p-8 md:p-10 grid lg:grid-cols-[1.1fr_1fr] gap-10">
           <div>
@@ -95,17 +101,26 @@ export const ContactForm = () => {
             )}
             <form onSubmit={onSubmit} className="mt-6 grid sm:grid-cols-2 gap-4" noValidate>
               <div>
-                <input name="name" placeholder="Your Name" className={inputCls} maxLength={100} />
+                <label htmlFor="name" className={labelCls}>Your Name</label>
+                <input id="name" name="name" placeholder="Your Name" className={inputCls} maxLength={100} />
                 {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
               </div>
               <div>
-                <input name="email" type="email" placeholder="Your Email" className={inputCls} maxLength={255} />
+                <label htmlFor="email" className={labelCls}>Your Email</label>
+                <input id="email" name="email" type="email" placeholder="Your Email" className={inputCls} maxLength={255} />
                 {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
               </div>
-              <input name="company" placeholder="Company Name" className={inputCls} maxLength={120} />
-              <input name="phone" placeholder="Phone Number" className={inputCls} maxLength={30} />
+              <div>
+                <label htmlFor="company" className={labelCls}>Company Name</label>
+                <input id="company" name="company" placeholder="Company Name" className={inputCls} maxLength={120} />
+              </div>
+              <div>
+                <label htmlFor="phone" className={labelCls}>Phone Number</label>
+                <input id="phone" name="phone" placeholder="Phone Number" className={inputCls} maxLength={30} />
+              </div>
               <div className="sm:col-span-2">
-                <select name="service" defaultValue="" className={inputCls}>
+                <label htmlFor="service" className={labelCls}>Service Needed</label>
+                <select id="service" name="service" defaultValue="" className={inputCls}>
                   <option value="" disabled>Select a Service</option>
                   <option>Web Development</option>
                   <option>LMS Development</option>
@@ -117,7 +132,19 @@ export const ContactForm = () => {
                 {errors.service && <p className="text-xs text-destructive mt-1">{errors.service}</p>}
               </div>
               <div className="sm:col-span-2">
-                <textarea name="message" rows={5} placeholder="Tell us about your project..." className={inputCls} maxLength={1000} />
+                <label htmlFor="budget" className={labelCls}>Project Budget Range</label>
+                <select id="budget" name="budget" defaultValue="" className={inputCls}>
+                  <option value="" disabled>Select a budget range</option>
+                  <option value="Under $10K">Under ₹10K</option>
+                  <option value="$10K - $25K">₹10K - ₹25K</option>
+                  <option value="$25K - $50K">₹25K - ₹50K</option>
+                  <option value="$50K - $100K">₹50K - ₹100K</option>
+                  <option value="$100K+">₹100K+</option>
+                </select>
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="message" className={labelCls}>Project Details</label>
+                <textarea id="message" name="message" rows={5} placeholder="Tell us about your project..." className={inputCls} maxLength={1000} />
                 {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
               </div>
               <button type="submit" disabled={isSubmitting} className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-gradient-cta text-primary-foreground px-6 py-3.5 rounded-xl font-semibold shadow-glow hover:opacity-95 transition disabled:opacity-60 disabled:cursor-not-allowed">

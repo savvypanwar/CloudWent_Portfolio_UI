@@ -7,6 +7,7 @@ export interface TeamMember {
   linkedin?: string;
   twitter?: string;
   github?: string;
+  instagram?: string;
   isLeader: boolean;
   department: string;
   displayOrder: number;
@@ -21,6 +22,7 @@ export interface CreateTeamMemberData {
   linkedin?: string;
   twitter?: string;
   github?: string;
+  instagram?: string;
   isLeader?: boolean;
   department: string;
   displayOrder?: number;

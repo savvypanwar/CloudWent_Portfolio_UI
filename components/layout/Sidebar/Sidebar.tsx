@@ -98,6 +98,7 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
               { icon: MessageSquare, label: "Testimonials", href: "/testimonials" },
               { icon: Calendar, label: "Contact", href: "/leads" },
               { icon: Activity, label: "Newsletter", href: "/newsletter" },
+              { icon: DollarSign, label: "Manage Blog", href: "/manage-blog" },
             ],
           },
           {

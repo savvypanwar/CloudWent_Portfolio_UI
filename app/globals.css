@@ -54,10 +54,7 @@
    CSS VARIABLES (Light Mode)
    ========================================== */
 :root {
-  /* Spacing Radius */
   --radius: 0.875rem;
-
-  /* Light Palette */
   --background: oklch(0.99 0.005 250);
   --foreground: oklch(0.16 0.03 260);
   --surface: oklch(0.97 0.01 250);
@@ -84,13 +81,11 @@
   --dark-foreground: oklch(0.98 0 0);
   --color: oklch(0.99 0.005 250);
 
-  /* Gradients */
   --gradient-primary: linear-gradient(135deg, oklch(0.58 0.21 258), oklch(0.72 0.18 240));
   --gradient-hero-text: linear-gradient(90deg, oklch(0.78 0.16 230), oklch(0.58 0.21 258));
   --gradient-dark: radial-gradient(ellipse at top, oklch(0.22 0.06 265), oklch(0.12 0.04 260));
   --gradient-cta: linear-gradient(90deg, oklch(0.5 0.22 270), oklch(0.62 0.2 255));
 
-  /* Shadows */
   --shadow-card: 0 1px 2px oklch(0.2 0.05 260 / 0.04), 0 4px 24px oklch(0.2 0.05 260 / 0.06);
   --shadow-glow: 0 20px 60px -20px oklch(0.58 0.21 258 / 0.45);
   --shadow-elegant: 0 10px 40px -10px oklch(0.2 0.05 260 / 0.08);
@@ -98,7 +93,7 @@
 }
 
 /* ==========================================
-   CSS VARIABLES (Dark Mode)
+   CSS VARIABLES (Dark Mode) – FIXED
    ========================================== */
 .dark {
   --background: oklch(0.12 0.04 260);
@@ -125,7 +120,13 @@
   --ring: oklch(0.78 0.16 230);
   --dark: oklch(0.16 0.04 260);
   --dark-foreground: oklch(0.98 0 0);
-  --shadow-card-hover: 0 20px 40px -12px oklch(0.78 0.16 230 / 0.20);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.78 0.16 230), oklch(0.62 0.20 250));
+  --gradient-hero-text: linear-gradient(90deg, oklch(0.65 0.15 240), oklch(0.78 0.16 230));
+  --gradient-cta: linear-gradient(90deg, oklch(0.55 0.20 270), oklch(0.70 0.18 255));
+
+  --shadow-card-hover: 0 20px 40px -12px var(--primary-glow);
+  --shadow-glow: 0 20px 60px -20px var(--primary-glow);
 }
 
 /* ==========================================

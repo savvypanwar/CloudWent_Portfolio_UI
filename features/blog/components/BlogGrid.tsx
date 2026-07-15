@@ -4,7 +4,7 @@ import { Calendar, User } from "lucide-react";
 import { StaticImageData } from "next/image";
 
 interface BlogPost {
-  id: number;
+  id: string | number;
   title: string;
   excerpt: string;
   author: string;

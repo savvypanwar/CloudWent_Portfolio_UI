@@ -83,6 +83,18 @@ function normalizeInput(input: TeamMemberInput) {
   };
 }
 
+function isDatabaseUnavailableError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+
+  return (
+    message.includes("Server selection timeout") ||
+    message.includes("No connection could be made") ||
+    message.includes("ECONNREFUSED") ||
+    message.includes("connect ECONNREFUSED") ||
+    message.includes("No available servers")
+  );
+}
+
 export async function getTeamMembers(
   options?: TeamQueryOptions
 ): Promise<TeamMemberProfile[]> {
@@ -95,7 +107,9 @@ export async function getTeamMembers(
 
     return members.map(mapTeamMember);
   } catch (error) {
-    console.error("Failed to fetch team members from database:", error);
+    if (!isDatabaseUnavailableError(error)) {
+      console.error("Failed to fetch team members from database:", error);
+    }
     return [];
   }
 }

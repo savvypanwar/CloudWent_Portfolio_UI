@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { logout } from "@/app/actions/auth";
 import { useThemeStore } from "@/store/theme.store";
 
@@ -22,15 +22,12 @@ import {
   Activity,
   Layers,
   CreditCard,
-  Cloud,
   Calendar,
   ChevronDown,
   BarChart3,
   LogOut,
   Sun,
   Moon,
-  Route,
-  HelpCircle,
   DollarSign,
   Menu,
   X,
@@ -63,7 +60,6 @@ const getInitials = (name?: string | null) => {
 export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProps) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
   const initials = getInitials(name);
   const { resolvedTheme, toggleTheme } = useThemeStore();
 
@@ -93,12 +89,29 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
             items: [
               { icon: Users, label: "Users", href: "/users" },
               { icon: Briefcase, label: "Applications", href: "/applications" },
+              { icon: Layers, label: "Offer Letters", href: "/offer-letter" },
               { icon: UserCog, label: "Team Members", href: "/myteam" },
               { icon: Briefcase, label: "Careers", href: "/careersapplications" },
               { icon: MessageSquare, label: "Testimonials", href: "/testimonials" },
               { icon: Calendar, label: "Contact", href: "/leads" },
               { icon: Activity, label: "Newsletter", href: "/newsletter" },
               { icon: DollarSign, label: "Manage Blog", href: "/manage-blog" },
+            ],
+          },
+          {
+            section: "HR Module",
+            items: [
+              { icon: LayoutDashboard, label: "HR Dashboard", href: "/hr/dashboard" },
+              { icon: Briefcase, label: "Recruitment", href: "/hr/recruitment" },
+              { icon: Users, label: "Employees", href: "/hr/employees" },
+              { icon: Calendar, label: "Attendance", href: "/hr/attendance" },
+              { icon: FileText, label: "Leave", href: "/hr/leave" },
+              { icon: CreditCard, label: "Payroll", href: "/hr/payroll" },
+              { icon: BarChart3, label: "Performance", href: "/hr/performance" },
+              { icon: Server, label: "Assets", href: "/hr/assets" },
+              { icon: FolderKanban, label: "Documents", href: "/hr/documents" },
+              { icon: Activity, label: "Reports", href: "/hr/reports" },
+              { icon: Settings, label: "HR Settings", href: "/hr/settings" },
             ],
           },
           {
@@ -118,6 +131,22 @@ export const Sidebar = ({ name = "CloudWent User", role = "admin" }: SidebarProp
           {
             section: "Main",
             items: [{ icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" }],
+          },
+          {
+            section: "HR Module",
+            items: [
+              { icon: LayoutDashboard, label: "HR Dashboard", href: "/hr/dashboard" },
+              { icon: Briefcase, label: "Recruitment", href: "/hr/recruitment" },
+              { icon: Users, label: "Employees", href: "/hr/employees" },
+              { icon: Calendar, label: "Attendance", href: "/hr/attendance" },
+              { icon: FileText, label: "Leave", href: "/hr/leave" },
+              { icon: CreditCard, label: "Payroll", href: "/hr/payroll" },
+              { icon: BarChart3, label: "Performance", href: "/hr/performance" },
+              { icon: Server, label: "Assets", href: "/hr/assets" },
+              { icon: FolderKanban, label: "Documents", href: "/hr/documents" },
+              { icon: Activity, label: "Reports", href: "/hr/reports" },
+              { icon: Settings, label: "HR Settings", href: "/hr/settings" },
+            ],
           },
           {
             section: "Hiring",

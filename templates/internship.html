@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Internship Offer Letter - {{candidateName}}</title>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 25mm 20mm;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .header-table {
+            width: 100%;
+            margin-bottom: 10px;
+            border-collapse: collapse;
+        }
+
+        .header-left {
+            text-align: left;
+            vertical-align: bottom;
+        }
+
+        .header-right {
+            text-align: right;
+            vertical-align: bottom;
+            width: 200px;
+        }
+
+        .logo-img {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+        }
+
+        .company-title {
+            font-size: 20pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #143666;
+            margin: 0;
+        }
+
+        .company-details {
+            margin-top: 5px;
+            font-size: 10.5pt;
+            line-height: 1.4;
+            color: #333333;
+        }
+
+        .partition-line {
+            border-top: 2px solid #143666;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .meta-line {
+            margin-bottom: 5px;
+        }
+
+        .recipient-block {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .subject-line {
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .salutation {
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11pt;
+            padding-top: 10px;
+        }
+
+        .timeline-table th,
+        .timeline-table td {
+            border: 1px solid #143666;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .timeline-table th {
+            background-color: #143666;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .timeline-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+
+        .tc-item {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .tc-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sign-section {
+            margin-top: 40px;
+            line-height: 1.2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .acceptance-block {
+            margin-top: 30px;
+            border-top: 1px dashed #000000;
+            padding-top: 20px;
+            line-height: 1.6;
+        }
+
+        .acceptance-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
+        .annexure-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11pt;
+        }
+
+        .annexure-table th,
+        .annexure-table td {
+            border: 1px solid #143666;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .annexure-table th {
+            background-color: #143666;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .annexure-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .annexure-table .total-row {
+            font-weight: bold;
+            background-color: #e8edf4 !important;
+        }
+
+        .annexure-note {
+            font-size: 10.5pt;
+            font-style: italic;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background-color: #f0f4fa;
+            border-left: 4px solid #143666;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+
+        .key-terms-box {
+            background-color: #f8fafc;
+            border: 1px solid #143666;
+            padding: 10px 20px;
+            margin: 15px 0;
+        }
+
+        .key-terms-box strong {
+            color: #143666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================================= -->
+    <!-- HEADER -->
+    <!-- ========================================================= -->
+
+    <table class="header-table">
+        <tr>
+
+            <td class="header-left">
+
+                <div class="company-title">
+                    {{companyName}}
+                </div>
+
+                <div class="company-details">
+
+                    {{companyName}}<br>
+
+                    {{companyAddress}}<br>
+
+                    Email: {{companyEmail}}<br>
+
+                    Website: {{companyWebsite}}
+
+                </div>
+
+            </td>
+
+            <td class="header-right">
+
+                <img
+                    src="{{logoImage}}"
+                    class="logo-img"
+                    alt="{{companyName}} Logo"
+                >
+
+            </td>
+
+        </tr>
+    </table>
+
+
+    <div class="partition-line"></div>
+
+
+    <!-- ========================================================= -->
+    <!-- OFFER DETAILS -->
+    <!-- ========================================================= -->
+
+    <div class="meta-line">
+
+        <strong>Date:</strong>
+        {{offerDate}}
+
+    </div>
+
+
+    <div class="meta-line">
+
+        <strong>Offer Letter Ref No.:</strong>
+        {{offerReference}}
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- RECIPIENT -->
+    <!-- ========================================================= -->
+
+    <div class="recipient-block">
+
+        To<br>
+
+        <strong>
+            {{candidateTitleName}} {{candidateName}}
+        </strong>
+
+        <br>
+
+        Residential Address:
+        {{candidateAddress}}
+
+        <br>
+
+        Phone No:
+        {{candidatePhone}}
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- SUBJECT -->
+    <!-- ========================================================= -->
+
+    <div class="subject-line">
+
+        Subject:
+        Offer of Internship – {{position}}
+
+    </div>
+
+
+    <div class="salutation">
+
+        Dear {{candidateName}},
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- CONGRATULATIONS -->
+    <!-- ========================================================= -->
+
+    <p>
+
+        <strong>Congratulations!</strong>
+
+    </p>
+
+
+    <p>
+
+        We are pleased to inform you that you have successfully cleared
+        both interview rounds for the {{position}} at {{companyName}}.
+        The interview panel was highly impressed with your technical
+        skills and enthusiasm.
+
+    </p>
+
+
+    <p>
+
+        We are excited to welcome you to our team. To proceed with
+        generating your official Internship Offer Letter, please reply
+        to this email as soon as possible with a scanned copy or clear
+        photo of your Aadhaar Card for verification and documentation
+        purposes.
+
+    </p>
+
+
+    <!-- ========================================================= -->
+    <!-- INTERNSHIP DETAILS -->
+    <!-- ========================================================= -->
+
+    <p>
+
+        Your internship details are as follows:
+
+    </p>
+
+
+    <ul>
+
+        <li>
+            <strong>Position:</strong>
+            {{position}}
+        </li>
+
+        <li>
+            <strong>Internship Duration:</strong>
+            {{duration}}
+        </li>
+
+        <li>
+            <strong>Joining Date:</strong>
+            {{joiningDate}}
+        </li>
+
+        <li>
+            <strong>Work Mode:</strong>
+            {{workMode}}
+        </li>
+
+        <li>
+            <strong>Compensation:</strong>
+            {{compensation}}
+        </li>
+
+    </ul>
+
+
+    <!-- ========================================================= -->
+    <!-- COMPENSATION TIMELINE -->
+    <!-- ========================================================= -->
+
+    <p>
+
+        <strong>
+            Internship Structure &amp; Compensation Timeline
+        </strong>
+
+        <br>
+
+        As discussed during the evaluation process, your
+        {{duration}} internship will follow the structure
+        outlined below:
+
+    </p>
+
+
+    <table class="timeline-table">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Timeline Period
+                </th>
+
+                <th>
+                    Stipend / Compensation Structure
+                </th>
+
+                <th>
+                    Milestone Outcome
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    <strong>
+                        Months 0 to 3
+                    </strong>
+                </td>
+
+                <td>
+                    {{firstThreeMonthsStipend}}
+                </td>
+
+                <td>
+                    {{milestone1}}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    <strong>
+                        Months 3 to 6
+                    </strong>
+                </td>
+
+                <td>
+                    {{lastThreeMonthsStipend}}
+                </td>
+
+                <td>
+                    {{milestone2}}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    <strong>
+                        Upon {{duration}} Completion
+                    </strong>
+                </td>
+
+                <td>
+                    Full-time / Paid Employment Structure
+                </td>
+
+                <td>
+                    {{ppoOutcome}}
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <!-- ========================================================= -->
+    <!-- KEY TERMS -->
+    <!-- ========================================================= -->
+
+    <div class="key-terms-box">
+
+        <p>
+
+            <strong>
+                Key Terms &amp; Conditions:
+            </strong>
+
+        </p>
+
+
+        <ul style="margin-bottom: 0;">
+
+            <li>
+
+                <strong>
+                    Work Mode:
+                </strong>
+
+                The internship will follow a
+                {{workMode}} work model.
+
+            </li>
+
+
+            <li>
+
+                <strong>
+                    Notice Period:
+                </strong>
+
+                Either party can terminate the internship by providing
+                a <strong>{{noticePeriod}}</strong> written notice.
+
+            </li>
+
+
+            <li>
+
+                <strong>
+                    Intellectual Property &amp; NDA:
+                </strong>
+
+                All code, repositories, and technical assets developed
+                during the internship will remain the exclusive property
+                of {{companyName}}. Strict confidentiality regarding
+                company data must be maintained.
+
+            </li>
+
+
+            <li>
+
+                <strong>
+                    PPO &amp; Certification:
+                </strong>
+
+                The final Internship Certificate, Letter of Recommendation,
+                and PPO confirmation will be strictly contingent upon your
+                performance, task completion, and professional conduct
+                throughout the {{duration}}.
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- FINAL MESSAGE -->
+    <!-- ========================================================= -->
+
+    <p>
+
+        Please share your Aadhaar Card at the earliest so we can finalize
+        your onboarding and issue the formal letter.
+
+    </p>
+
+
+    <p>
+
+        If you have any questions, feel free to reach out.
+        Welcome to {{companyName}}!
+
+    </p>
+
+
+    <!-- ========================================================= -->
+    <!-- SIGNATURE -->
+    <!-- ========================================================= -->
+
+    <div class="sign-section">
+
+        <div>
+
+            Best regards,
+
+            <br>
+            <br>
+
+            <strong>
+                {{hrName}}
+            </strong>
+
+            <br>
+
+            {{hrDesignation}}
+
+            <br>
+
+            {{companyName}}, Bhopal
+
+            <br>
+
+            Email:
+            {{companyEmail}}
+
+            <br>
+
+            Website:
+            {{companyWebsite}}
+
+        </div>
+
+
+        <div>
+
+            <img
+                src="{{signatureImage}}"
+                alt="Signature"
+                style="width: 150px; height: auto;"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- ACCEPTANCE -->
+    <!-- ========================================================= -->
+
+    <div class="acceptance-block">
+
+        <div class="acceptance-title">
+
+            Acceptance of Offer
+
+        </div>
+
+
+        <p>
+
+            I accept the aforesaid terms and conditions of this
+            internship offer and agree to keep the contents of this
+            document confidential.
+
+        </p>
+
+
+        <p>
+
+            I will join on
+            {{joiningDate}}
+
+        </p>
+
+
+        <br>
+
+
+        Name:
+        {{candidateName}}
+
+        <br>
+
+        Signature:
+        _______________________
+
+        <br>
+
+        Date:
+        ___________________________
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- ANNEXURE -->
+    <!-- ========================================================= -->
+
+    <div class="section-heading">
+
+        Annexure – Stipend Structure
+
+    </div>
+
+
+    <table class="annexure-table">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Timeline
+                </th>
+
+                <th>
+                    Monthly Stipend (INR)
+                </th>
+
+                <th>
+                    Total (INR)
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    Months 0 to 3
+                </td>
+
+                <td>
+                    {{firstThreeMonthsStipend}}
+                </td>
+
+                <td>
+                    ₹0
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    Months 3 to 6
+                </td>
+
+                <td>
+                    {{lastThreeMonthsStipend}}
+                </td>
+
+                <td>
+                    {{lastThreeMonthsTotal}}
+                </td>
+
+            </tr>
+
+
+            <tr class="total-row">
+
+                <td>
+
+                    <strong>
+                        Total Stipend ({{duration}})
+                    </strong>
+
+                </td>
+
+                <td></td>
+
+                <td>
+
+                    <strong>
+                        {{totalStipend}}
+                    </strong>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <div class="annexure-note">
+
+        Note: The stipend for months 3 to 6 is payable subject to
+        satisfactory participation, assigned work, and compliance with
+        company policies. The PPO and certification are contingent upon
+        performance review at the end of the {{duration}} period.
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- TERMS & CONDITIONS -->
+    <!-- ========================================================= -->
+
+    <div class="section-heading">
+
+        Terms &amp; Conditions
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            1. Internship Period
+
+        </div>
+
+        The internship shall be for a duration of
+        {{duration}}, commencing from {{joiningDate}}.
+
+        Any extension or continuation of the internship shall remain
+        solely at the discretion of {{companyName}} based on business
+        requirements and performance evaluation.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            2. Nature of Internship
+
+        </div>
+
+        This internship is provided for educational, training, and
+        professional development purposes.
+
+        The intern shall work on real-world engineering projects,
+        technical systems, research, software development, and
+        collaborative product development initiatives under the
+        supervision of {{companyName}}.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            3. Work Mode and Availability
+
+        </div>
+
+        The internship shall follow a
+        {{workMode}} work model.
+
+        The intern shall maintain timely communication, attend assigned
+        meetings, and remain reasonably available during project
+        collaboration hours.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            4. Compensation &amp; Stipend Model
+
+        </div>
+
+        As per the structure outlined above, the intern shall receive
+        {{firstThreeMonthsStipend}} for the first 3 months.
+
+        For the subsequent 3 months, the intern shall receive
+        {{lastThreeMonthsStipend}}, totaling
+        {{totalStipend}} for the full internship period,
+        subject to satisfactory participation and compliance with
+        company policies.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            5. Pre-Placement Opportunity (PPO)
+
+        </div>
+
+        Upon the successful completion of the full
+        {{duration}} internship tenure, the candidate may be reviewed
+        for a Pre-Placement Opportunity (PPO) to transition into regular
+        employment.
+
+        Any PPO or employment opportunity shall remain strictly
+        contingent on technical performance, task completion, business
+        requirements, and collaborative conduct during the internship.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            6. Notice Period and Termination
+
+        </div>
+
+        Either party may terminate the internship by providing a minimum
+        <strong>{{noticePeriod}}</strong> written notice.
+
+        <br>
+        <br>
+
+        {{companyName}} reserves the right to terminate the internship
+        based on business requirements, project restructuring,
+        organizational changes, or performance concerns.
+
+        <br>
+        <br>
+
+        Additionally, {{companyName}} may terminate the internship with
+        immediate effect and without prior notice in cases involving:
+
+        <ul>
+
+            <li>
+                Misconduct or unethical behavior
+            </li>
+
+            <li>
+                Breach of confidentiality
+            </li>
+
+            <li>
+                Unauthorized access or misuse of company systems
+            </li>
+
+            <li>
+                Non-performance or repeated inactivity
+            </li>
+
+            <li>
+                Violation of company policies
+            </li>
+
+            <li>
+                Harassment, abuse, or inappropriate behavior
+            </li>
+
+            <li>
+                Unauthorized sharing of source code or company information
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            7. Ownership of Work / Intellectual Property
+
+        </div>
+
+        All software, source code, APIs, repositories, infrastructure,
+        documentation, databases, systems, product ideas, architecture,
+        technical assets, internal tools, business logic, designs,
+        research, inventions, and any work created, modified,
+        contributed to, or developed during the internship shall remain
+        the sole and exclusive intellectual property of
+        {{companyName}}.
+
+        <br>
+        <br>
+
+        The intern acknowledges and agrees that all work performed during
+        the internship belongs exclusively to {{companyName}} and shall
+        not be considered personal property.
+
+        <br>
+        <br>
+
+        The intern shall have no ownership rights, copyright claims,
+        licensing claims, or commercial rights over any work created
+        during the internship.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            8. Restriction on Personal Use of Company Code
+
+        </div>
+
+        The intern shall not:
+
+        <ul>
+
+            <li>
+                Copy company code for personal projects
+            </li>
+
+            <li>
+                Reuse {{companyName}} systems or software externally
+            </li>
+
+            <li>
+                Open-source or publicly distribute company work
+            </li>
+
+            <li>
+                Sell, redistribute, or claim ownership of company software
+            </li>
+
+            <li>
+                Use proprietary business logic for personal benefit
+            </li>
+
+            <li>
+                Create duplicate competing systems using
+                {{companyName}} code
+            </li>
+
+        </ul>
+
+        Any unauthorized use of company intellectual property shall
+        constitute a violation of company policy and may result in
+        legal action.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            9. Confidentiality Agreement (NDA)
+
+        </div>
+
+        The intern agrees to maintain strict confidentiality regarding
+        all proprietary and confidential information of {{companyName}},
+        including but not limited to:
+
+        <ul>
+
+            <li>
+                Source code and repositories
+            </li>
+
+            <li>
+                Internal documentation
+            </li>
+
+            <li>
+                Infrastructure architecture
+            </li>
+
+            <li>
+                API keys and credentials
+            </li>
+
+            <li>
+                Business plans and strategies
+            </li>
+
+            <li>
+                Internal discussions and communication
+            </li>
+
+            <li>
+                Customer and operational data
+            </li>
+
+        </ul>
+
+        This confidentiality obligation shall remain applicable during
+        and after completion or termination of the internship.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            10. Repository and System Access
+
+        </div>
+
+        All access granted to Git repositories, servers, cloud
+        infrastructure, CI/CD pipelines, databases, project management
+        systems, internal dashboards, and technical resources shall
+        remain the property of {{companyName}} and may be revoked at
+        any time without prior notice.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            11. Professional Conduct and Performance
+
+        </div>
+
+        The intern shall maintain professionalism, timely communication,
+        ethical conduct, and quality standards while working on assigned
+        tasks.
+
+        <br>
+        <br>
+
+        Failure to demonstrate satisfactory performance, consistent
+        inactivity, repeated missed deadlines, or misconduct may result
+        in termination of the internship.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            12. Certificate, Recommendation, and PPO
+
+        </div>
+
+        Issuance of:
+
+        <ul>
+
+            <li>
+                Internship Completion Certificate
+            </li>
+
+            <li>
+                Letter of Recommendation (LOR)
+            </li>
+
+            <li>
+                PPO (Pre-Placement Opportunity)
+            </li>
+
+            <li>
+                Future Employment Opportunities
+            </li>
+
+        </ul>
+
+        shall be solely based on:
+
+        <ul>
+
+            <li>
+                Internship performance
+            </li>
+
+            <li>
+                Completion of assigned tasks
+            </li>
+
+            <li>
+                Professional conduct
+            </li>
+
+            <li>
+                Contribution to projects
+            </li>
+
+        </ul>
+
+        {{companyName}} reserves the right to withhold certificates or
+        recommendations if performance is unsatisfactory.
+
+    </div>
+
+
+    <div class="tc-item">
+
+        <div class="tc-title">
+
+            13. Return of Company Materials
+
+        </div>
+
+        Upon completion or termination of the internship, the intern
+        shall immediately cease access to all company systems and
+        return/delete all confidential files, code, credentials,
+        internal resources, and proprietary information belonging to
+        {{companyName}}.
+
+    </div>
+
+</body>
+
+</html>

@@ -159,17 +159,17 @@ async function main() {
     { step: "4", title: "Offer", description: "Reference checks, offer letter and welcome to the team.", icon: "handshake", page: "careers", order: 3 },
   ];
 
-  for (const step of processSteps) {
-    await prisma.processStep.upsert({
-      where: { id: "nonexistent" }, // upsert by id doesn't work well for createMany patterns, we'll use createMany
-      update: step,
-      create: { ...step, active: true },
-    });
-  }
-  // Actually, let me just create them directly since we don't have unique fields for process steps
-  // We need to clear existing first to avoid duplicates
+  // ─── Seed Process Steps ───
   await prisma.processStep.deleteMany({});
-  await prisma.processStep.createMany({ data: processSteps.map(s => ({ ...s, active: true })) });
+
+  await prisma.processStep.createMany({
+    data: processSteps.map((step) => ({
+      ...step,
+      active: true,
+    })),
+  });
+
+  console.log("✅ Process steps seeded");
 
   // ─── Seed Perks ───
   const perks = [
@@ -221,6 +221,42 @@ async function main() {
 
   await prisma.pricingPlan.deleteMany({});
   await prisma.pricingPlan.createMany({ data: pricingPlans.map(p => ({ ...p, active: true })) });
+
+  // ─── Seed Company ───
+  // ─── Seed Company ───
+  const company = await prisma.company.upsert({
+    where: {
+      id: "000000000000000000000001",
+    },
+
+    update: {
+      name: "CloudWent",
+      address: "Bhopal, Madhya Pradesh, India",
+      email: "hr@cloudwent.com",
+      website: "https://cloudwent.com",
+      logoUrl: "/images/cloudwent-logo.png",
+      signatureUrl: "/images/signature.png",
+      hrName: "Uttam Turkar",
+      hrDesignation: "HR & Operations Head",
+      hrEmail: "hr@cloudwent.com",
+    },
+
+    create: {
+      id: "000000000000000000000001",
+      name: "CloudWent",
+      address: "Bhopal, Madhya Pradesh, India",
+      email: "hr@cloudwent.com",
+      website: "https://cloudwent.com",
+      logoUrl: "/images/cloudwent-logo.png",
+      signatureUrl: "/images/signature.png",
+      hrName: "Uttam Turkar",
+      hrDesignation: "HR & Operations Head",
+      hrEmail: "hr@cloudwent.com",
+    },
+  });
+
+  console.log("✅ Company seeded:", company.name);
+
 
   console.log("✅ Seed completed successfully!");
 }
